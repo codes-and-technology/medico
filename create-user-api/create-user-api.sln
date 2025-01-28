@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalInterfaceGateway", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabbit.Producer.Create", "src\Rabbit.Producer.Create\Rabbit.Producer.Create.csproj", "{A006B132-E46A-437F-A79C-AE4218FE0370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueGateway", "src\QueueGateway\QueueGateway.csproj", "{42404268-208B-41E7-9E16-0E1F0E219819}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,10 +83,6 @@ Global
 		{A006B132-E46A-437F-A79C-AE4218FE0370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A006B132-E46A-437F-A79C-AE4218FE0370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A006B132-E46A-437F-A79C-AE4218FE0370}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42404268-208B-41E7-9E16-0E1F0E219819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42404268-208B-41E7-9E16-0E1F0E219819}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42404268-208B-41E7-9E16-0E1F0E219819}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42404268-208B-41E7-9E16-0E1F0E219819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,7 +103,6 @@ Global
 		{3D363832-2509-40EE-A1D0-033FC3F11511} = {074B8904-FF3F-4CC7-AD17-9E12CE9D58EF}
 		{AB280518-D9F3-4DAA-85C3-B37313A64819} = {147F6DE8-61D9-4B35-80B4-C6074A2CDE97}
 		{A006B132-E46A-437F-A79C-AE4218FE0370} = {074B8904-FF3F-4CC7-AD17-9E12CE9D58EF}
-		{42404268-208B-41E7-9E16-0E1F0E219819} = {147F6DE8-61D9-4B35-80B4-C6074A2CDE97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2445399-5ABB-4272-875F-DE059539A92F}

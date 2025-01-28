@@ -20,14 +20,14 @@ public class CreateController : ControllerBase
     }
 
     [HttpPost("/doctor")]
-    public async Task<IActionResult> Doctor([FromBody] DoctorDto doctorDto)
+    public async Task<IActionResult> Doctor([FromBody] UserDto doctorDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _controller.CreateUserAsync(doctorDto, UserType.Doctor, doctorDto.CrmNumber);
+            var result = await _controller.CreateUserAsync(doctorDto);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
@@ -37,14 +37,14 @@ public class CreateController : ControllerBase
     }
 
     [HttpPost("/patient")]
-    public async Task<IActionResult> Patient([FromBody] Patient patientDto)
+    public async Task<IActionResult> Patient([FromBody] UserDto userDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _controller.CreateUserAsync(patientDto, UserType.Patient, null);
+            var result = await _controller.CreateUserAsync(userDto);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)

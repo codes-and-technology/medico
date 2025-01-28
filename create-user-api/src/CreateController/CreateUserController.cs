@@ -6,26 +6,21 @@ using Presenters.Enum;
 
 namespace CreateController;
 
-public class CreateUserController(IUserConsultingGateway userConsulting, IUserQueueGateway userQueuGateway) : IController
+public class CreateUserController(IUserConsultingGateway userConsulting) : IController
 {
     private readonly IUserConsultingGateway _userConsulting = userConsulting;
-    private readonly IUserQueueGateway _userQueuGateway = userQueuGateway;
 
-    public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto, UserType userType, int? crm)
+    public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto)
     {
         var user = await _userConsulting.GetUser(userDto.Email);
-        var hasDocument = await _userConsulting.DocumentExists(userDto.DocumentNumber, DocumentType.CPF);
 
         var hasCrm = false;
-        if (userType == UserType.Doctor)
-            hasCrm = await _userConsulting.DocumentExists(crm.Value.ToString(), DocumentType.CRM);
+        if (!string.IsNullOrEmpty(userDto.CRM))
+            hasCrm = await _userConsulting.DocumentExists(userDto.CRM);
 
-        var createContactUseCase = new CreateUseCase(userDto, user, userType, crm, hasCrm, hasDocument);
+        var createContactUseCase = new CreateUseCase(userDto, user);
 
         var result = createContactUseCase.CreateUser();
-
-        if (result.Success)
-            await _userQueuGateway.SendMessage(result.Data);
 
         return result;
     }

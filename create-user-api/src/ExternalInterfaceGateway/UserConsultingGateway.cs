@@ -24,9 +24,9 @@ public class UserConsultingGateway : IUserConsultingGateway
         return result.Content;
     }
 
-    public async Task<bool> DocumentExists(string value, DocumentType documentType)
+    public async Task<bool> DocumentExists(string crm)
     {
-        var result = await _contactConsultingApi.GetDocument(value, (int)documentType);
+        var result = await _contactConsultingApi.GetCRM(crm);
 
         if (!result.IsSuccessStatusCode)
             throw new Exception("Falha ao tentar consultar");

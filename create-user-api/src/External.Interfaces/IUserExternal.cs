@@ -8,7 +8,7 @@ namespace External.Interfaces
         [Get("/api/User")]
         Task<IApiResponse<UserConsultingDto>> GetUser(string email);
 
-        [Get("/api/Document")]
-        Task<IApiResponse<bool>> GetDocument(string value, int typeId);
+        [Get("/api/CRM")]
+        Task<IApiResponse<bool>> GetCRM(string crm);
     }
 }

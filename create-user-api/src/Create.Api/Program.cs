@@ -2,7 +2,6 @@
 using CreateInterface;
 using ExternalInterfaceGateway;
 using Microsoft.OpenApi.Models;
-using QueueGateway;
 using Rabbit.Producer.Create;
 using External.Interfaces;
 using Prometheus;
@@ -66,7 +65,6 @@ public class Program
 
         builder.Services.AddScoped<IController, CreateUserController>();
         builder.Services.AddScoped<IUserProducer, UserProducer>();
-        builder.Services.AddScoped<IUserQueueGateway, UserQueueGateway>();
         builder.Services.AddScoped<IUserConsultingGateway, UserConsultingGateway>();
     }
 }
