@@ -6,8 +6,14 @@ namespace CreateUseCases.UseCase;
 
 public class CreateDocumentUseCase : ICreateDocumentUseCase
 {
-    public CreateResult<DocumentEntity> Create(int typeId, string value, Guid userId)
+    public CreateResult<DocumentEntity> Create(int typeId, string value, Guid userId, DocumentEntity documentEntity)
     {
+        var result = new CreateResult<DocumentEntity>();
+        if (documentEntity is not null)
+        {
+            result.Errors.Add("Documento já cadastrado");
+        }
+
         var document = new DocumentEntity
         {
             Value = value,
@@ -17,6 +23,7 @@ public class CreateDocumentUseCase : ICreateDocumentUseCase
             TypeDocumentId = typeId
         };
         
-        return new CreateResult<DocumentEntity>(document);
+        result.Data = document;
+        return result;
     }
 }

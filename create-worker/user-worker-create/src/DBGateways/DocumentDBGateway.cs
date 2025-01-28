@@ -15,4 +15,9 @@ public class DocumentDBGateway(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IDo
     {
         return await Uow.Documents.FindByIdAsync(id);
     }
+
+    public async Task<DocumentEntity> FirstOrDefaultAsync(string value)
+    {
+        return await Uow.Documents.FirstOrDefaultAsync(x => x.Value.Equals(value));
+    }
 }

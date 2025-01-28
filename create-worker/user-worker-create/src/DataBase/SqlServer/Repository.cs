@@ -1,6 +1,7 @@
 ﻿using CreateEntitys;
 using CreateInterface.DataBase;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DataBase.SqlServer;
 
@@ -17,4 +18,6 @@ public class Repository<T> : IRepository<T> where T : EntityBase
 
     public virtual async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
     public virtual async Task<T> FindByIdAsync(Guid id) => await _dbSet.FindAsync(id);
+    public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate) => await _dbSet.FirstOrDefaultAsync(predicate);
+
 }

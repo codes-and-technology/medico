@@ -29,15 +29,20 @@ namespace CreateController
 
         public async Task<CreateResult<UserEntity>> CreateAsync(UserDto entity)
         {
-            var result = _createUserUseCase.Create(entity);
+            var userIdentity = await _userManager.FindByEmailAsync(entity.Email);
+            var result = _createUserUseCase.Create(entity, userIdentity);
 
+            var documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.DocumentNumber);
             var document = _createDocumentUseCase.Create(
-                typeId: 2, value: entity.DocumentNumber, userId: entity.Id
+                typeId: 2, 
+                value: entity.DocumentNumber, 
+                userId: entity.Id,
+                documentEntity: documentEntity
                 );
 
             if (result.Errors.Count > 0)
                 return result;
-
+            
             var user = new ApplicationUser { UserName = entity.Email, Email = entity.Email };
             var userManger = await _userManager.CreateAsync(user, entity.Password);
 
@@ -47,11 +52,17 @@ namespace CreateController
 
             if (userManger.Succeeded)
                 await _signInManager.SignInAsync(user, isPersistent: false);
+            else
+                throw new Exception("Erro ao tentar criado usuário");
 
             if (entity.UserType == UserType.Doctor)
             {
+                documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.Crm.ToString());
                 var crm = _createDocumentUseCase.Create(
-                    typeId: 1, value: entity.Crm.ToString(), userId: entity.Id
+                    typeId: 1, 
+                    value: entity.Crm.ToString(), 
+                    userId: entity.Id,
+                    documentEntity: documentEntity
                 );
 
                 await _documentDbGateway.AddAsync(crm.Data);
@@ -61,9 +72,9 @@ namespace CreateController
 
             await _cache.ClearCacheAsync("Users");
 
-            var doctors = await userManager.Users
-                .Where(user => userManager.IsInRoleAsync(user, "DOCTOR").Result)
-                .ToListAsync();
+            //var doctors = await userManager.Users
+            //    .Where(user => userManager.IsInRoleAsync(user, "DOCTOR").Result)
+            //    .ToListAsync();
 
             return result;
         }
