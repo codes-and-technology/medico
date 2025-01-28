@@ -2,7 +2,7 @@
 
 public interface IUnitOfWork : IDisposable
 {
-    IDocumentRepository Documents { get; }
+    IUserRepository Users { get; }
     Task<int> CommitAsync();
 }
 

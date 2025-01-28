@@ -3,6 +3,5 @@
 public class EntityBase
 {
     public Guid Id { get; set; }
-    public DateTime CreatedDate { get; set; }
-    
+    public DateTime CreateDate { get; set; }
 }

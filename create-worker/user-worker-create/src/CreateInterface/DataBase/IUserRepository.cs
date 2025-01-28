@@ -2,7 +2,7 @@
 
 namespace CreateInterface.DataBase;
 
-public interface IDocumentRepository : IRepository<DocumentEntity>
+public interface IUserRepository : IRepository<UserEntity>
 {
     
 }

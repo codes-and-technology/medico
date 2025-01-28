@@ -4,20 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataBase.SqlServer.Configurations;
 
-public class DocumentConfiguration : IEntityTypeConfiguration<DocumentEntity>
+public class DocumentConfiguration : IEntityTypeConfiguration<UserEntity>
 {
-    public void Configure(EntityTypeBuilder<DocumentEntity> builder)
+    public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
-        builder.ToTable("Documento");
+        builder.ToTable("User");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).IsRequired();
-        builder.Property(p => p.UserId).IsRequired();
-        builder.Property(p => p.TypeDocumentId).IsRequired();
-        builder.Property(p => p.CreatedDate).HasColumnName("DataCriacao").HasColumnType("DATETIME").IsRequired();
-
-        builder.HasOne(d => d.ApplicationUser)
-             .WithMany() 
-             .HasForeignKey(d => d.UserId) 
-             .OnDelete(DeleteBehavior.Cascade);
+        builder.Property(p => p.CPF).IsRequired();
+        builder.Property(p => p.CRM).IsRequired();
+        builder.Property(p => p.CreateDate).IsRequired();
     }
 }

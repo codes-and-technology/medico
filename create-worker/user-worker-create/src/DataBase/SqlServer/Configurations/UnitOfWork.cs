@@ -6,13 +6,13 @@ public class UnitOfWork : IUnitOfWork
 {
 
     private readonly ApplicationDbContext _dbContext;
-    public IDocumentRepository Documents { get; }
+    public IUserRepository Users { get; }
 
     public UnitOfWork(ApplicationDbContext dbContext,
-        IDocumentRepository documentRepository)
+        IUserRepository userRepository)
     {
         _dbContext = dbContext;
-        Documents = documentRepository;
+        Users = userRepository;
     }
 
     public async Task<int> CommitAsync()
