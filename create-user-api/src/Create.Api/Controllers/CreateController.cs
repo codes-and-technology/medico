@@ -37,14 +37,14 @@ public class CreateController : ControllerBase
     }
 
     [HttpPost("/patient")]
-    public async Task<IActionResult> Patient([FromBody] UserDto userDto)
+    public async Task<IActionResult> Patient([FromBody] Patient patientDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _controller.CreateUserAsync(userDto, UserType.Patient, null);
+            var result = await _controller.CreateUserAsync(patientDto, UserType.Patient, null);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
