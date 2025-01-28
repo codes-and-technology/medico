@@ -36,7 +36,7 @@ namespace CreateController
 
             var documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.DocumentNumber, (int)TypeDocument.CPF);
             var document = _createDocumentUseCase.Create(
-                typeId: 2, 
+                typeId: (int)TypeDocument.CPF, 
                 value: entity.DocumentNumber, 
                 userId: entity.Id,
                 documentEntity: documentEntity
@@ -47,7 +47,7 @@ namespace CreateController
             {
                 documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.Crm.ToString(), (int)TypeDocument.CRM);
                 var crm = _createDocumentUseCase.Create(
-                    typeId: 1,
+                    typeId: (int)TypeDocument.CRM,
                     value: entity.Crm.ToString(),
                     userId: entity.Id,
                     documentEntity: documentEntity

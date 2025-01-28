@@ -1,6 +1,7 @@
 ﻿using Presenters;
 using CreateInterface;
 using External.Interfaces;
+using Presenters.Enum;
 
 namespace ExternalInterfaceGateway;
 
@@ -23,12 +24,12 @@ public class UserConsultingGateway : IUserConsultingGateway
         return result.Content;
     }
 
-    public async Task<bool> GetCrm(int crm)
+    public async Task<bool> DocumentExists(string value, DocumentType documentType)
     {
-        var result = await _contactConsultingApi.GetCrm(crm);
+        var result = await _contactConsultingApi.GetDocument(value, (int)documentType);
 
         if (!result.IsSuccessStatusCode)
-            throw new Exception("Falha ao tentar consultar CRM");
+            throw new Exception("Falha ao tentar consultar");
 
         return result.Content;
     }
