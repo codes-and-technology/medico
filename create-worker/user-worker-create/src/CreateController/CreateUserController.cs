@@ -29,16 +29,31 @@ namespace CreateController
 
         public async Task<CreateResult<UserEntity>> CreateAsync(UserDto entity)
         {
+            List<DocumentEntity> documentList = [];
+
             var userIdentity = await _userManager.FindByEmailAsync(entity.Email);
             var result = _createUserUseCase.Create(entity, userIdentity);
 
-            var documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.DocumentNumber);
+            var documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.DocumentNumber, (int)TypeDocument.CPF);
             var document = _createDocumentUseCase.Create(
                 typeId: 2, 
                 value: entity.DocumentNumber, 
                 userId: entity.Id,
                 documentEntity: documentEntity
                 );
+            documentList.Add(document.Data);
+
+            if (entity.UserType == UserType.Doctor)
+            {
+                documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.Crm.ToString(), (int)TypeDocument.CRM);
+                var crm = _createDocumentUseCase.Create(
+                    typeId: 1,
+                    value: entity.Crm.ToString(),
+                    userId: entity.Id,
+                    documentEntity: documentEntity
+                );
+                documentList.Add(crm.Data);
+            }
 
             if (result.Errors.Count > 0)
                 return result;
@@ -46,28 +61,14 @@ namespace CreateController
             var user = new ApplicationUser { UserName = entity.Email, Email = entity.Email };
             var userManger = await _userManager.CreateAsync(user, entity.Password);
 
-            await AssignRole(entity.Email, role: entity.UserType == UserType.Doctor ? "DOCTOR" : "PATIENT");
-
-            await _documentDbGateway.AddAsync(document.Data);
+            await AssignRole(entity.Email, role: entity.UserType == UserType.Doctor ? "DOCTOR" : "PATIENT");           
 
             if (userManger.Succeeded)
                 await _signInManager.SignInAsync(user, isPersistent: false);
             else
                 throw new Exception("Erro ao tentar criado usuário");
 
-            if (entity.UserType == UserType.Doctor)
-            {
-                documentEntity = await _documentDbGateway.FirstOrDefaultAsync(entity.Crm.ToString());
-                var crm = _createDocumentUseCase.Create(
-                    typeId: 1, 
-                    value: entity.Crm.ToString(), 
-                    userId: entity.Id,
-                    documentEntity: documentEntity
-                );
-
-                await _documentDbGateway.AddAsync(crm.Data);
-            }
-
+            await _documentDbGateway.AddRangeAsync(documentList);
             await _documentDbGateway.CommitAsync();
 
             await _cache.ClearCacheAsync("Users");
