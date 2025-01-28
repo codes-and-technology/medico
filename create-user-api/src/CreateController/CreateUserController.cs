@@ -11,15 +11,16 @@ public class CreateUserController(IUserConsultingGateway userConsulting, IUserQu
     private readonly IUserConsultingGateway _userConsulting = userConsulting;
     private readonly IUserQueueGateway _userQueuGateway = userQueuGateway;
 
-    public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDtor, UserType userType, int? crm)
+    public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto, UserType userType, int? crm)
     {
-        var user = await _userConsulting.GetUser(userDtor.Email);
-        var crmExists = false;
+        var user = await _userConsulting.GetUser(userDto.Email);
+        var hasDocument = await _userConsulting.DocumentExists(userDto.DocumentNumber, DocumentType.CPF);
 
+        var hasCrm = false;
         if (userType == UserType.Doctor)
-            crmExists = await _userConsulting.GetCrm(crm.Value);
+            hasCrm = await _userConsulting.DocumentExists(crm.Value.ToString(), DocumentType.CRM);
 
-        var createContactUseCase = new CreateUseCase(userDtor, user, userType, crm, crmExists);
+        var createContactUseCase = new CreateUseCase(userDto, user, userType, crm, hasCrm, hasDocument);
 
         var result = createContactUseCase.CreateUser();
 

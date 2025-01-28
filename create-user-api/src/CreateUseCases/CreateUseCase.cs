@@ -11,14 +11,16 @@ public class CreateUseCase
     private readonly UserType _userType;
     private readonly bool _hasCrm;
     private readonly int? _crm;
+    private readonly bool _hasDocument;
 
-    public CreateUseCase(UserDto userDto, UserConsultingDto userConsultingDto, UserType userType, int? crm, bool hasCrm)
+    public CreateUseCase(UserDto userDto, UserConsultingDto userConsultingDto, UserType userType, int? crm, bool hasCrm, bool hasDocument)
     {
         _userDto = userDto;        
         _userConsultingDto = userConsultingDto;
         _userType = userType;
         _hasCrm =hasCrm;
-        _crm = crm; 
+        _crm = crm;
+        _hasDocument = hasDocument;
     }
 
     public ResultDto<UserEntity> CreateUser()
@@ -29,6 +31,12 @@ public class CreateUseCase
         if (_userDto.Email.Equals(_userConsultingDto.Email))
         {
             result.Errors.Add("Email já existe");        
+            return result;
+        }
+
+        if (_hasDocument)
+        {
+            result.Errors.Add("CPF já existe");
             return result;
         }
 
