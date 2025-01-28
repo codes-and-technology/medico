@@ -32,11 +32,7 @@ internal class Program
             .Build();
 
         builder.Services.UseHttpClientMetrics();
-
-        builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+        
         builder.Services.AddRabbitMq(configuration);
         builder.Services.AddRedis(configuration);
 
