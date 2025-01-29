@@ -1,0 +1,15 @@
+ services:
+      
+   create.api:
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    build:
+      context: .
+      dockerfile: ./user-create-api/create-user-api/src/Create.Api/Dockerfile    
+    ports:
+      - "6002:80"
+    networks:
+       - minha-rede   
+
+ networks:
+   minha-rede:
