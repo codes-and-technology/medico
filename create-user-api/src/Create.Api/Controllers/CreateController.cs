@@ -10,24 +10,17 @@ namespace Create.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class CreateController : ControllerBase
+public class CreateController(IController controller) : ControllerBase
 {
-    private readonly IController _controller;
-
-    public CreateController(IController controller)
-    {
-        _controller = controller;
-    }
-
     [HttpPost("/doctor")]
-    public async Task<IActionResult> Doctor([FromBody] UserDto doctorDto)
+    public async Task<IActionResult> Doctor([FromBody] UserDto userDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _controller.CreateUserAsync(doctorDto);
+            var result = await controller.CreateUserAsync(userDto);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
@@ -44,7 +37,7 @@ public class CreateController : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _controller.CreateUserAsync(userDto);
+            var result = await controller.CreateUserAsync(userDto);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)

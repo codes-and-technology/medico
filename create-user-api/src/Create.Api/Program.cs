@@ -1,11 +1,13 @@
 ﻿using CreateController;
 using CreateInterface;
-using ExternalInterfaceGateway;
 using Microsoft.OpenApi.Models;
-using Rabbit.Producer.Create;
-using External.Interfaces;
 using Prometheus;
 using Create.Api.Helpers.Middlewares;
+using DataBase;
+using DataBase.SqlServer.Configurations;
+using DBGateways;
+using Microsoft.EntityFrameworkCore;
+
 public class Program
 {
     private static void Main(string[] args)
@@ -17,12 +19,18 @@ public class Program
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
             .Build();
-
+        // Configuração do DbContext
+        builder.Services.AddDbContext<ApplicationDbContext>(
+            options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("ConnectionString"));
+            }, ServiceLifetime.Scoped);
+        
         InstallServices(builder, configuration);
 
         builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuário", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
         });
 
         builder.Services.UseHttpClientMetrics();
@@ -59,12 +67,12 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
-        builder.Services.AddRabbitMq(configuration);
-        builder.Services.AddRefitServiceExtension(configuration);
-
+        
         builder.Services.AddScoped<IController, CreateUserController>();
-        builder.Services.AddScoped<IUserProducer, UserProducer>();
-        builder.Services.AddScoped<IUserConsultingGateway, UserConsultingGateway>();
+        builder.Services.AddScoped<IAuthDBGateway, AuthDbGateway>();
+        builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IUserDBGateway, UserDbGateway>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
     }
 }

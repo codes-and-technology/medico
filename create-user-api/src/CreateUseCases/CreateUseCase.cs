@@ -4,23 +4,37 @@ using Presenters.Enum;
 
 namespace CreateUseCases;
 
-public class CreateUseCase(UserDto userDto, UserConsultingDto userConsultingDto)
+public class CreateUseCase(UserDto userDto, UserEntity userEntity)
 {
     public ResultDto<UserEntity> CreateUser()
     {
         var result = new ResultDto<UserEntity>();
         result.Valid(userDto);
 
-        if (userDto.Email.ToLower().Equals(userConsultingDto.Email.ToLower(), StringComparison.InvariantCultureIgnoreCase))
+        if (userEntity is not null && userDto.Email.ToLower().Equals(userEntity.Email.ToLower(), StringComparison.InvariantCultureIgnoreCase))
         {
             result.Errors.Add("Email já existe");        
         } 
-        if (userDto.CRM.Equals(userConsultingDto.CRM))
-        {
-            result.Errors.Add("CRM já existe");
-        }
-
+        
         return result.Errors.Count > 0 ? result : CreateUserEntity();
+    }
+
+    public ResultDto<AuthEntity> CreateAuth(UserEntity currentUser, string password)
+    {
+        ResultDto<AuthEntity> result = new ();
+        result.Valid(currentUser);
+
+        AuthEntity authEntity = new()
+        {
+            Id = Guid.NewGuid().ToString(),
+            CreateDate = DateTime.Now,
+            Password = password,
+            IdUser = currentUser.Id,
+            LastLoginDate = DateTime.Now,
+        };
+        
+        result.Data = authEntity;
+        return result;
     }
 
     private ResultDto<UserEntity> CreateUserEntity()
@@ -28,7 +42,7 @@ public class CreateUseCase(UserDto userDto, UserConsultingDto userConsultingDto)
         var result = new ResultDto<UserEntity>();
         var contact = new UserEntity
         {
-            Id = "1",
+            Id = Guid.NewGuid().ToString(),
             Name = userDto.Name,
             Email = userDto.Email,
             CreateDate = DateTime.Now,

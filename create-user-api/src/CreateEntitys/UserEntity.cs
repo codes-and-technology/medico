@@ -10,4 +10,6 @@ public class UserEntity : EntityBase
     public string Email { get; set; }
 
     public string CRM { get; set; }
+    
+    public AuthEntity Auth{get;set;}
 }

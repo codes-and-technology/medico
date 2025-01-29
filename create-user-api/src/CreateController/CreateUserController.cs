@@ -2,26 +2,32 @@
 using CreateEntitys;
 using CreateInterface;
 using CreateUseCases;
-using Presenters.Enum;
 
 namespace CreateController;
 
-public class CreateUserController(IUserConsultingGateway userConsulting) : IController
+public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway authDbGateway) : IController
 {
-    private readonly IUserConsultingGateway _userConsulting = userConsulting;
-
     public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto)
     {
-        var user = await _userConsulting.GetUser(userDto.Email);
+        var user = await userDbGateway.FirstOrDefaultAsync(f => f.Email.Equals(userDto.Email));
+        
+        var useCase = new CreateUseCase(userDto, user);
 
-        var hasCrm = false;
-        if (!string.IsNullOrEmpty(userDto.CRM))
-            hasCrm = await _userConsulting.DocumentExists(userDto.CRM);
+        var result = useCase.CreateUser();
 
-        var createContactUseCase = new CreateUseCase(userDto, user);
+        if (!result.Success)
+        {
+            return result;
+        }
+        
+        await userDbGateway.AddAsync(result.Data);
 
-        var result = createContactUseCase.CreateUser();
+        var authEntity = useCase.CreateAuth(result.Data, userDto.Password);
+        
+        await authDbGateway.AddAsync(authEntity.Data);
 
+        await authDbGateway.CommitAsync();
+        
         return result;
     }
 }
