@@ -16,6 +16,10 @@ COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/Consultin
 COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/ConsultingInterface/ConsultingInterface.csproj", "src/ConsultingInterface/"]
 COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/ConsultingUseCases/ConsultingUseCases.csproj", "src/ConsultingUseCases/"]
 COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
+COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
+COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/Redis/Redis.csproj", "src/Redis/"]
+COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/CacheGateway/CacheGateway.csproj", "src/CacheGateway/"]
+COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
 
 RUN dotnet restore "./src/Consulting.Api/Consulting.Api.csproj"
 
