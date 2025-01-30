@@ -11,7 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["/auth-api/auth-api/src/Auth.Api/Auth.Api.csproj", "src/Auth.Api/"]
-COPY ["/auth-api/auth-api/src/AuthController/AuthController.csproj", "src/AuthController/"]
+COPY ["/auth-api/auth-api/src/AuthController/AuthControllers.csproj", "src/AuthController/"]
 COPY ["/auth-api/auth-api/src/AuthEntitys/AuthEntitys.csproj", "src/AuthEntitys/"]
 COPY ["/auth-api/auth-api/src/AuthInterface/AuthInterface.csproj", "src/AuthInterface/"]
 COPY ["/auth-api/auth-api/src/AuthUseCases/AuthUseCases.csproj", "src/AuthUseCases/"]
