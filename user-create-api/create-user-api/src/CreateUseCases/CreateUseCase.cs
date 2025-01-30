@@ -1,6 +1,8 @@
-﻿using CreateEntitys;
+﻿using CreateController.Utils;
+using CreateEntitys;
+using CreateUseCases.Utils;
 using Presenters;
-using Presenters.Enum;
+
 
 namespace CreateUseCases;
 
@@ -15,6 +17,10 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
         {
             result.Errors.Add("Email já existe");        
         } 
+        if(!CpfUtils.ValidateCpf(userDto.DocumentNumber))
+        {
+            result.Errors.Add("CPF inválido");
+        }
         
         return result.Errors.Count > 0 ? result : CreateUserEntity();
     }
@@ -28,7 +34,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
         {
             Id = Guid.NewGuid().ToString(),
             CreateDate = DateTime.Now,
-            Password = password,
+            Password = SecurityUtils.HashPassword(password),
             IdUser = currentUser.Id,
             LastLoginDate = DateTime.Now,
         };

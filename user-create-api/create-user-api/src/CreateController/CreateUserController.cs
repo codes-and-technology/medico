@@ -10,7 +10,7 @@ public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway a
     public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto)
     {
         var user = await userDbGateway.FirstOrDefaultAsync(f => f.Email.Equals(userDto.Email));
-        
+
         var useCase = new CreateUseCase(userDto, user);
 
         var result = useCase.CreateUser();
