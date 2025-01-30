@@ -46,7 +46,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
     private ResultDto<UserEntity> CreateUserEntity()
     {
         var result = new ResultDto<UserEntity>();
-        var contact = new UserEntity
+        var user = new UserEntity
         {
             Id = Guid.NewGuid().ToString(),
             Name = userDto.Name,
@@ -56,7 +56,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
             CPF = userDto.DocumentNumber
         };
 
-        result.Data = contact;
+        result.Data = user;
         return result;
     }
 }

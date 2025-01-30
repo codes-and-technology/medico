@@ -11,14 +11,14 @@ namespace UserApiCreateTests
     {
         [Theory]
         [InlineData("usuario teste", "40993229808", "teste@teste.com")]
-        public async Task When_CreateContact_ShouldBe_Ok(string name, string document, string email)
+        public async Task When_CreateUser_ShouldBe_Ok(string name, string document, string email)
         {
             var userDbGateway = new Mock<IUserDBGateway>();
             var authDbGateway = new Mock<IAuthDBGateway>();
 
             userDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<UserEntity, bool>>>()))
                 .ReturnsAsync(null as UserEntity);
-            var createContactController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
+            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
 
             UserDto dto = new()
             {
@@ -27,14 +27,14 @@ namespace UserApiCreateTests
                 DocumentNumber = document
             };
 
-            var result = await createContactController.CreateUserAsync(dto);
+            var result = await createUserController.CreateUserAsync(dto);
 
             Assert.NotNull(result);
         }
 
         [Theory]
         [InlineData("usuario teste", "988027555", "teste@teste.com")]
-        public async Task When_CreateContact_ShouldBe_Error_WithContactExists(string name, string document, string email)
+        public async Task When_CreateUser_ShouldBe_Error_WithUserExists(string name, string document, string email)
         {
             var userDbGateway = new Mock<IUserDBGateway>();
             var authDbGateway = new Mock<IAuthDBGateway>();
@@ -45,7 +45,7 @@ namespace UserApiCreateTests
                     Id = Guid.NewGuid().ToString(),
                     Email = email
                 });
-            var createContactController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
+            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
 
             UserDto dto = new()
             {
@@ -54,7 +54,7 @@ namespace UserApiCreateTests
                 DocumentNumber = document
             };
 
-            var result = await createContactController.CreateUserAsync(dto);
+            var result = await createUserController.CreateUserAsync(dto);
 
             Assert.False(result.Success);
         }
@@ -64,14 +64,14 @@ namespace UserApiCreateTests
         [InlineData("usuario teste", "40993229808", "")]
         [InlineData("usuario teste", "", "")]
         [InlineData("", "57829013457082349", "teste@teste.com")]
-        public async Task When_CreateContact_ShouldBe_Error_WithInvalidDto(string name, string document, string email)
+        public async Task When_CreateUser_ShouldBe_Error_WithInvalidDto(string name, string document, string email)
         {
             var userDbGateway = new Mock<IUserDBGateway>();
             var authDbGateway = new Mock<IAuthDBGateway>();
 
             userDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<UserEntity, bool>>>()))
                 .ReturnsAsync(null as UserEntity);
-            var createContactController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
+            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
 
             UserDto dto = new()
             {
@@ -80,7 +80,7 @@ namespace UserApiCreateTests
                 DocumentNumber= document,
             };
 
-            var result = await createContactController.CreateUserAsync(dto);
+            var result = await createUserController.CreateUserAsync(dto);
 
             Assert.False(result.Success);
         }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataBase.SqlServer.Configurations;
 
-public class ContactConfiguration : IEntityTypeConfiguration<UserEntity>
+public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
 {
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
