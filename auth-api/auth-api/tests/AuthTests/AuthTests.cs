@@ -31,14 +31,14 @@ namespace AuthTests
             var authDbGateway = new Mock<IAuthDBGateway>();
 
             userDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<UserEntity, bool>>>()))
-                .ReturnsAsync(new UserEntity { Id = "aaaa", Email = "teste@teste.com", Auth = new AuthEntity { Password = "123456" } });
+                .ReturnsAsync(new UserEntity { Id = "aaaa", Email = "teste@teste.com" });
 
             authDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<AuthEntity, bool>>>()))
-                .ReturnsAsync(new AuthEntity { Id = "aaaa", Password = "123456" });
+                .ReturnsAsync(new AuthEntity { Id = "aaaa", Password = "$2a$10$yIE1TQgmRJytR1XGN3Wmkufu2oGp0Kd7yruK6WyqX1Mg8xXQxIEfe" });
 
             var createContactController = new AuthController(userDbGateway.Object, authDbGateway.Object, _configuration);
 
-            var result = await createContactController.AuthAsync(new LoginDto { Email = "teste@teste.com", Password = "123456" });
+            var result = await createContactController.AuthAsync(new LoginDto { Email = "teste@teste.com", Password = "string" });
 
             Assert.True(result.Success);
         }

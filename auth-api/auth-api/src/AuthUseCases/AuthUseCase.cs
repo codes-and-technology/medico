@@ -1,4 +1,5 @@
 ﻿using AuthEntitys;
+using AuthUseCases.Utils;
 using Microsoft.IdentityModel.Tokens;
 using Presenters;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,7 +23,7 @@ public class AuthUseCase(UserEntity user, LoginDto login, byte[] secretJwt)
     {
         ResultDto<string> result = new();
 
-        if (loginRequested.Password != authEntity.Password)
+        if (!SecurityUtils.VerifyPassword(loginRequested.Password, authEntity.Password))
             result.Errors.Add("Usuário ou senha inválido");
         else
             result.Data = GenerateToken(authEntity, user);
@@ -36,11 +37,11 @@ public class AuthUseCase(UserEntity user, LoginDto login, byte[] secretJwt)
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenProperts = new SecurityTokenDescriptor()
         {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
+            Subject = new ClaimsIdentity(
+            [
                 new Claim("ID", user.Id),
                 new Claim(ClaimTypes.Role, string.IsNullOrEmpty(user.CRM) ? "PATIENT" : "DOCTOR"),
-            }),
+            ]),
             Expires = DateTime.UtcNow.AddMinutes(2),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretJwt), SecurityAlgorithms.HmacSha256Signature)
         };
