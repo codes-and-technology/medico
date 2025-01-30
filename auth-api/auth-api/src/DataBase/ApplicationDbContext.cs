@@ -1,4 +1,4 @@
-﻿using CreateEntitys;
+﻿using AuthEntitys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

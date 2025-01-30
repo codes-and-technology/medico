@@ -1,19 +1,30 @@
 ﻿using AuthUseCases;
-using CreateInterface;
+using AuthInterface;
 using Presenters;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
-namespace CreateController;
+namespace AuthControllers;
 
-public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway authDbGateway) : IController
+public class AuthController(IUserDBGateway userDbGateway, IAuthDBGateway authDbGateway, IConfiguration configuration) : IController
 {
     public async Task<ResultDto<string>> AuthAsync(LoginDto login)
     {
         var user = await userDbGateway.FirstOrDefaultAsync(f => f.Email.Equals(login.Email));
+
+        var result = new ResultDto<string>();
+        if (user == null)
+        {
+            result.Errors.Add("Usuário ou senha inválido");
+            return result;
+        }
+
         var auth = await authDbGateway.FirstOrDefaultAsync(f => f.IdUser.Equals(user.Id));
 
-        var useCase = new AuthUseCase(user, login);
+        var key = Encoding.ASCII.GetBytes(configuration["SecretJWT"]);
+        var useCase = new AuthUseCase(user, login, key);
 
-        var result = useCase.Authenticate(login, auth, user);
+        result = useCase.Authenticate(login, auth, user);
 
         if (!result.Success)
             return result;

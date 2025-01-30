@@ -1,6 +1,6 @@
 ﻿using Auth.Api.Helpers.Middlewares;
-using CreateController;
-using CreateInterface;
+using AuthControllers;
+using AuthInterface;
 using DataBase;
 using DataBase.SqlServer.Configurations;
 using DBGateways;
@@ -68,7 +68,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         
-        builder.Services.AddScoped<IController, CreateUserController>();
+        builder.Services.AddScoped<IController, AuthController>();
         builder.Services.AddScoped<IAuthDBGateway, AuthDbGateway>();
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

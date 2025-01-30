@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AuthController\AuthController.csproj" />
+    <ProjectReference Include="..\..\src\AuthController\AuthControllers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

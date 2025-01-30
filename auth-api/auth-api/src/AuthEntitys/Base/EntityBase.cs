@@ -1,4 +1,4 @@
-﻿namespace CreateEntitys.Base;
+﻿namespace AuthEntitys.Base;
 
 public class EntityBase
 {

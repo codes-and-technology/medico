@@ -1,6 +1,6 @@
-﻿using CreateEntitys.Base;
+﻿using AuthEntitys.Base;
 
-namespace CreateEntitys;
+namespace AuthEntitys;
 
 public class UserEntity : EntityBase
 {

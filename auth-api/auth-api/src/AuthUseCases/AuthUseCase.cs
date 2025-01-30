@@ -1,11 +1,14 @@
-﻿using CreateEntitys;
+﻿using AuthEntitys;
+using Microsoft.IdentityModel.Tokens;
 using Presenters;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace AuthUseCases;
 
-public class AuthUseCase(UserEntity user, LoginDto login)
+public class AuthUseCase(UserEntity user, LoginDto login, byte[] secretJwt)
 {
-    public ResultDto<UserEntity> CreateUser()
+    public ResultDto<UserEntity> Auth()
     {
         var result = new ResultDto<UserEntity>();
         
@@ -22,15 +25,27 @@ public class AuthUseCase(UserEntity user, LoginDto login)
         if (loginRequested.Password != authEntity.Password)
             result.Errors.Add("Usuário ou senha inválido");
         else
-        {
             result.Data = GenerateToken(authEntity, user);
-        }
 
         return result;
     }
 
     private string GenerateToken(AuthEntity authEntity, UserEntity user)
     {
-        return "TESTE TOKEN GERADO FAKE#";
+        //Gerando token
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var tokenProperts = new SecurityTokenDescriptor()
+        {
+            Subject = new ClaimsIdentity(new Claim[]
+            {
+                new Claim("ID", user.Id),
+                new Claim(ClaimTypes.Role, string.IsNullOrEmpty(user.CRM) ? "PATIENT" : "DOCTOR"),
+            }),
+            Expires = DateTime.UtcNow.AddMinutes(2),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretJwt), SecurityAlgorithms.HmacSha256Signature)
+        };
+
+        var token = tokenHandler.CreateToken(tokenProperts);
+        return tokenHandler.WriteToken(token);
     }
 }

@@ -1,6 +1,6 @@
-﻿using CreateEntitys;
+﻿using AuthEntitys;
 
-namespace CreateInterface;
+namespace AuthInterface;
 
 public interface IUserRepository : IRepository<UserEntity>
 {

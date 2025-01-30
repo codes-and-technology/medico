@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-FDR", "1-FDR", "{074B8904
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{147F6DE8-61D9-4B35-80B4-C6074A2CDE97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthController", "src\AuthController\AuthController.csproj", "{813AA942-182F-45EC-B8BA-BE7FE75C3E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthControllers", "src\AuthController\AuthControllers.csproj", "{813AA942-182F-45EC-B8BA-BE7FE75C3E06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthInterface", "src\AuthInterface\AuthInterface.csproj", "{9E95F761-84D8-42BE-B9BA-FB8E164E1A31}"
 EndProject

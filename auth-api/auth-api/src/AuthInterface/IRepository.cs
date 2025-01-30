@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using CreateEntitys.Base;
+using AuthEntitys.Base;
 
-namespace CreateInterface;
+namespace AuthInterface;
 
 public interface IRepository<T> where T : EntityBase
 {

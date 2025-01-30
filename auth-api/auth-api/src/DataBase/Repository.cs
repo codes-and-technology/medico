@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
-using CreateEntitys.Base;
-using CreateInterface;
+using AuthEntitys.Base;
+using AuthInterface;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataBase;

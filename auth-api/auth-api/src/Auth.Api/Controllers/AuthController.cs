@@ -1,4 +1,4 @@
-﻿using CreateInterface;
+﻿using AuthInterface;
 using Microsoft.AspNetCore.Mvc;
 using Presenters;
 
@@ -9,7 +9,7 @@ namespace Auth.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController(IController controller) : ControllerBase
+public class AuthController(IController controller) : ControllerBase
 {
     /// <summary>
     /// Método para autenticação de usuários
@@ -25,7 +25,7 @@ public class UsersController(IController controller) : ControllerBase
                 return BadRequest(ModelState);
 
             var result = await controller.AuthAsync(login);
-            return result.Success ? NoContent() : BadRequest(result);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
         catch (Exception ex)
         {

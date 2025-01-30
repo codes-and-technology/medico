@@ -1,4 +1,4 @@
-﻿namespace CreateInterface;
+﻿namespace AuthInterface;
 
 public interface IUnitOfWork : IDisposable
 {

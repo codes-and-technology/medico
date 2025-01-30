@@ -1,6 +1,6 @@
 ﻿using Presenters;
 
-namespace CreateInterface;
+namespace AuthInterface;
 
 public interface IController
 {

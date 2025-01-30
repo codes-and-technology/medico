@@ -1,4 +1,4 @@
-﻿using CreateInterface;
+﻿using AuthInterface;
 
 namespace DataBase.SqlServer.Configurations;
 

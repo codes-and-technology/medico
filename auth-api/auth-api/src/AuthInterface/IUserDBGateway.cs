@@ -1,7 +1,7 @@
-﻿using System.Linq.Expressions;
-using CreateEntitys;
+﻿using AuthEntitys;
+using System.Linq.Expressions;
 
-namespace CreateInterface;
+namespace AuthInterface;
 
 public interface IUserDBGateway: IBaseDB
 {
