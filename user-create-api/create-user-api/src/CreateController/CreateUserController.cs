@@ -1,5 +1,4 @@
-﻿using CreateController.Utils;
-using Presenters;
+﻿using Presenters;
 using CreateEntitys;
 using CreateInterface;
 using CreateUseCases;
@@ -11,7 +10,7 @@ public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway a
     public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto)
     {
         var user = await userDbGateway.FirstOrDefaultAsync(f => f.Email.Equals(userDto.Email));
-        
+
         var useCase = new CreateUseCase(userDto, user);
 
         var result = useCase.CreateUser();
@@ -24,9 +23,7 @@ public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway a
         await userDbGateway.AddAsync(result.Data);
 
         var authEntity = useCase.CreateAuth(result.Data, userDto.Password);
-
         
-        authEntity.Data.Password = Security.HashPassword(userDto.Password);
         await authDbGateway.AddAsync(authEntity.Data);
 
         await authDbGateway.CommitAsync();
