@@ -99,7 +99,7 @@ CREATE TABLE [dbo].[Auth](
 	[Id] [varchar](50) NOT NULL,
 	[IdUser] [varchar](50) NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
-	[Password] [varchar](50) NOT NULL,
+	[Password] [varchar](500) NOT NULL,
 	[LastLoginDate] [datetime] NULL,
  CONSTRAINT [PK_Auth_1] PRIMARY KEY CLUSTERED 
 (

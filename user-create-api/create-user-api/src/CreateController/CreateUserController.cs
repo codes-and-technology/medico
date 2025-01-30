@@ -1,4 +1,5 @@
-﻿using Presenters;
+﻿using CreateController.Utils;
+using Presenters;
 using CreateEntitys;
 using CreateInterface;
 using CreateUseCases;
@@ -23,7 +24,9 @@ public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway a
         await userDbGateway.AddAsync(result.Data);
 
         var authEntity = useCase.CreateAuth(result.Data, userDto.Password);
+
         
+        authEntity.Data.Password = Security.HashPassword(userDto.Password);
         await authDbGateway.AddAsync(authEntity.Data);
 
         await authDbGateway.CommitAsync();
