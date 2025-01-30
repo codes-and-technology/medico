@@ -24,7 +24,8 @@ namespace UserApiCreateTests
             {
                 Name = name,
                 Email = email,
-                DocumentNumber = document
+                DocumentNumber = document,
+                Password = "Teste@1235$%#@"
             };
 
             var result = await createUserController.CreateUserAsync(dto);
