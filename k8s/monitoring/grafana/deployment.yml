@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - containerPort: 3000          
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources 
+              name: grafana-datasources
+              readOnly: false
+            - mountPath: /var/lib/grafana/dashboards 
+              name: grafana-dashboards
+              readOnly: false
+            - mountPath: /etc/grafana/provisioning/dashboards
+              name: grafana-provisioning
+              readOnly: false
+          securityContext:
+            runAsUser: 472
+      volumes:
+        - name: grafana-datasources
+          configMap:
+            defaultMode: 420
+            name: grafana-datasources
+        - name: grafana-dashboards
+          configMap:
+            defaultMode: 420
+            name: grafana-dashboards  
+        - name: grafana-provisioning
+          configMap:
+            defaultMode: 420
+            name: grafana-provisioning
+      securityContext:
+        fsGroup: 472
+        runAsUser: 472
+        supplementalGroups:
+          - 0

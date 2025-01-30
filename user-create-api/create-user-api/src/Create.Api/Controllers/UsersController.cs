@@ -10,7 +10,7 @@ namespace Create.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class CreateController(IController controller) : ControllerBase
+public class UsersController(IController controller) : ControllerBase
 {
     [HttpPost("/doctor")]
     public async Task<IActionResult> Doctor([FromBody] UserDto userDto)

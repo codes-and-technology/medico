@@ -5,9 +5,9 @@
       - ASPNETCORE_URLS=http://+:80
     build:
       context: .
-      dockerfile: ./user-create-api/create-user-api/src/Create.Api/Dockerfile    
+      dockerfile: danielharo/user-create-api:latest  
     ports:
-      - "6002:80"
+      - "50040:80"
     networks:
        - minha-rede   
 
