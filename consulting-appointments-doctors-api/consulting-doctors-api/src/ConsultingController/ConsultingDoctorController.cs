@@ -5,7 +5,7 @@ using Presenters;
 namespace ConsultingController;
 public class ConsultingDoctorController(IUserDBGateway userDbGateway, ICache cacheGateway) : IController
 {
-    public async Task<ResultDto<List<UserDto>>> ConsultingUserAsync()
+    public async Task<ResultDto<List<UserDto>>> ConsultingDoctorAsync()
     {
         var doctorCache = await cacheGateway.GetCacheAsync("Doctors");
 

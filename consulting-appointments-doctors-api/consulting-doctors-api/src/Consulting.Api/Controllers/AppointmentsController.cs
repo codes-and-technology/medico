@@ -15,7 +15,7 @@ public class AppointmentsController(IController controller) : ControllerBase
     {
         try
         {
-            var result = await controller.ConsultingUserAsync();
+            var result = await controller.ConsultingDoctorAsync();
             return result.Success ? Ok(result) : BadRequest(result);
         }
         catch (Exception ex)

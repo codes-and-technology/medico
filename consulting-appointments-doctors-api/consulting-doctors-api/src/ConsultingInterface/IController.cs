@@ -5,5 +5,5 @@ namespace ConsultingInterface;
 
 public interface IController
 {
-    Task<ResultDto<List<UserDto>>> ConsultingUserAsync();
+    Task<ResultDto<List<UserDto>>> ConsultingDoctorAsync();
 }
