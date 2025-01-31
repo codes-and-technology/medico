@@ -6,5 +6,5 @@ namespace CreateInterface;
 
 public interface IController
 {
-    Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto);
+    Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto, string crm);
 }

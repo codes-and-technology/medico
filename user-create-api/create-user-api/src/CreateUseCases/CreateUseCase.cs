@@ -6,7 +6,7 @@ using Presenters;
 
 namespace CreateUseCases;
 
-public class CreateUseCase(UserDto userDto, UserEntity userEntity)
+public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm)
 {
     public ResultDto<UserEntity> CreateUser()
     {
@@ -22,7 +22,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
             result.Errors.Add("CPF inválido");
         }
         
-        return result.Errors.Count > 0 ? result : CreateUserEntity();
+        return result.Errors.Count > 0 ? result : CreateUserEntity(crm);
     }
 
     public ResultDto<AuthEntity> CreateAuth(UserEntity currentUser, string password)
@@ -43,7 +43,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
         return result;
     }
 
-    private ResultDto<UserEntity> CreateUserEntity()
+    private ResultDto<UserEntity> CreateUserEntity(string crm)
     {
         var result = new ResultDto<UserEntity>();
         var user = new UserEntity
@@ -52,7 +52,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity)
             Name = userDto.Name,
             Email = userDto.Email,
             CreateDate = DateTime.Now,
-            CRM = userDto.CRM,
+            CRM = crm,
             CPF = userDto.DocumentNumber
         };
 

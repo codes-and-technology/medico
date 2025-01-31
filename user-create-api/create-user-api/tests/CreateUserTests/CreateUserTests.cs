@@ -29,7 +29,7 @@ namespace UserApiCreateTests
                 Password = "Teste@1235$%#@"
             };
 
-            var result = await createUserController.CreateUserAsync(dto);
+            var result = await createUserController.CreateUserAsync(dto, "");
 
             Assert.NotNull(result);
         }
@@ -57,7 +57,7 @@ namespace UserApiCreateTests
                 DocumentNumber = document
             };
 
-            var result = await createUserController.CreateUserAsync(dto);
+            var result = await createUserController.CreateUserAsync(dto, "1243-SP");
 
             Assert.False(result.Success);
         }
@@ -84,7 +84,7 @@ namespace UserApiCreateTests
                 DocumentNumber= document,
             };
 
-            var result = await createUserController.CreateUserAsync(dto);
+            var result = await createUserController.CreateUserAsync(dto, "");
 
             Assert.False(result.Success);
         }

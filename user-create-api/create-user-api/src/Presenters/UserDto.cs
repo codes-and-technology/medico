@@ -29,6 +29,4 @@ public class UserDto
 
     public string Password { get; set; }
     
-    public string CRM { get; set; }
-
 }

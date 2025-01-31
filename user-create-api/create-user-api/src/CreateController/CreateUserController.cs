@@ -10,11 +10,11 @@ public class CreateUserController(
     IAuthDBGateway authDbGateway,
     ICacheGateway<UserEntity> cache) : IController
 {
-    public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto)
+    public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto, string crm)
     {
         var user = await userDbGateway.FirstOrDefaultAsync(f => f.Email.Equals(userDto.Email));
 
-        var useCase = new CreateUseCase(userDto, user);
+        var useCase = new CreateUseCase(userDto, user, crm);
 
         var result = useCase.CreateUser();
 
@@ -31,7 +31,7 @@ public class CreateUserController(
 
         await authDbGateway.CommitAsync();
 
-        if (!string.IsNullOrEmpty(userDto.CRM))
+        if (!string.IsNullOrEmpty(crm))
             await cache.ClearCacheAsync("Doctors");
 
         return result;

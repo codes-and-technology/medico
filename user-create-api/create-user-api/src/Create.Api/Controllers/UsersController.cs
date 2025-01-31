@@ -14,14 +14,14 @@ namespace Create.Api.Controllers;
 public class UsersController(IController controller) : ControllerBase
 {
     [HttpPost("/doctor")]
-    public async Task<IActionResult> Doctor([FromBody] UserDto userDto)
+    public async Task<IActionResult> Doctor([FromBody] DoctorDto doctorDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await controller.CreateUserAsync(userDto);
+            var result = await controller.CreateUserAsync(doctorDto, doctorDto.CRM);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
@@ -31,14 +31,14 @@ public class UsersController(IController controller) : ControllerBase
     }
 
     [HttpPost("/patient")]
-    public async Task<IActionResult> Patient([FromBody] UserDto userDto)
+    public async Task<IActionResult> Patient([FromBody] PatientDto patientDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await controller.CreateUserAsync(userDto);
+            var result = await controller.CreateUserAsync(patientDto, string.Empty);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
