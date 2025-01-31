@@ -56,6 +56,8 @@ kubectl apply -f k8s/api/user-create-api/deployment.yml
 kubectl apply -f k8s/api/user-create-api/service.yml
 kubectl apply -f k8s/api/auth-api/deployment.yml
 kubectl apply -f k8s/api/auth-api/service.yml
+kubectl apply -f k8s/api/consulting-appointments-doctors-api/deployment.yml
+kubectl apply -f k8s/api/consulting-appointments-doctors-api/service.yml
 
 Write-Host "All deployments have been applied successfully."
 

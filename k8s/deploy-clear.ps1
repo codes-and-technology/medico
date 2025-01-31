@@ -59,7 +59,8 @@ Delete-IfExists "k8s/monitoring/node/deployment.yml"
 Write-Host "Deleting API configurations..."
 Delete-IfExists "k8s/api/user-create-api/service.yml"
 Delete-IfExists "k8s/api/user-create-api/deployment.yml"
-
+Delete-IfExists "k8s/api/consulting-appointments-doctors-api/service.yml"
+Delete-IfExists "k8s/api/consulting-appointments-doctors-api/deployment.yml"
 
 
 Write-Host "Resource cleanup completed."
