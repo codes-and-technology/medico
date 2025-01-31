@@ -13,6 +13,7 @@ namespace Consulting.Api.Controllers;
 public class AppointmentsController(IController controller) : ControllerBase
 {
     [HttpGet("/doctors")]
+    [Authorize(Roles = "PATIENT")]
     public async Task<IActionResult> Doctor()
     {
         try
