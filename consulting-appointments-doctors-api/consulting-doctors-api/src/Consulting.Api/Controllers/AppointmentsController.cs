@@ -9,7 +9,7 @@ namespace Consulting.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class AppointmentsController(IController controller) : ControllerBase
 {
     [HttpGet("/doctors")]

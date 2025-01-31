@@ -35,4 +35,4 @@ RUN dotnet publish "./Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Consulting.Doctors.Api.dll"]
+ENTRYPOINT ["dotnet", "Consulting.Api.dll"]

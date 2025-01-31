@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: user-create-api
-        image: danielharo/user-create-app:latest # Imagem do seu container
+        image: danielharo/user-create-api:latest # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
         env:

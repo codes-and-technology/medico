@@ -1,11 +1,9 @@
  services:
       
    create.api:
+    image: danielharo/doctor-consulting:latest
     environment:
-      - ASPNETCORE_URLS=http://+:80
-    build:
-      context: .
-      dockerfile: danielharo/doctor-consulting:latest  
+      - ASPNETCORE_URLS=http://+:80    
     ports:
       - "50041:80"
     networks:
