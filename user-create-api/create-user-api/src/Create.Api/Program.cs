@@ -1,4 +1,5 @@
-﻿using CreateController;
+﻿using CacheGateways;
+using CreateController;
 using CreateInterface;
 using Microsoft.OpenApi.Models;
 using Prometheus;
@@ -7,6 +8,7 @@ using DataBase;
 using DataBase.SqlServer.Configurations;
 using DBGateways;
 using Microsoft.EntityFrameworkCore;
+using Redis;
 
 public class Program
 {
@@ -25,7 +27,7 @@ public class Program
             {
                 options.UseSqlServer(configuration.GetConnectionString("ConnectionString"));
             }, ServiceLifetime.Scoped);
-        
+        builder.Services.AddRedis(configuration);
         InstallServices(builder, configuration);
 
         builder.Services.AddSwaggerGen(c =>
@@ -70,6 +72,7 @@ public class Program
         
         builder.Services.AddScoped<IController, CreateUserController>();
         builder.Services.AddScoped<IAuthDBGateway, AuthDbGateway>();
+        builder.Services.AddScoped(typeof(ICacheGateway<>), typeof(CacheGateway<>));
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IUserDBGateway, UserDbGateway>();

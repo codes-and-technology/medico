@@ -5,7 +5,10 @@ using CreateUseCases;
 
 namespace CreateController;
 
-public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway authDbGateway) : IController
+public class CreateUserController(
+    IUserDBGateway userDbGateway,
+    IAuthDBGateway authDbGateway,
+    ICacheGateway<UserEntity> cache) : IController
 {
     public async Task<ResultDto<UserEntity>> CreateUserAsync(UserDto userDto)
     {
@@ -19,15 +22,18 @@ public class CreateUserController(IUserDBGateway userDbGateway, IAuthDBGateway a
         {
             return result;
         }
-        
+
         await userDbGateway.AddAsync(result.Data);
 
         var authEntity = useCase.CreateAuth(result.Data, userDto.Password);
-        
+
         await authDbGateway.AddAsync(authEntity.Data);
 
         await authDbGateway.CommitAsync();
-        
+
+        if (!string.IsNullOrEmpty(userDto.CRM))
+            await cache.ClearCacheAsync("Doctors");
+
         return result;
     }
 }

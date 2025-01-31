@@ -1,4 +1,5 @@
 ﻿using ConsultingInterface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Consulting.Api.Controllers;
@@ -8,6 +9,7 @@ namespace Consulting.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
+//[Authorize]
 public class AppointmentsController(IController controller) : ControllerBase
 {
     [HttpGet("/doctors")]

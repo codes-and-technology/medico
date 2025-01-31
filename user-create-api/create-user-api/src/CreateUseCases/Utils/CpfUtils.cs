@@ -1,11 +1,16 @@
-﻿namespace CreateUseCases.Utils;
+﻿using System.Text.RegularExpressions;
+
+namespace CreateUseCases.Utils;
 
 public static class CpfUtils
 {
     public static bool ValidateCpf(string cpf)
     {
         cpf = cpf.Replace(".", "").Replace("-", "");
-
+        if (!Regex.IsMatch(cpf, @"^\d{11}$"))
+        {
+            return false;
+        }
         if (cpf.Length != 11 || cpf.All(c => c == cpf[0])) // If all characters are the same
         {
             return false;

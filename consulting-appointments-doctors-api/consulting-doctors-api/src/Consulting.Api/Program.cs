@@ -10,6 +10,9 @@ using DBGateways;
 using Microsoft.EntityFrameworkCore;
 using ConsultingController;
 using Redis;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 public class Program
 {
@@ -59,13 +62,36 @@ public class Program
                 {
                     options.UseSqlServer(configuration.GetConnectionString("ConnectionString"));
                 }, ServiceLifetime.Scoped);
-        
-        builder
-            .Services
-            .AddSwaggerGen(c =>
+
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
+
+            // Adiciona suporte para passar o token JWT no Swagger
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
+                Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
             });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[] {}
+            }
+        });
+        });
 
         builder
             .Services
@@ -74,7 +100,26 @@ public class Program
             {
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             });
-        
+
+        var key = Encoding.ASCII.GetBytes(configuration["SecretJWT"]);
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false; // Somente para desenvolvimento, mude para true em produção
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false, // Você pode configurar isso dependendo das suas necessidades
+                    ValidateAudience = false // Você pode configurar isso dependendo das suas necessidades
+                };
+            });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddRedis(configuration);

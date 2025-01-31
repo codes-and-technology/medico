@@ -15,10 +15,11 @@ namespace UserApiCreateTests
         {
             var userDbGateway = new Mock<IUserDBGateway>();
             var authDbGateway = new Mock<IAuthDBGateway>();
+            var cache = new Mock<ICacheGateway<UserEntity> >();
 
             userDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<UserEntity, bool>>>()))
                 .ReturnsAsync(null as UserEntity);
-            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
+            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object, cache.Object);
 
             UserDto dto = new()
             {
@@ -39,6 +40,7 @@ namespace UserApiCreateTests
         {
             var userDbGateway = new Mock<IUserDBGateway>();
             var authDbGateway = new Mock<IAuthDBGateway>();
+            var cache = new Mock<ICacheGateway<UserEntity> >();
 
             userDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<UserEntity, bool>>>()))
                 .ReturnsAsync(new UserEntity
@@ -46,7 +48,7 @@ namespace UserApiCreateTests
                     Id = Guid.NewGuid().ToString(),
                     Email = email
                 });
-            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
+            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object, cache.Object);
 
             UserDto dto = new()
             {
@@ -69,10 +71,11 @@ namespace UserApiCreateTests
         {
             var userDbGateway = new Mock<IUserDBGateway>();
             var authDbGateway = new Mock<IAuthDBGateway>();
+            var cache = new Mock<ICacheGateway<UserEntity> >();
 
             userDbGateway.Setup(s => s.FirstOrDefaultAsync(It.IsAny<Expression<Func<UserEntity, bool>>>()))
                 .ReturnsAsync(null as UserEntity);
-            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object);
+            var createUserController = new CreateUserController(userDbGateway.Object, authDbGateway.Object, cache.Object);
 
             UserDto dto = new()
             {
