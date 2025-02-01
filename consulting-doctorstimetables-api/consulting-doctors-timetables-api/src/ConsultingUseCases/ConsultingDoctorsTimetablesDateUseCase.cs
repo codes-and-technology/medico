@@ -20,7 +20,7 @@ public class ConsultingDoctorsTimetablesDateUseCase()
         var list = doctorsTimetablesDateList.Select(f => new DoctorsTimetablesDateDto()
         {
             Id = f.Id.ToString(),
-            IdDoctor = f.Doctor.Id.ToString(),
+            IdDoctor = f.IdDoctor,
             Date = f.AvailableDate.ToString("yyyy-MM-dd")
         }).ToList();
 

@@ -6,20 +6,14 @@ public class UnitOfWork : IUnitOfWork
 {
 
     private readonly ApplicationDbContext _dbContext;
-    public IUserRepository Users { get; }
-    public IAppointmentsRespository Appointments { get; }
-    public IDoctorsTimetablesDateRespository DoctorsTimetablesDate { get; }
-    public IDoctorsTimetablesTimesRespository DoctorsTimetablesTimes { get; }
+    public IDoctorsTimetablesDateRepository DoctorsTimetablesDate { get; }
+    public IDoctorsTimetablesTimesRepository DoctorsTimetablesTimes { get; }
 
     public UnitOfWork(ApplicationDbContext dbContext, 
-                      IUserRepository userRepository,
-                      IAppointmentsRespository appointmentsRespository,
-                      IDoctorsTimetablesDateRespository doctorsTimetablesDateRespository,
-                      IDoctorsTimetablesTimesRespository doctorsTimetablesTimesRespository)
+                      IDoctorsTimetablesDateRepository doctorsTimetablesDateRespository,
+                      IDoctorsTimetablesTimesRepository doctorsTimetablesTimesRespository)
     {
         _dbContext = dbContext;
-        Users = userRepository;
-        Appointments = appointmentsRespository;
         DoctorsTimetablesDate = doctorsTimetablesDateRespository;
         DoctorsTimetablesTimes = doctorsTimetablesTimesRespository;
     }

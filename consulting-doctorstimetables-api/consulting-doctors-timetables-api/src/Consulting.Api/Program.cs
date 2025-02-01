@@ -125,8 +125,10 @@ public class Program
 
         builder.Services.AddScoped<IController, ConsultingController.ConsultingController>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-        builder.Services.AddScoped<IUserDBGateway, UserDbGateway>();
+        builder.Services.AddScoped<IDoctorsTimetablesDateDBGateway, DoctorsTimetablesDateDBGateway>();
+        builder.Services.AddScoped<IDoctorsTimetablesTimesDBGateway, DoctorsTimetablesTimesDBGateway>();
         builder.Services.AddScoped(typeof(ICache<>), typeof(Cache<>));
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IDoctorsTimetablesDateRepository, DoctorsTimetablesDateRepository>();
+        builder.Services.AddScoped<IDoctorsTimetablesTimesRepository, DoctorsTimetablesTimesRepository>();
     }
 }

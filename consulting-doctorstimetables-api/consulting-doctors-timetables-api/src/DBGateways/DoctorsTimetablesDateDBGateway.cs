@@ -7,6 +7,6 @@ public class DoctorsTimetablesDateDBGateway(IUnitOfWork unitOfWork) : BaseDB(uni
 {
     public Task<IEnumerable<DoctorsTimetablesDateEntity>> FindDoctorsTimetablesDateByIdDoctorAsync(string idDoctor)
     {
-        return Uow.DoctorsTimetablesDate.GetAllAsync(d => d.Doctor.Id == idDoctor);
+        return Uow.DoctorsTimetablesDate.GetAllAsync(d => d.IdDoctor == idDoctor);
     }
 }

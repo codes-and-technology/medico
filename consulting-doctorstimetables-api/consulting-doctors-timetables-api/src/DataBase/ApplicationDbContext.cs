@@ -19,8 +19,8 @@ public class ApplicationDbContext : DbContext
         _connectionString = connectionString;
     }
     
-    public DbSet<UserEntity> Users { get; set; }
-
+    public DbSet<DoctorsTimetablesDateEntity> DoctorsTimetablesDates { get; set; }
+    public DbSet<DoctorsTimetablesTimesEntity> DoctorsTimetablesTimes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
