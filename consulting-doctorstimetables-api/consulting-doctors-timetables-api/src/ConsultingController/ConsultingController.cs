@@ -25,11 +25,9 @@ public class ConsultingController(IDoctorsTimetablesDateDBGateway doctorsTimetab
 
         if (result.Data.Any())
         {
-            await cacheGateway.SaveCacheAsync("DoctorsTimetablesDate", result.Data);
-
             foreach (var doctorsTimetablesDateDto in result.Data)
             {
-                var doctorsTimetablesTimesDBList = await doctorsTimetablesTimesDBGateway.FindAsync(t => t.Date.Id == doctorsTimetablesDateDto.Id);
+                var doctorsTimetablesTimesDBList = await doctorsTimetablesTimesDBGateway.FindAsync(t => t.IdDoctorsTimetablesDate == doctorsTimetablesDateDto.Id);
 
                 if (doctorsTimetablesTimesDBList.Any())
                 {
@@ -40,6 +38,8 @@ public class ConsultingController(IDoctorsTimetablesDateDBGateway doctorsTimetab
                         doctorsTimetablesDateDto.TimeList = doctorsTimetablesTimesDtoList.Data;
                 }
             }
+
+            await cacheGateway.SaveCacheAsync("DoctorsTimetablesDate", result.Data);
         }
 
         return result;

@@ -167,7 +167,7 @@ GO
 CREATE TABLE [dbo].[DoctorsTimetablesTimes](
 	[Id] [varchar](50) NOT NULL,
 	[IdDoctorsTimetablesDate] [varchar](50) NOT NULL,
-	[Time] [time](7) NOT NULL,
+	[Time] [char](5) NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[DeleteDate] [datetime] NULL,
  CONSTRAINT [PK_DoctorsTimetablesTimes] PRIMARY KEY CLUSTERED 
