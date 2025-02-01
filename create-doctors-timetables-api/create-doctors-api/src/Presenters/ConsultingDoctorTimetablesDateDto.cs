@@ -2,6 +2,8 @@
 
 public class ConsultingDoctorTimetablesDateDto
 {
-    public DateTime AvailableDate { get; set; }
-    public List<string> Times { get; set; }
+    public string Id { get; set; }
+    public string IdDoctor { get; set; }
+    public string Date { get; set; }
+    public List<DoctorsTimetablesTimesDto> TimeList { get; set; }
 }

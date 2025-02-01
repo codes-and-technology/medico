@@ -13,9 +13,9 @@ public class CreateUseCase(CreateDoctorTimetablesDto createDoctorTimetablesDto,
        
         if (doctoTimetablesList is not null && doctoTimetablesList
                 .Any(e => 
-                    e.AvailableDate == createDoctorTimetablesDto.AvailableDate &&
-                    e.Times.Any(item => 
-                        createDoctorTimetablesDto.Times.Contains(item))
+                    e.Date == createDoctorTimetablesDto.AvailableDate.ToString("dd/MM/yyyy") &&
+                    e.TimeList.Any(item => 
+                        createDoctorTimetablesDto.Times.Contains(item.Time))
                 ))
         {
             result.Errors.Add("Existe Data e Horário cadastrado no sistema, verifique os dados e tente novamente.");
