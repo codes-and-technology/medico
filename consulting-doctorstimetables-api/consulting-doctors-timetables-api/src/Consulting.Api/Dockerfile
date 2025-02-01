@@ -10,20 +10,20 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/Consulting.Api/Consulting.Api.csproj", "src/Consulting.Api/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/ConsultingController/ConsultingController.csproj", "src/ConsultingController/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/ConsultingEntitys/ConsultingEntitys.csproj", "src/ConsultingEntitys/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/ConsultingInterface/ConsultingInterface.csproj", "src/ConsultingInterface/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/ConsultingUseCases/ConsultingUseCases.csproj", "src/ConsultingUseCases/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/Redis/Redis.csproj", "src/Redis/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/CacheGateway/CacheGateway.csproj", "src/CacheGateway/"]
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/Consulting.Api/Consulting.Api.csproj", "src/Consulting.Api/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/ConsultingController/ConsultingController.csproj", "src/ConsultingController/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/ConsultingEntitys/ConsultingEntitys.csproj", "src/ConsultingEntitys/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/ConsultingInterface/ConsultingInterface.csproj", "src/ConsultingInterface/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/ConsultingUseCases/ConsultingUseCases.csproj", "src/ConsultingUseCases/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/Redis/Redis.csproj", "src/Redis/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/CacheGateway/CacheGateway.csproj", "src/CacheGateway/"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
 
 RUN dotnet restore "./src/Consulting.Api/Consulting.Api.csproj"
 
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api", "/src"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api", "/src"]
 
 WORKDIR "/src/src/Consulting.Api"
 RUN dotnet build "Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
