@@ -64,7 +64,7 @@ public class Program
 
         builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Horários Médicos", Version = "v1" });
 
             // Adiciona suporte para passar o token JWT no Swagger
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
