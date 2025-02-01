@@ -1,57 +1,15 @@
-USE [Fiap_Hackathon]
+SET ANSI_NULLS ON
 GO
-ALTER TABLE [dbo].[Notification] DROP CONSTRAINT [FK_Notification_Appointments]
+SET QUOTED_IDENTIFIER ON
 GO
-ALTER TABLE [dbo].[DoctorsTimetablesTimes] DROP CONSTRAINT [FK_DoctorsTimetablesTimes_DoctorsTimetablesDate]
-GO
-ALTER TABLE [dbo].[DoctorsTimetablesDate] DROP CONSTRAINT [FK_DoctorsTimetablesDate_Users]
-GO
-ALTER TABLE [dbo].[Auth] DROP CONSTRAINT [FK_Auth_Users1]
-GO
-ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_Users1]
-GO
-ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_Users]
-GO
-ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_DoctorsTimetablesTimes]
-GO
-ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_DoctorsTimetablesDate]
-GO
-/****** Object:  Table [dbo].[Users]    Script Date: 28/01/2025 11:55:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
-DROP TABLE [dbo].[Users]
-GO
-/****** Object:  Table [dbo].[Notification]    Script Date: 28/01/2025 11:55:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Notification]') AND type in (N'U'))
-DROP TABLE [dbo].[Notification]
-GO
-/****** Object:  Table [dbo].[DoctorsTimetablesTimes]    Script Date: 28/01/2025 11:55:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DoctorsTimetablesTimes]') AND type in (N'U'))
-DROP TABLE [dbo].[DoctorsTimetablesTimes]
-GO
-/****** Object:  Table [dbo].[DoctorsTimetablesDate]    Script Date: 28/01/2025 11:55:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DoctorsTimetablesDate]') AND type in (N'U'))
-DROP TABLE [dbo].[DoctorsTimetablesDate]
-GO
-/****** Object:  Table [dbo].[Auth]    Script Date: 28/01/2025 11:55:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Auth]') AND type in (N'U'))
-DROP TABLE [dbo].[Auth]
-GO
-/****** Object:  Table [dbo].[Appointments]    Script Date: 28/01/2025 11:55:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Appointments]') AND type in (N'U'))
-DROP TABLE [dbo].[Appointments]
-GO
-USE [master]
-GO
-/****** Object:  Database [Fiap_Hackathon]    Script Date: 28/01/2025 11:55:51 ******/
-DROP DATABASE [Fiap_Hackathon]
-GO
-/****** Object:  Database [Fiap_Hackathon]    Script Date: 28/01/2025 11:55:51 ******/
+
+
 CREATE DATABASE [Fiap_Hackathon]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'Fiap_Hackathon', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\Fiap_Hackathon.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'Fiap_Hackathon', FILENAME = N'/var/opt/mssql/data/Fiap_Hackathon.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'Fiap_Hackathon_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\Fiap_Hackathon_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'Fiap_Hackathon_log', FILENAME = N'/var/opt/mssql/data/Fiap_Hackathon_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
 ALTER DATABASE [Fiap_Hackathon] SET COMPATIBILITY_LEVEL = 150
@@ -125,11 +83,35 @@ ALTER DATABASE [Fiap_Hackathon] SET QUERY_STORE = OFF
 GO
 USE [Fiap_Hackathon]
 GO
+
+
+/****** Object:  Table [dbo].[Users]    Script Date: 28/01/2025 11:55:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
+DROP TABLE [dbo].[Users]
+GO
+/****** Object:  Table [dbo].[Notification]    Script Date: 28/01/2025 11:55:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Notification]') AND type in (N'U'))
+DROP TABLE [dbo].[Notification]
+GO
+/****** Object:  Table [dbo].[DoctorsTimetablesTimes]    Script Date: 28/01/2025 11:55:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DoctorsTimetablesTimes]') AND type in (N'U'))
+DROP TABLE [dbo].[DoctorsTimetablesTimes]
+GO
+/****** Object:  Table [dbo].[DoctorsTimetablesDate]    Script Date: 28/01/2025 11:55:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DoctorsTimetablesDate]') AND type in (N'U'))
+DROP TABLE [dbo].[DoctorsTimetablesDate]
+GO
+/****** Object:  Table [dbo].[Auth]    Script Date: 28/01/2025 11:55:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Auth]') AND type in (N'U'))
+DROP TABLE [dbo].[Auth]
+GO
 /****** Object:  Table [dbo].[Appointments]    Script Date: 28/01/2025 11:55:51 ******/
-SET ANSI_NULLS ON
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Appointments]') AND type in (N'U'))
+DROP TABLE [dbo].[Appointments]
 GO
-SET QUOTED_IDENTIFIER ON
-GO
+
+/****** Object:  Database [Fiap_Hackathon]    Script Date: 28/01/2025 11:55:51 ******/
+/****** Object:  Table [dbo].[Appointments]    Script Date: 28/01/2025 11:55:51 ******/
 CREATE TABLE [dbo].[Appointments](
 	[Id] [varchar](50) NOT NULL,
 	[IdPatient] [varchar](50) NOT NULL,
@@ -203,9 +185,9 @@ CREATE TABLE [dbo].[Notification](
 	[Id] [varchar](50) NOT NULL,
 	[IdAppointments] [varchar](50) NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
-	[SendDate] [datetime] NOT NULL,
+	[SendDate] [datetime] NULL,
 	[Message] [varchar](200) NOT NULL,
-	[Success] [bit] NOT NULL,
+	[Success] [bit] NULL,
 	[ErrorMessage] [varchar](200) NULL
 ) ON [PRIMARY]
 GO
@@ -267,7 +249,30 @@ REFERENCES [dbo].[Appointments] ([Id])
 GO
 ALTER TABLE [dbo].[Notification] CHECK CONSTRAINT [FK_Notification_Appointments]
 GO
+
+
 USE [master]
 GO
 ALTER DATABASE [Fiap_Hackathon] SET  READ_WRITE 
 GO
+USE [Fiap_Hackathon]
+GO
+
+/*
+ALTER TABLE [dbo].[Notification] DROP CONSTRAINT [FK_Notification_Appointments]
+GO
+ALTER TABLE [dbo].[DoctorsTimetablesTimes] DROP CONSTRAINT [FK_DoctorsTimetablesTimes_DoctorsTimetablesDate]
+GO
+ALTER TABLE [dbo].[DoctorsTimetablesDate] DROP CONSTRAINT [FK_DoctorsTimetablesDate_Users]
+GO
+ALTER TABLE [dbo].[Auth] DROP CONSTRAINT [FK_Auth_Users1]
+GO
+ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_Users1]
+GO
+ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_Users]
+GO
+ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_DoctorsTimetablesTimes]
+GO
+ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_DoctorsTimetablesDate]
+GO
+*/

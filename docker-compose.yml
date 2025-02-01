@@ -1,0 +1,42 @@
+ services:
+   rabbitmq:
+     image: rabbitmq:3-management
+     container_name: rabbitmq_management    
+     ports: 
+      - 5672:5672 # (erlang) communication between the nodes and CLI tool
+      - 15672:15672 # communication with the web management API 
+    
+     volumes:
+     - C:\Users\kenny\source\repos\medico\docker_volumes\rabbit:/var/lib/rabbitmq/
+     environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+     networks:
+       - minha-rede
+   
+   db:
+     user: root
+     image: mcr.microsoft.com/mssql/server:2019-latest
+     environment:
+       ACCEPT_EULA: "Y"
+       SA_PASSWORD: "sql@123456"
+       MSSQL_PID: Express
+     ports:
+       - "1433:1433"
+     volumes:
+       - C:\Users\kenny\source\repos\medico\docker_volumes\mssql:/var/opt/mssql/data
+     networks:
+       - minha-rede
+   
+   redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - minha-rede
+
+ networks:
+   minha-rede:
+
+ volumes:
+   db-data:
