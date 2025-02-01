@@ -7,20 +7,20 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["/create-worker/src/Create.Worker/Create.Worker.csproj", "src/Create.Worker/"]
-COPY ["/create-worker/src/CreateController/CreateController.csproj", "src/CreateController/"]
-COPY ["/create-worker/src/CreateEntitys/CreateEntitys.csproj", "src/CreateEntitys/"]
-COPY ["/create-worker/src/CreateInterface/CreateInterface.csproj", "src/CreateInterface/"]
-COPY ["/create-worker/src/Presenters/Presenters.csproj", "src/Presenters/"]
-COPY ["/create-worker/src/CreateUseCases/CreateUseCases.csproj", "src/CreateUseCases/"]
-COPY ["/create-worker/src/DataBase/DataBase.csproj", "src/DataBase/"]
-COPY ["/create-worker/src/Rabbit.Consumer.Create/Rabbit.Consumer.Create.csproj", "src/Rabbit.Consumer.Create/"]
+COPY ["src/Create.Worker/Create.Worker.csproj", "Create.Worker/"]
+COPY ["src/CreateController/CreateController.csproj", "CreateController/"]
+COPY ["src/CreateEntitys/CreateEntitys.csproj", "CreateEntitys/"]
+COPY ["src/CreateInterface/CreateInterface.csproj", "CreateInterface/"]
+COPY ["src/Presenters/Presenters.csproj", "Presenters/"]
+COPY ["src/CreateUseCases/CreateUseCases.csproj", "CreateUseCases/"]
+COPY ["src/DataBase/DataBase.csproj", "DataBase/"]
+COPY ["src/Rabbit.Consumer.Create/Rabbit.Consumer.Create.csproj", "Rabbit.Consumer.Create/"]
 
 RUN dotnet restore "./src/Create.Worker/Create.Worker.csproj"
 
 COPY ["/create-worker", "/src"]
 
-WORKDIR "/src/src/Create.Worker"
+WORKDIR "/src/Create.Worker"
 RUN dotnet build "./Create.Worker.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

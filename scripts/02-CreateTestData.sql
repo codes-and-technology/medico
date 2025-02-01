@@ -98,7 +98,8 @@ BEGIN
 				 VALUES
 					   (@idDoctorAvailability + '\' +  RIGHT('00' + (@intLoop+8), 2)
 					   ,@idDoctorAvailability
-					   ,CONVERT(time, RIGHT('00' + (@intLoop+8), 2) + ':00')
+					   --,CONVERT(time, RIGHT('00' + (@intLoop+8), 2) + ':00')
+					   ,RIGHT('00' + (@intLoop+8), 2) + ':00'
 					   ,CURRENT_TIMESTAMP
 					   );
 		END

@@ -5,5 +5,5 @@ namespace CreateInterface.Controllers;
 
 public interface ICreateUserController
 {
-    Task<CreateResult<UserEntity>> CreateAsync(UserDto entity);
+    Task<CreateResult<NotificationEntity>> CreateAsync(NotificationDto entity);
 }

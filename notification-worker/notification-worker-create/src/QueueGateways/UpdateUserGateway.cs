@@ -9,7 +9,7 @@ namespace QueueGateways
     {
         private readonly ICreateUserController _createUserController = createUserController;
 
-        public async Task<CreateResult<UserEntity>> CreateAsync(UserDto entity)
+        public async Task<CreateResult<NotificationEntity>> CreateAsync(NotificationDto entity)
         {
             return await _createUserController.CreateAsync(entity);
         }

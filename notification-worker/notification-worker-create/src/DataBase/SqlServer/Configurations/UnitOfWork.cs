@@ -6,13 +6,17 @@ public class UnitOfWork : IUnitOfWork
 {
 
     private readonly ApplicationDbContext _dbContext;
-    public IUserRepository Users { get; }
+    public INotificationRepository Notifications { get; }
+    public IPendingNotificationRepository PendingNotifications { get; }
 
     public UnitOfWork(ApplicationDbContext dbContext,
-        IUserRepository userRepository)
+        INotificationRepository notificationRepository,
+        IPendingNotificationRepository pendingNotifications
+        )
     {
         _dbContext = dbContext;
-        Users = userRepository;
+        Notifications = notificationRepository;
+        PendingNotifications = pendingNotifications;
     }
 
     public async Task<int> CommitAsync()

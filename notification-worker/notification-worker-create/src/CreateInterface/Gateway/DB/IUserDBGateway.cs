@@ -5,8 +5,8 @@ namespace CreateInterface.Gateway.DB;
 
 public interface IUserDBGateway: IBaseDB
 {
-    Task AddAsync(UserEntity entity);
-    Task<UserEntity> FindByIdAsync(Guid id);
+    Task AddAsync(NotificationEntity entity);
+    Task<NotificationEntity> FindByIdAsync(Guid id);
     
-    Task<UserEntity> FirstOrDefaultAsync(Expression<Func<UserEntity, bool>> predicate);
+    Task<NotificationEntity> FirstOrDefaultAsync(Expression<Func<NotificationEntity, bool>> predicate);
 }

@@ -8,4 +8,5 @@ public interface IRepository<T> where T : EntityBase
     Task<T> FindByIdAsync(Guid id);
     Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
     Task AddRageAsync(List<T> entity);
+    Task<List<T>> ToListAsync();
 }

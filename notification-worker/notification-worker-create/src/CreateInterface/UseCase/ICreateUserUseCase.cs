@@ -5,5 +5,5 @@ namespace CreateInterface.UseCase;
 
 public interface ICreateUserUseCase
 {
-    CreateResult<UserEntity> Create(UserDto userDto, List<UserEntity> list);
+    CreateResult<NotificationEntity> Create(NotificationDto notificationDto, List<NotificationEntity> list);
 }

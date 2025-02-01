@@ -5,11 +5,11 @@ using Presenters;
 
 namespace Rabbit.Consumer.Create;
 
-public class CreateUserConsumer(ICreateUserGateway createUserGateway) : IConsumer<UserDto>
+public class CreateUserConsumer(ICreateUserGateway createUserGateway) : IConsumer<NotificationDto>
 {
     private readonly ICreateUserGateway _createUserGateway = createUserGateway;
 
-    public async Task Consume(ConsumeContext<UserDto> context)
+    public async Task Consume(ConsumeContext<NotificationDto> context)
     {
         var message = context.Message;
         Console.WriteLine($"Received message: {message}");

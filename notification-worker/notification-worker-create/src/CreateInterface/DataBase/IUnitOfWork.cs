@@ -2,7 +2,7 @@
 
 public interface IUnitOfWork : IDisposable
 {
-    IUserRepository Users { get; }
+    INotificationRepository Notifications { get; }
     Task<int> CommitAsync();
 }
 

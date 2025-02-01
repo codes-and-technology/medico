@@ -5,5 +5,5 @@ namespace CreateInterface.Gateway.Queue;
 
 public interface ICreateUserGateway
 {
-    Task<CreateResult<UserEntity>> CreateAsync(UserDto entity);
+    Task<CreateResult<NotificationEntity>> CreateAsync(NotificationDto entity);
 }

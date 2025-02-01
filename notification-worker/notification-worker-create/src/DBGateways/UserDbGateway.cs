@@ -7,18 +7,18 @@ namespace DBGateways;
 
 public class UserDbGateway(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IUserDBGateway
 {
-    public async Task AddAsync(UserEntity entity)
+    public async Task AddAsync(NotificationEntity entity)
     {
-        await Uow.Users.AddAsync(entity);
+        await Uow.Notifications.AddAsync(entity);
     }
 
-    public async Task<UserEntity> FindByIdAsync(Guid id)
+    public async Task<NotificationEntity> FindByIdAsync(Guid id)
     {
-        return await Uow.Users.FindByIdAsync(id);
+        return await Uow.Notifications.FindByIdAsync(id);
     }
 
-    public async Task<UserEntity> FirstOrDefaultAsync(Expression<Func<UserEntity, bool>> predicate)
+    public async Task<NotificationEntity> FirstOrDefaultAsync(Expression<Func<NotificationEntity, bool>> predicate)
     {
-        return await Uow.Users.FirstOrDefaultAsync(predicate);
+        return await Uow.Notifications.FirstOrDefaultAsync(predicate);
     }
 }

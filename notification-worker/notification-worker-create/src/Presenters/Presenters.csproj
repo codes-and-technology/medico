@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CreateEntitys\CreateEntitys.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enum\" />
+  </ItemGroup>
+
 </Project>

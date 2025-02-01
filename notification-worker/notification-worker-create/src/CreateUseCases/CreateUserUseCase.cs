@@ -6,10 +6,11 @@ namespace CreateUseCases.UseCase;
 
 public class CreateUserUseCase : ICreateUserUseCase
 {
-    public CreateResult<UserEntity> Create(UserDto entity, List<UserEntity> list)
+    public CreateResult<NotificationEntity> Create(NotificationDto entity, List<NotificationEntity> list)
     {
-        var result = new CreateResult<UserEntity>();
+        var result = new CreateResult<NotificationEntity>();
 
+        /*
         if (list.Exists(e => e.Email.Equals(entity.Email, StringComparison.InvariantCultureIgnoreCase)))
         {
             result.Errors.Add("Email já em uso");
@@ -33,6 +34,7 @@ public class CreateUserUseCase : ICreateUserUseCase
 
         result.Valid(entity);
 
+        */
         return result;
     }
 }

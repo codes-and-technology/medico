@@ -4,45 +4,43 @@ using CreateInterface.Gateway.Cache;
 using CreateInterface.Gateway.DB;
 using CreateInterface.UseCase;
 using Presenters;
-using Presenters.Enum;
 
 namespace CreateController
 {
     public class CreateUserController(
         ICreateUserUseCase createUserUseCase,
-        ICacheGateway<UserDto> cache,
+        ICacheGateway<NotificationDto> cache,
         IUserDBGateway userDbGateway
         ) : ICreateUserController
     {
         private readonly ICreateUserUseCase _createUserUseCase = createUserUseCase;
-        private readonly ICacheGateway<UserDto> _cache = cache;
+        private readonly ICacheGateway<NotificationDto> _cache = cache;
         private readonly IUserDBGateway _userDbGateway = userDbGateway;
 
-        public async Task<CreateResult<UserEntity>> CreateAsync(UserDto userDto)
+        public async Task<CreateResult<NotificationEntity>> CreateAsync(NotificationDto notificationDto)
         {
-            List<UserEntity> userList = new List<UserEntity>();
-            var userExists = await _userDbGateway.FirstOrDefaultAsync(x => x.Email.Equals((userDto.Email)));
-            userList.Add(userExists);
+            List<NotificationEntity> notificationList = new List<NotificationEntity>();
+            /*
+            var notificationExists = await _userDbGateway.FirstOrDefaultAsync(x => x.Email.Equals((notificationDto.Email)));
+            notificationList.Add(notificationExists);
             
-            var cpfExists = await _userDbGateway.FirstOrDefaultAsync(f => f.CPF == userDto.DocumentNumber);
-            userList.Add(cpfExists);
-            
-            if (userDto.UserType == UserType.Doctor)
+            if (NotificationDto.UserType == UserType.Doctor)
             {
-                var crmExists  = await _userDbGateway.FirstOrDefaultAsync(f => f.CRM == userDto.Crm);
+                var crmExists  = await _userDbGateway.FirstOrDefaultAsync(f => f.CRM == NotificationDto.Crm);
                 userList.Add(crmExists);
             }
+            */
 
-            var result = _createUserUseCase.Create(userDto, userList);
+            var result = _createUserUseCase.Create(notificationDto, notificationList);
 
             if (result.Errors.Count > 0)
                 return result;
 
             await _userDbGateway.CommitAsync();
 
-            await _cache.ClearCacheAsync("Users");
-            
+            await _cache.ClearCacheAsync("Notification");
             return result;
+            
         }
     }
 }
