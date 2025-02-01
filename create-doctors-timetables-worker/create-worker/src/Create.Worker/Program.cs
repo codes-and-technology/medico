@@ -5,11 +5,13 @@ using CreateEntitys;
 using CreateInterface.Controllers;
 using CreateInterface.DataBase;
 using CreateInterface.Gateway.Cache;
+using CreateInterface.Gateway.DB;
 using CreateInterface.Gateway.Queue;
 using CreateInterface.UseCase;
 using CreateUseCases.UseCase;
 using DataBase.SqlServer;
 using DataBase.SqlServer.Configurations;
+using DBGateways;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +43,10 @@ internal class Program
         builder.Services.AddScoped<ICreateDoctorTimetablesGateway, CreateDoctorTimetablesGateway>();
         builder.Services.AddScoped<ICreateDoctorTimetablesController, CreateDoctorTimetablesController>();
         builder.Services.AddScoped<ICreateDoctorTimetablesUseCase, CreateDoctorTimetablesUseCase>();
+        builder.Services.AddScoped<IDoctorTimetablesDateDBGateway, DoctorTimetablesDateDbGateway>();
+        builder.Services.AddScoped<IDoctorTimetablesTimeDBGateway, DoctorTimetablesTimesDbGateway>();
+        builder.Services.AddScoped<IDoctorTimetablesDateRepository, DoctorTimetablesDateRepository>();
+        builder.Services.AddScoped<IDoctorTimetablesTimeRepository, DoctorTimetablesTimeRepository>();
 
         builder.Services.AddHostedService<Worker>();
 
