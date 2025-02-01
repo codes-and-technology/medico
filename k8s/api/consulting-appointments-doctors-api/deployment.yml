@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consulting-appointments-doctors-api
+  labels: 
+    app: consulting-appointments-doctors-api
+    ambiente: dev
+    equipe: desenvolvimento
+  annotations: 
+    criador: "Daniel Haro, Eduardo Rodrigues e Kenny Evans"
+    descricao: "API para Consultar Médicos"
+    revisao: "1.0"    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consulting-appointments-doctors-api
+  template:
+    metadata:
+      labels:
+        app: consulting-appointments-doctors-api
+    spec:
+      containers:
+      - name: consulting-appointments-doctors-api
+        image: danielharo/doctor-consulting-api # Imagem do seu container
+        ports:
+        - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"  # O ASP.NET Core precisa escutar em todas as interfaces
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-v1
+              key: ConnectionString
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.1"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
