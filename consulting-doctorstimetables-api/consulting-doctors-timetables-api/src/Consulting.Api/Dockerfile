@@ -23,7 +23,7 @@ COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/D
 
 RUN dotnet restore "./src/Consulting.Api/Consulting.Api.csproj"
 
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api", "/src"]
+COPY ["/consulting-doctorstimetables-api/consulting-doctors-timetables-api", "/src"]
 
 WORKDIR "/src/src/Consulting.Api"
 RUN dotnet build "Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build

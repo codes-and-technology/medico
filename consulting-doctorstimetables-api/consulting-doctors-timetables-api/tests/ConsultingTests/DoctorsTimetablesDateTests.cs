@@ -48,7 +48,7 @@ public class DoctorsTimetablesDateTests
         else
             cacheGateway.Setup(s => s.GetCacheAsync(It.IsAny<string>())).ReturnsAsync(new List<DoctorsTimetablesDateDto>());
 
-        doctorsTimetablesDateDBGateway.Setup(s => s.FindDoctorsTimetablesDateByIdDoctorAsync("1")).ReturnsAsync(doctorsTimetablesDateList);
+        doctorsTimetablesDateDBGateway.Setup(s => s.FindDoctorsTimetablesDateByIdDoctorAvailableAsync("1")).ReturnsAsync(doctorsTimetablesDateList);
         doctorsTimetablesTimesDBGateway.Setup(s => s.FindAsync(t => t.IdDoctorsTimetablesDate == "1")).ReturnsAsync(doctorsTimetablesTimesList);
 
         var controller = new ConsultingController.ConsultingController(doctorsTimetablesDateDBGateway.Object, doctorsTimetablesTimesDBGateway.Object, cacheGateway.Object);

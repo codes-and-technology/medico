@@ -19,7 +19,7 @@ public class ConsultingController(IDoctorsTimetablesDateDBGateway doctorsTimetab
                 return useCase.CreateConsultingFromCache(cacheList);
         }
 
-        var doctorsTimetablesDateDBList = await doctorsTimetablesDateDBGateway.FindDoctorsTimetablesDateByIdDoctorAsync(idDoctor);
+        var doctorsTimetablesDateDBList = await doctorsTimetablesDateDBGateway.FindDoctorsTimetablesDateByIdDoctorAvailableAsync(idDoctor);
 
         var result = useCase.CreateDoctorsTimeTablesDateDB(doctorsTimetablesDateDBList);
 
@@ -27,7 +27,7 @@ public class ConsultingController(IDoctorsTimetablesDateDBGateway doctorsTimetab
         {
             foreach (var doctorsTimetablesDateDto in result.Data)
             {
-                var doctorsTimetablesTimesDBList = await doctorsTimetablesTimesDBGateway.FindAsync(t => t.IdDoctorsTimetablesDate == doctorsTimetablesDateDto.Id);
+                var doctorsTimetablesTimesDBList = await doctorsTimetablesTimesDBGateway.FindAsync(t => t.IdDoctorsTimetablesDate == doctorsTimetablesDateDto.Id && !t.DeleteDate.HasValue);
 
                 if (doctorsTimetablesTimesDBList.Any())
                 {
