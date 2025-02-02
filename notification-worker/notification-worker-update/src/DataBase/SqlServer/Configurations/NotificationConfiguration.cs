@@ -16,5 +16,7 @@ public class NotificationConfiguration : IEntityTypeConfiguration<NotificationEn
         builder.Property(p => p.Message).IsRequired();
         builder.Property(p => p.Success);
         builder.Property(p => p.ErrorMessage);
+
+
     }
 }
