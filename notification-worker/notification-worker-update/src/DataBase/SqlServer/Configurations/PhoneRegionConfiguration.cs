@@ -11,7 +11,7 @@ public class PhoneRegionConfiguration : IEntityTypeConfiguration<PhoneRegionEnti
         builder.ToTable("TelefoneRegiao");
         builder.HasKey(k => k.Id);
         builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
-        builder.Property(p => p.CreatedDate).HasColumnName("DataCriacao").HasColumnType("DATETIME").IsRequired();
+        builder.Property(p => p.CreateDate).HasColumnName("DataCriacao").HasColumnType("DATETIME").IsRequired();
         builder.Property(p => p.RegionNumber).HasColumnName("CodigoArea").IsRequired();
     }
 }

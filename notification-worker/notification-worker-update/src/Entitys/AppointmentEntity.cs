@@ -9,14 +9,30 @@ public class AppointmentEntity : EntityBase
 
     }
 
-    public AppointmentEntity(short regionNumber)
+    public AppointmentEntity(string idPatient, string idDoctor, string idTimetablesDate, string idTimetablesTime)
     {
-        RegionNumber = regionNumber;
+        IdPatient = idPatient;
+        IdDoctor = idDoctor;
+        IdDoctorTimetablesDate = idTimetablesDate;
+        IdDoctorTimetablesTime = idTimetablesTime;
     }
 
-    [Required(ErrorMessage = "O número da região é obrigatório.")]
-    [Range(11, 99, ErrorMessage = "O número da região deve estar entre 11 e 99.")]
-    public short RegionNumber { get; set; }
+    [Required(ErrorMessage = "O ID do paciente é obrigatório.")]
+    public string IdPatient { get; set; }
 
-    public ICollection<AppointmentEntity> Contacts { get; set; } = [];
+    [Required(ErrorMessage = "O ID do médico é obrigatório.")]
+    public string IdDoctor { get; set; }
+
+    [Required(ErrorMessage = "O ID da agenda(data) é obrigatório.")]
+    public string IdDoctorTimetablesDate { get; set; }
+
+    [Required(ErrorMessage = "O ID da agenda(horario) é obrigatório.")]
+    public string IdDoctorTimetablesTime { get; set; }
+
+    public ICollection<NotificationEntity> Notifications { get; set; } = [];
+    public UserEntity Pacient { get; set; }
+    public UserEntity Doctor { get; set; }
+    public DoctorsTimetablesDateEntity TimetablesDate { get; set; }
+    public DoctorsTimetablesTimesEntity TimetablesTimes { get; set; }
+
 }

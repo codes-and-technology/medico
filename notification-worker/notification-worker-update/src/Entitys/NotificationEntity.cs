@@ -27,6 +27,8 @@ namespace Entitys
         public bool Success { get; set; }
         public string ErrorMessage { get; set; }
 
+        public AppointmentEntity Appointment { get; set; }
+
         public override string ToString()
         {
             return $"IdAppointment: {IdAppointment}, SendDate: {SendDate}, Message: {Message}, Success: {Success}, ErrorMessage: {ErrorMessage}";

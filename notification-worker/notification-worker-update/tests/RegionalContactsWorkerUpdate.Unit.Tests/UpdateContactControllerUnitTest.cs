@@ -24,14 +24,14 @@ namespace RegionalContactsWorkerUpdate.Unit.Tests
 
             var entity = new ContactEntity
             {
-                CreatedDate = DateTime.Now,
+                CreateDate = DateTime.Now,
                 Email = email,
                 Id = Guid.NewGuid(),
                 Name = name,
                 PhoneNumber = phone,
                 PhoneRegion = new PhoneRegionEntity
                 {
-                    CreatedDate = DateTime.Now,
+                    CreateDate = DateTime.Now,
                     Id = Guid.NewGuid(),
                     RegionNumber = region
                 }
@@ -62,14 +62,14 @@ namespace RegionalContactsWorkerUpdate.Unit.Tests
 
             var entity = new ContactEntity
             {
-                CreatedDate = DateTime.Now,
+                CreateDate = DateTime.Now,
                 Email = email,
                 Id = Guid.NewGuid(),
                 Name = name,
                 PhoneNumber = phone,
                 PhoneRegion = new PhoneRegionEntity
                 {
-                    CreatedDate = DateTime.Now,
+                    CreateDate = DateTime.Now,
                     Id = Guid.NewGuid(),
                     RegionNumber = region
                 }

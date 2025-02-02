@@ -6,6 +6,13 @@ public interface IUnitOfWork : IDisposable
     //IPhoneRegionRepository PhoneRegions { get; }
 
     INotificationRepository Notifications { get; }
+    IAppointmentRepository Appointments { get; }
+    IDoctorsTimetablesTimesRepository TimetablesTimes { get; }
+    IDoctorsTimetablesDateRepository TimetablesDates { get; }
+    IPatientRepository Patients { get; }
+    IDoctorRepository Doctors { get; }
+
+
 
     Task<int> CommitAsync();
 }
