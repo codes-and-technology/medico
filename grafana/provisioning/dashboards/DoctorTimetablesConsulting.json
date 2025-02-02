@@ -89,7 +89,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{code=~\"2..\",controller=\"Auth\", job=\"auth-api\"}) or vector(0)",
+          "expr": "sum(http_request_duration_seconds_count{code=~\"2..\",controller=\"DoctorsTimetables\", job=\"consulting-doctorstimetables-api\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -151,7 +151,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{code=~\"4..\",controller=\"Auth\", job=\"auth-api\"}) or vector(0)",
+          "expr": "sum(http_request_duration_seconds_count{code=~\"4..\",controller=\"DoctorsTimetables\", job=\"consulting-doctorstimetables-api\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -213,7 +213,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{code=~\"5..\",controller=\"Auth\", job=\"auth-api\"}) or vector(0)",
+          "expr": "sum(http_request_duration_seconds_count{code=~\"5..\",controller=\"DoctorsTimetables\", job=\"consulting-doctorstimetables-api\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -275,7 +275,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{controller=\"Auth\",job=\"auth-api\"}) or vector(0)",
+          "expr": "sum(http_request_duration_seconds_count{controller=\"DoctorsTimetables\",job=\"consulting-doctorstimetables-api\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -361,13 +361,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg_over_time(process_private_memory_bytes{job=\"auth-api\"}[5m]) / (1024 * 1024)\n",
+          "expr": "avg_over_time(process_private_memory_bytes{job=\"consulting-doctorstimetables-api\"}[5m]) / (1024 * 1024)\n",
           "interval": "",
           "legendFormat": "Consumo em MB",
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de memoria - Aplicaca",
+      "title": "Consumo de uso de memória - Aplicação",
       "type": "timeseries"
     },
     {
@@ -444,13 +444,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(process_cpu_seconds_total{job=\"auth-api\"}[1m]) * 3.60",
+          "expr": "rate(process_cpu_seconds_total{job=\"consulting-doctorstimetables-api\"}[1m]) * 3.60",
           "interval": "",
           "legendFormat": "Consumo em GHz",
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de processador - Aplicacao",
+      "title": "Consumo de uso de processador - Aplicação",
       "type": "timeseries"
     },
     {
@@ -503,14 +503,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{job=\"auth-api\"}[$__interval])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{job=\"consulting-doctorstimetables-api\"}[$__interval])) by (le))",
           "interval": "",
           "legendFormat": "p99",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job=\"auth-api\"}[$__interval])) by (le))\n",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job=\"consulting-doctorstimetables-api\"}[$__interval])) by (le))\n",
           "hide": false,
           "interval": "",
           "legendFormat": "p95",
@@ -518,7 +518,7 @@
         },
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{job=\"auth-api\"}[$__interval])) by (le))\n",
+          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{job=\"consulting-doctorstimetables-api\"}[$__interval])) by (le))\n",
           "hide": false,
           "interval": "",
           "legendFormat": "p50",
@@ -529,7 +529,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Percentis de latencia",
+      "title": "Percentis de latência",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -640,7 +640,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "API Auth",
-  "uid": "3",
+  "title": "API Consulting Timetables Doctor",
+  "uid": "8",
   "version": 5
 }

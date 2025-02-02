@@ -16,8 +16,6 @@ COPY ["/update-doctors-timetables-api/update-doctors-api/src/UpdateEntitys/Updat
 COPY ["/update-doctors-timetables-api/update-doctors-api/src/UpdateInterface/UpdateInterface.csproj", "src/UpdateInterface/"]
 COPY ["/update-doctors-timetables-api/update-doctors-api/src/UpdateUseCases/UpdateUseCases.csproj", "src/UpdateUseCases/"]
 COPY ["/update-doctors-timetables-api/update-doctors-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
-COPY ["/update-doctors-timetables-api/update-doctors-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
-COPY ["/update-doctors-timetables-api/update-doctors-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
 
 RUN dotnet restore "./src/Update.Api/Update.Api.csproj"
 

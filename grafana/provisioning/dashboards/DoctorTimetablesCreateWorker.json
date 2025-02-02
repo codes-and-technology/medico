@@ -41,254 +41,6 @@
     },
     {
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 0,
-        "y": 1
-      },
-      "id": 8,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.2.0-33922pre",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{code=~\"2..\",controller=\"Auth\", job=\"auth-api\"}) or vector(0)",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Successful Responses",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 5,
-        "y": 1
-      },
-      "id": 11,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.2.0-33922pre",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{code=~\"4..\",controller=\"Auth\", job=\"auth-api\"}) or vector(0)",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Client Error Responses",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 10,
-        "y": 1
-      },
-      "id": 12,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.2.0-33922pre",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{code=~\"5..\",controller=\"Auth\", job=\"auth-api\"}) or vector(0)",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Server Error Responses",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 15,
-        "y": 1
-      },
-      "id": 13,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.2.0-33922pre",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(http_request_duration_seconds_count{controller=\"Auth\",job=\"auth-api\"}) or vector(0)",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Total Request's",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -344,7 +96,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 6
+        "y": 1
       },
       "id": 17,
       "options": {
@@ -361,13 +113,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg_over_time(process_private_memory_bytes{job=\"auth-api\"}[5m]) / (1024 * 1024)\n",
+          "expr": "avg_over_time(process_private_memory_bytes{job=\"create-doctors-timetables-worker\"}[5m]) / (1024 * 1024)\n",
           "interval": "",
           "legendFormat": "Consumo em MB",
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de memoria - Aplicaca",
+      "title": "Consumo de uso de memoria - Aplicacao",
       "type": "timeseries"
     },
     {
@@ -427,7 +179,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 1
       },
       "id": 20,
       "options": {
@@ -444,7 +196,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(process_cpu_seconds_total{job=\"auth-api\"}[1m]) * 3.60",
+          "expr": "rate(process_cpu_seconds_total{job=\"create-doctors-timetables-worker\"}[1m]) * 3.60",
           "interval": "",
           "legendFormat": "Consumo em GHz",
           "refId": "A"
@@ -472,7 +224,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 19,
@@ -503,14 +255,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{job=\"auth-api\"}[$__interval])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{job=\"create-doctors-timetables-worker\"}[$__interval])) by (le))",
           "interval": "",
           "legendFormat": "p99",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job=\"auth-api\"}[$__interval])) by (le))\n",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job=\"create-doctors-timetables-worker\"}[$__interval])) by (le))\n",
           "hide": false,
           "interval": "",
           "legendFormat": "p95",
@@ -518,7 +270,7 @@
         },
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{job=\"auth-api\"}[$__interval])) by (le))\n",
+          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{job=\"create-doctors-timetables-worker\"}[$__interval])) by (le))\n",
           "hide": false,
           "interval": "",
           "legendFormat": "p50",
@@ -596,7 +348,7 @@
         "h": 16,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 9
       },
       "id": 18,
       "options": {
@@ -640,7 +392,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "API Auth",
-  "uid": "3",
-  "version": 5
+  "title": "Worker Doctor Timetables Create",
+  "uid": "98",
+  "version": 3
 }
