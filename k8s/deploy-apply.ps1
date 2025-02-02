@@ -60,6 +60,10 @@ kubectl apply -f k8s/api/consulting-appointments-doctors-api/deployment.yml
 kubectl apply -f k8s/api/consulting-appointments-doctors-api/service.yml
 kubectl apply -f k8s/api/consulting-doctorstimetables-api/deployment.yml
 kubectl apply -f k8s/api/consulting-doctorstimetables-api/service.yml
+kubectl apply -f k8s/api/create-doctors-timetables-api/deployment.yml
+kubectl apply -f k8s/api/create-doctors-timetables-api/service.yml
+kubectl apply -f k8s/api/create-doctors-timetables-worker/deployment.yml
+kubectl apply -f k8s/api/create-doctors-timetables-worker/service.yml
 
 Write-Host "All deployments have been applied successfully."
 

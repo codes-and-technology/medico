@@ -51,6 +51,8 @@ public class Program
 
     private static void InstallServices(WebApplicationBuilder builder, IConfigurationRoot configuration)
     {
+        builder.Services.AddRabbitMq(configuration);
+
         builder.Services.AddLogging(builder => builder.AddConsole());
         builder.Services.AddHealthChecks();
    
@@ -114,7 +116,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddRabbitMq(configuration);
         builder.Services.AddRefitServiceExtension(configuration);
         
         builder.Services.AddScoped<IController, CreateDoctorController>();
