@@ -65,7 +65,7 @@ public class Program
 
         builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Agendamentos", Version = "v1" });
 
             // Adiciona suporte para passar o token JWT no Swagger
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -124,10 +124,17 @@ public class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddRedis(configuration);
 
-        builder.Services.AddScoped<IController, ConsultingDoctorController>();
+        builder.Services.AddScoped<IDoctorController, ConsultingDoctorController>();
+        builder.Services.AddScoped<IDoctorTimetablesController, ConsultingDoctorTimetablesController>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IDoctorsTimetablesDateDBGateway, DoctorsTimetablesDateDBGateway>();
+        builder.Services.AddScoped<IDoctorsTimetablesTimesDBGateway, DoctorsTimetablesTimesDBGateway>();
+        builder.Services.AddScoped<IAppointmentDBGateway, AppointmentDbGateway>();
         builder.Services.AddScoped<IUserDBGateway, UserDbGateway>();
         builder.Services.AddScoped<ICache, Cache>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IDoctorsTimetablesDateRepository, DoctorsTimetablesDateRepository>();
+        builder.Services.AddScoped<IDoctorsTimetablesTimesRepository, DoctorsTimetablesTimesRepository>();
+        builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
     }
 }

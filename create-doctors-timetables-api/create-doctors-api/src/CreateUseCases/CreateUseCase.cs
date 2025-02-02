@@ -4,19 +4,20 @@ using Presenters;
 namespace CreateUseCases;
 
 public class CreateUseCase(CreateDoctorTimetablesDto createDoctorTimetablesDto, 
-    List<ConsultingDoctorTimetablesDateDto> doctoTimetablesList,
+    ConsultingDoctorTimetablesDateDto doctoTimetablesList,
     string doctorId)
 {
     public ResultDto<DoctorTimetablesDateEntity> CreateDoctorTimetablesDate()
     {
         var result = new ResultDto<DoctorTimetablesDateEntity>();
        
-        if (doctoTimetablesList is not null && doctoTimetablesList
-                .Any(e => 
-                    e.Date == createDoctorTimetablesDto.AvailableDate.ToString("dd/MM/yyyy") &&
-                    e.TimeList.Any(item => 
-                        createDoctorTimetablesDto.Times.Contains(item.Time))
-                ))
+        if (doctoTimetablesList is not null 
+            && doctoTimetablesList.Date == createDoctorTimetablesDto.AvailableDate.ToString("yyyy-MM-dd")
+            && doctoTimetablesList
+            .TimeList
+            .Any(item =>
+                createDoctorTimetablesDto.Times.Contains(item.Time))
+            )
         {
             result.Errors.Add("Existe Data e Horário cadastrado no sistema, verifique os dados e tente novamente.");
             return result;

@@ -3,13 +3,13 @@ using ConsultingUseCases;
 using Presenters;
 
 namespace ConsultingController;
-public class ConsultingDoctorController(IUserDBGateway userDbGateway, ICache cacheGateway) : IController
+public class ConsultingDoctorController(IUserDBGateway userDbGateway, ICache cacheGateway) : IDoctorController
 {
     public async Task<ResultDto<List<UserDto>>> ConsultingDoctorAsync()
     {
         var doctorCache = await cacheGateway.GetCacheAsync("Doctors");
 
-        var useCase = new ConsultingUseCase();
+        var useCase = new ConsultingDoctorUseCase();
 
         if (doctorCache is not null && doctorCache.Count > 0)
             return useCase.CreateConsultingFromCache(doctorCache);

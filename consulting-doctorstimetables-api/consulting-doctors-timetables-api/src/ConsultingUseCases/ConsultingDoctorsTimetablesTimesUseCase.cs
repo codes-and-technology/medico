@@ -20,8 +20,8 @@ public class ConsultingDoctorsTimetablesTimesUseCase()
         var list = DoctorsTimetablesDateList.Select(f => new DoctorsTimetablesTimesDto()
         {
             Id = f.Id.ToString(),
-            Time = f.Time
-
+            Time = f.Time,
+            IdDoctorsTimetablesDate = f.IdDoctorsTimetablesDate           
         }).ToList();
 
         var result = new ResultDto<List<DoctorsTimetablesTimesDto>>

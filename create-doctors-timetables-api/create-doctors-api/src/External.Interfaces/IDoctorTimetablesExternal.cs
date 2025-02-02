@@ -7,6 +7,6 @@ using Refit;
 public interface IDoctorTimetablesExternal
 {
     [Get("/doctors-timetables")]
-    Task<IApiResponse<List<ConsultingDoctorTimetablesDateDto>>> Get([Header("Authorization")] string authorization);
+    Task<IApiResponse<ResultDto<List<ConsultingDoctorTimetablesDateDto>>>> Get([Header("Authorization")] string authorization);
 
 }
