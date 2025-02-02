@@ -15,7 +15,7 @@ public static class RabbitServiceExtension
 
         services.AddMassTransit(register =>
         {
-            register.AddConsumer<CreateUserConsumer>();
+            register.AddConsumer<CreateDoctorTimetablesConsumer>();
 
             register.UsingRabbitMq((context, cfg) =>
             {
@@ -27,7 +27,7 @@ public static class RabbitServiceExtension
                 });
                 cfg.ReceiveEndpoint("create-doctor-timetables", receiver =>
                 {
-                    receiver.ConfigureConsumer<CreateUserConsumer>(context);
+                    receiver.ConfigureConsumer<CreateDoctorTimetablesConsumer>(context);
                     receiver.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));                    
                 });
             });          

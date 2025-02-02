@@ -15,7 +15,7 @@ public class CreateDoctorController(IDoctorTimetablesConsultingGateway doctorTim
 
         var doctoTimetablesList = await doctorTimetablesConsultingGateway.GetAllAsync(token);
 
-        var useCase = new CreateUseCase(createDoctorTimetablesDto, doctoTimetablesList.ToList(),doctorId);
+        var useCase = new CreateUseCase(createDoctorTimetablesDto, doctoTimetablesList,doctorId);
 
         var doctorTimetablesDate = useCase.CreateDoctorTimetablesDate();
 

@@ -55,7 +55,16 @@ public class CreateUseCase(CreateDoctorTimetablesDto createDoctorTimetablesDto,
 
     public ResultDto<DoctorTimetablesDateEntity> CreateEntity(DoctorTimetablesDateEntity doctorTimetablesDateEntity, List<DoctorTimetablesTimeEntity> doctorTimetablesTimeList)
     {
-        var result = new ResultDto<DoctorTimetablesDateEntity>();
+        var result = new ResultDto<DoctorTimetablesDateEntity>
+        {
+            Data = new DoctorTimetablesDateEntity
+            {
+                DoctorTimetablesTimes = [.. doctorTimetablesTimeList],
+                IdDoctor = doctorTimetablesDateEntity.IdDoctor,
+                Id = doctorTimetablesDateEntity.Id,
+                AvailableDate = doctorTimetablesDateEntity.AvailableDate
+            }
+        };
 
         return result;
     }

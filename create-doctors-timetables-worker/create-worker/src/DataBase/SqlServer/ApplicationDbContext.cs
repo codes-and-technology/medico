@@ -22,6 +22,8 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<DoctorTimetablesDateEntity> DoctorTimetablesDates { get; set; }
+    public DbSet<DoctorTimetablesTimeEntity> DoctorTimetablesTimes { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
