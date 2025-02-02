@@ -119,7 +119,7 @@
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de memória - Aplicação",
+      "title": "Consumo de uso de memoria - Aplicacao",
       "type": "timeseries"
     },
     {
@@ -202,7 +202,7 @@
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de processador - Aplicação",
+      "title": "Consumo de uso de processador - Aplicacao",
       "type": "timeseries"
     },
     {
@@ -281,7 +281,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Percentis de latência",
+      "title": "Percentis de latencia",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -392,7 +392,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Create Worker Metrics Dashboard",
-  "uid": "780987c4-f7ef-4508-858e-16b5d9042c73",
+  "title": "Worker User Create",
+  "uid": "99",
   "version": 3
 }

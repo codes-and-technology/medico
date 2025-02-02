@@ -367,7 +367,7 @@
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de memória - Aplicação",
+      "title": "Consumo de uso de memoria - Aplicacao",
       "type": "timeseries"
     },
     {
@@ -450,7 +450,7 @@
           "refId": "A"
         }
       ],
-      "title": "Consumo de uso de processador - Aplicação",
+      "title": "Consumo de uso de processador - Aplicacao",
       "type": "timeseries"
     },
     {
@@ -529,7 +529,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Percentis de latência",
+      "title": "Percentis de latencia",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -640,7 +640,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Consulting Doctor API Metrics Dashboard",
+  "title": "API Consulting Doctor",
   "uid": "1",
   "version": 5
 }

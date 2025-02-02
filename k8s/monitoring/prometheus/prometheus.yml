@@ -26,8 +26,23 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['consulting-appointments-doctors-api:80']
-          
-        
-        
-        
-      
+      - job_name: 'consulting-doctorstimetables-api'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['consulting-doctorstimetables-api:80']          
+      - job_name: 'create-doctors-timetables-api'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['create-doctors-timetables-api:80']      
+      - job_name: 'create-doctors-timetables-worker'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['create-doctors-timetables-worker:80'] 
+      - job_name: 'update-doctors-timetables-api'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['update-doctors-timetables-api:80']   
+      - job_name: 'update-doctors-timetables-worker'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['update-doctors-timetables-worker:80']  
