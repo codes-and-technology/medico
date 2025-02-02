@@ -1,12 +1,13 @@
 ﻿using ConsultingEntitys;
 using ConsultingInterface;
+using System.Linq.Expressions;
 
 namespace DBGateways;
 
 public class DoctorsTimetablesDateDBGateway(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IDoctorsTimetablesDateDBGateway
 {
-    public Task<IEnumerable<DoctorsTimetablesDateEntity>> FindDoctorsTimetablesDateByIdDoctorAvailableAsync(string idDoctor)
+    public Task<IEnumerable<DoctorsTimetablesDateEntity>> FindAllAsync(Expression<Func<DoctorsTimetablesDateEntity, bool>> predicate)
     {
-        return Uow.DoctorsTimetablesDate.GetAllAsync(d => d.IdDoctor == idDoctor && !d.DeleteDate.HasValue);
+        return Uow.DoctorsTimetablesDate.GetAllAsync(predicate);
     }
 }

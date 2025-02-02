@@ -30,17 +30,11 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
 
     [HttpGet("/timetables")]
     [Authorize(Roles = "PATIENT")]
-    public async Task<IActionResult> Timetables()
+    public async Task<IActionResult> Timetables(string idDoctor)
     {
         try
         {
-            var userId = User.FindFirst("ID")?.Value;
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Unauthorized("User ID not found in token.");
-            }
-
-            var result = await doctorTimetablesController.ConsultingTimetablesAsync(userId);
+            var result = await doctorTimetablesController.ConsultingTimetablesAsync(idDoctor);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         catch (Exception ex)

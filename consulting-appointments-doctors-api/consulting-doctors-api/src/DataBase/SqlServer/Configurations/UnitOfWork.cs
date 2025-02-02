@@ -9,18 +9,20 @@ public class UnitOfWork : IUnitOfWork
     public IUserRepository Users { get; }
     public IDoctorsTimetablesDateRepository DoctorsTimetablesDate { get; }
     public IDoctorsTimetablesTimesRepository DoctorsTimetablesTimes { get; }
+    public IAppointmentRepository Appointment { get; }
 
     public UnitOfWork(ApplicationDbContext dbContext,
                       IUserRepository userRepository, 
                       IDoctorsTimetablesDateRepository doctorsTimetablesDateRespository,
-                      IDoctorsTimetablesTimesRepository doctorsTimetablesTimesRespository)
+                      IDoctorsTimetablesTimesRepository doctorsTimetablesTimesRespository,
+                      IAppointmentRepository appointment)
     {
         _dbContext = dbContext;
         Users = userRepository;
         DoctorsTimetablesDate = doctorsTimetablesDateRespository;
         DoctorsTimetablesTimes = doctorsTimetablesTimesRespository;
+        Appointment = appointment;
     }
-
 
     public void Dispose()
     {
