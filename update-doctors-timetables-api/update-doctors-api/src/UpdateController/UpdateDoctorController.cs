@@ -18,14 +18,14 @@ public class UpdateDoctorController(
 
         var doctoTimetablesList = await doctorTimetablesConsultingGateway.GetAllAsync(token);
 
-        var useCase = new UpdateUseCase(updateDoctorTimetablesDto, doctoTimetablesList, doctorId);
+        var useCase = new UpdateUseCase(updateDoctorTimetablesDto, doctoTimetablesList);
 
         var doctorTimetablesTime = useCase.UpdateDoctorTimetablesTime();
 
         if (!doctorTimetablesTime.Success)
             return doctorTimetablesTime;
 
-        var entity = useCase.UpdateEntity(updateDoctorTimetablesDto.Id, doctorId, doctorTimetablesTime.Data);
+        var entity = useCase.UpdateEntity(doctorId, updateDoctorTimetablesDto.Id, doctorTimetablesTime.Data);
 
         await doctorTimetablesQueueGateway.SendMessage(entity.Data);
         return result;

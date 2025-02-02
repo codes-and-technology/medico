@@ -30,7 +30,7 @@ namespace CreateController
             await doctorTimetablesTimeDbGateway.AddRangeAsync(doctorTimetables.DoctorTimetablesTimes);
             await doctorTimetablesDateDbGateway.CommitAsync();
 
-            await cache.ClearCacheAsync("DoctorsTimetables");
+            await cache.ClearCacheAsync("DoctorsTimetablesDate");
 
 
             return result;
