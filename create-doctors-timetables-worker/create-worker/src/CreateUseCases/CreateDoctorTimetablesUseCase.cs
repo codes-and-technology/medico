@@ -24,8 +24,9 @@ public class CreateDoctorTimetablesUseCase : ICreateDoctorTimetablesUseCase
         {
             result.Errors.Add("Doctor timetables vazio");
         }
-
+        doctorTimetables.CreateDate = DateTime.Now;
         result.Data = doctorTimetables;
+        
         result.Valid(doctorTimetables);
 
         return result;

@@ -4,7 +4,6 @@ using CreateInterface.Gateway.Cache;
 using CreateInterface.Gateway.DB;
 using CreateInterface.UseCase;
 using Presenters;
-using Presenters.Enum;
 
 namespace CreateController
 {
@@ -13,36 +12,27 @@ namespace CreateController
         ICacheGateway<DoctorTimetablesDateEntity> cache,
         IDoctorTimetablesDateDBGateway doctorTimetablesDateDbGateway,
         IDoctorTimetablesTimeDBGateway doctorTimetablesTimeDbGateway
-        ) : ICreateDoctorTimetablesController
+    ) : ICreateDoctorTimetablesController
     {
-        public async Task<CreateResult<DoctorTimetablesDateEntity>> CreateAsync(DoctorTimetablesDateEntity doctorTimetables)
+        public async Task<CreateResult<DoctorTimetablesDateEntity>> CreateAsync(
+            DoctorTimetablesDateEntity doctorTimetables)
         {
             CreateResult<DoctorTimetablesDateEntity> result = new();
-
             
-            try
+            result = createDoctorTimetablesUseCase.Create(doctorTimetables);
+
+            if (!result.Success)
             {
-                result = createDoctorTimetablesUseCase.Create(doctorTimetables);
-
-                if (!result.Success)
-                {
-                    throw new Exception("Objeto invalido");
-                }
-
-                await doctorTimetablesDateDbGateway.AddAsync(doctorTimetables);
-                await doctorTimetablesTimeDbGateway.AddRangeAsync(doctorTimetables.DoctorTimetablesTimes);
-                await doctorTimetablesDateDbGateway.CommitAsync();
-
-                await cache.ClearCacheAsync("DoctorsTimetables");
+                throw new Exception("Objeto invalido");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
-           
-            
+
+            await doctorTimetablesDateDbGateway.AddAsync(doctorTimetables);
+            await doctorTimetablesTimeDbGateway.AddRangeAsync(doctorTimetables.DoctorTimetablesTimes);
+            await doctorTimetablesDateDbGateway.CommitAsync();
+
+            await cache.ClearCacheAsync("DoctorsTimetables");
+
+
             return result;
         }
     }

@@ -17,8 +17,6 @@ COPY ["/create-doctors-timetables-api/create-doctors-api/src/CreateInterface/Cre
 COPY ["/create-doctors-timetables-api/create-doctors-api/src/CreateUseCases/CreateUseCases.csproj", "src/CreateUseCases/"]
 COPY ["/create-doctors-timetables-api/create-doctors-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
 COPY ["/create-doctors-timetables-api/create-doctors-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
-COPY ["/create-doctors-timetables-api/create-doctors-api/src/Redis/Redis.csproj", "src/Redis/"]
-COPY ["/create-doctors-timetables-api/create-doctors-api/src/CacheGateway/CacheGateway.csproj", "src/CacheGateway/"]
 COPY ["/create-doctors-timetables-api/create-doctors-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
 
 RUN dotnet restore "./src/Create.Api/Create.Api.csproj"

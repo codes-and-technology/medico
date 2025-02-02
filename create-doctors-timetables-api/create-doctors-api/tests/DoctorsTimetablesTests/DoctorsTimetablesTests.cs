@@ -49,8 +49,20 @@ public class CreateDoctorsTests
         {
             new ConsultingDoctorTimetablesDateDto()
             {
-                AvailableDate = date,
-                Times = times
+                Date = "2025-02-01",
+                TimeList = new List<DoctorsTimetablesTimesDto>
+                {
+                   new DoctorsTimetablesTimesDto
+                   {
+                       Id ="a" ,
+                       Time = "10:00"
+                   },
+                   new DoctorsTimetablesTimesDto
+                   {
+                       Id ="a" ,
+                       Time = "11:00"
+                   }
+                }
             }
         });
         
