@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: consulting-doctorstimetables-api
-        image: 318914/consulting-doctorstimetables-api:1.0.0.2 # Imagem do seu container
+        image: danielharo/consulting-doctorstimetables-api:latest # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
         env:

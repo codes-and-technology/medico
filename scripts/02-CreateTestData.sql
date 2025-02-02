@@ -30,7 +30,7 @@ BEGIN
 			,[Email]
 			,[CreateDate])
 		VALUES
-			('USR.0001'
+			(NEWID()
 			,'Kenneth Evans'
 			,'22214425802'
 			,'kevans.br@gmail.com'
@@ -50,10 +50,10 @@ BEGIN
 			,[CRM]
 			,[CreateDate])
 		VALUES
-			('DOC.0001'
+			(NEWID()
 			,'Emmett Brown'
 			,'11122233344'
-			,'outatime@gmail.com'
+			,'kevans.br@gmail.com'
 			,'SP123456'
 			,CURRENT_TIMESTAMP);
 
@@ -71,7 +71,7 @@ BEGIN
 				   ,[CreateDate]
 				   )
 			 VALUES
-				   ('AVA.' + @idDoctor + '[' + convert(varchar(25), getdate(), 126) + ']'
+				   (NEWID()
 				   ,@idDoctor
 				   ,getdate()+30
 				   ,CURRENT_TIMESTAMP
@@ -96,9 +96,10 @@ BEGIN
 					   ,[CreateDate]
 					   )
 				 VALUES
-					   (@idDoctorAvailability + '\' +  RIGHT('00' + (@intLoop+8), 2)
+					   (NEWID()
 					   ,@idDoctorAvailability
-					   ,CONVERT(time, RIGHT('00' + (@intLoop+8), 2) + ':00')
+					   --,CONVERT(time, RIGHT('00' + (@intLoop+8), 2) + ':00')
+					   ,RIGHT('00' + (@intLoop+8), 2) + ':00'
 					   ,CURRENT_TIMESTAMP
 					   );
 		END
@@ -113,7 +114,7 @@ BEGIN
 					,[IdDoctorsTimetablesTime]
 					,[CreateDate])
 				VALUES
-					('APO' + @idDoctor + '[' + convert(varchar(25), getdate(), 126) + ']'
+					(NEWID()
 					,@idPatient
 					,@idDoctor
 					,@idDoctorAvailability
@@ -130,7 +131,7 @@ BEGIN
 				   ,[Message]
 				   )
 			 VALUES
-				   ('NOT.TS' + '[' + convert(varchar(25), getdate(), 126) + ']'
+				   (NEWID()
 				   ,@idAppointment
 				   ,CURRENT_TIMESTAMP
 				   ,'Mensagem gerada pelo script de criação de dados de testes'
@@ -171,5 +172,13 @@ SELECT * FROM [DoctorsTimetablesDate]
 SELECT * FROM [DoctorsTimetablesTimes]
 SELECT * FROM [Appointments]
 SELECT * FROM [Notification]
+SELECT * FROM PendingNotification
+
+
+DELETE FROM [Notification]
+DELETE FROM [Appointments]
+DELETE FROM [DoctorsTimetablesTimes]
+DELETE FROM [DoctorsTimetablesDate]
+DELETE FROM [Users]
 
 */

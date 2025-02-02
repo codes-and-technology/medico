@@ -13,7 +13,7 @@ public class CreateDoctorsTests
         Mock<IDoctorTimetablesConsultingGateway> doctorTimetablesConsultingGateway = new();
         Mock<IDoctorTimetablesQueueGateway> doctorTimetablesQueueGateway = new();
 
-        doctorTimetablesConsultingGateway.Setup(s => s.GetAllAsync(It.IsAny<string>())).ReturnsAsync(new List<ConsultingDoctorTimetablesDateDto>());
+        doctorTimetablesConsultingGateway.Setup(s => s.GetAllAsync(It.IsAny<string>())).ReturnsAsync(new ConsultingDoctorTimetablesDateDto());
         
         var controller = new CreateDoctorController(doctorTimetablesConsultingGateway.Object, doctorTimetablesQueueGateway.Object);
 
@@ -45,12 +45,10 @@ public class CreateDoctorsTests
             "09:00",
             "10:00"
         };
-        doctorTimetablesConsultingGateway.Setup(s => s.GetAllAsync(It.IsAny<string>())).ReturnsAsync(new List<ConsultingDoctorTimetablesDateDto>
+        doctorTimetablesConsultingGateway.Setup(s => s.GetAllAsync(It.IsAny<string>())).ReturnsAsync(new ConsultingDoctorTimetablesDateDto
         {
-            new ConsultingDoctorTimetablesDateDto()
-            {
-                Date = "2025-02-01",
-                TimeList = new List<DoctorsTimetablesTimesDto>
+            Date = "2025-02-01",
+            TimeList = new List<DoctorsTimetablesTimesDto>
                 {
                    new DoctorsTimetablesTimesDto
                    {
@@ -63,7 +61,6 @@ public class CreateDoctorsTests
                        Time = "11:00"
                    }
                 }
-            }
         });
         
         var controller = new CreateDoctorController(doctorTimetablesConsultingGateway.Object, doctorTimetablesQueueGateway.Object);
