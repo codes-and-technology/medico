@@ -5,6 +5,7 @@ using CreateEntitys;
 using CreateInterface.Controllers;
 using CreateInterface.DataBase;
 using CreateInterface.Gateway.Cache;
+using CreateInterface.Gateway.DB;
 using CreateInterface.Gateway.Queue;
 using CreateInterface.UseCase;
 using CreateUseCases.UseCase;
@@ -32,17 +33,6 @@ internal class Program
             .Build();
 
         builder.Services.UseHttpClientMetrics();
-        
-        builder.Services.AddRabbitMq(configuration);
-        builder.Services.AddRedis(configuration);
-
-        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-        builder.Services.AddScoped(typeof(ICacheGateway<>), typeof(CacheGateway<>));
-        builder.Services.AddScoped<ICreateUserGateway, CreateUserGateway>();
-        builder.Services.AddScoped<ICreateUserController, CreateUserController>();
-        builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
-
-        builder.Services.AddHostedService<Worker>();
 
         // Configura��o do DbContext
         builder.Services.AddDbContext<ApplicationDbContext>(
@@ -50,6 +40,20 @@ internal class Program
             {
                 options.UseSqlServer(configuration.GetConnectionString("ConnectionString"));
             }, ServiceLifetime.Scoped);
+
+        //builder.Services.AddRabbitMq(configuration);
+        //builder.Services.AddRedis(configuration);
+
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped(typeof(ICacheGateway<>), typeof(CacheGateway<>));
+        builder.Services.AddScoped<ICreateUserGateway, CreateUserGateway>();
+        builder.Services.AddScoped<ICreateUserController, CreateUserController>();
+        builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
+        builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+        builder.Services.AddScoped<IPendingNotificationRepository, PendingNotificationRepository>();
+
+        builder.Services.AddHostedService<Worker>();
+
 
         // Adiciona health checks
         builder.Services.AddHealthChecks()

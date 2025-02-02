@@ -8,19 +8,19 @@ using Presenters;
 namespace CreateController
 {
     public class CreateUserController(
-        ICreateUserUseCase createUserUseCase,
-        ICacheGateway<NotificationDto> cache,
-        IUserDBGateway userDbGateway
+        //ICreateUserUseCase createUserUseCase,
+        //ICacheGateway<NotificationDto> cache,
+        //IUserDBGateway userDbGateway
         ) : ICreateUserController
     {
-        private readonly ICreateUserUseCase _createUserUseCase = createUserUseCase;
-        private readonly ICacheGateway<NotificationDto> _cache = cache;
-        private readonly IUserDBGateway _userDbGateway = userDbGateway;
+        //private readonly ICreateUserUseCase _createUserUseCase = createUserUseCase;
+        //private readonly ICacheGateway<NotificationDto> _cache = cache;
+        //private readonly IUserDBGateway _userDbGateway = userDbGateway;
 
+        /*
         public async Task<CreateResult<NotificationEntity>> CreateAsync(NotificationDto notificationDto)
         {
             List<NotificationEntity> notificationList = new List<NotificationEntity>();
-            /*
             var notificationExists = await _userDbGateway.FirstOrDefaultAsync(x => x.Email.Equals((notificationDto.Email)));
             notificationList.Add(notificationExists);
             
@@ -29,7 +29,6 @@ namespace CreateController
                 var crmExists  = await _userDbGateway.FirstOrDefaultAsync(f => f.CRM == NotificationDto.Crm);
                 userList.Add(crmExists);
             }
-            */
 
             var result = _createUserUseCase.Create(notificationDto, notificationList);
 
@@ -40,7 +39,12 @@ namespace CreateController
 
             await _cache.ClearCacheAsync("Notification");
             return result;
-            
+
+        }
+        */
+        public Task<CreateResult<NotificationEntity>> CreateAsync(NotificationDto entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

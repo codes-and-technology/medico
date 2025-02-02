@@ -11,7 +11,7 @@ public class PendingNotificationConfiguration : IEntityTypeConfiguration<Pending
         builder.ToTable("PendingNotification");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).IsRequired();
-        builder.Property(p => p.Sucess);
+        builder.Property(p => p.Success);
         builder.Property(p => p.ErrorMessage);
         builder.Property(p => p.SendDate);
         builder.Property(p => p.CreateDate).IsRequired();
