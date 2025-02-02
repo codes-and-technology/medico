@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: consulting-appointments-doctors-api
-        image: danielharo/doctor-consulting-api # Imagem do seu container
+        image: 318914/doctor-consulting-api:1.0.0.1 # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
         env:

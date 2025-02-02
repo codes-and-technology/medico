@@ -6,7 +6,7 @@ using Presenters;
 
 namespace ConsultingTests;
 
-public class ConsultingDoctorsTests
+public class ConsultingDoctorsControllerTests
 {
     [Theory]
     [InlineData("true")]

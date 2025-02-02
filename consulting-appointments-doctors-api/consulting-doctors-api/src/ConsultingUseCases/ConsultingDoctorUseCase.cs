@@ -3,7 +3,7 @@ using Presenters;
 
 namespace ConsultingUseCases;
 
-public class ConsultingUseCase()
+public class ConsultingDoctorUseCase()
 {
     public ResultDto<List<UserDto>> CreateConsultingFromCache(List<UserDto> doctorList)
     {
