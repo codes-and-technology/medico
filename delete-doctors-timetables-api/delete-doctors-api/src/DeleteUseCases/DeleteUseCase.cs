@@ -3,8 +3,7 @@ using Presenters;
 
 namespace DeleteUseCases;
 
-public class DeleteUseCase(DeleteDoctorTimetablesDto deleteDoctorTimetablesDto, 
-    ConsultingDoctorTimetablesDateDto doctoTimetables)
+public class DeleteUseCase(DeleteDoctorTimetablesDto deleteDoctorTimetablesDto)
 {
     public ResultDto<List<DoctorTimetablesTimeEntity>> DeleteDoctorTimetablesTime()
     {
@@ -13,46 +12,21 @@ public class DeleteUseCase(DeleteDoctorTimetablesDto deleteDoctorTimetablesDto,
             Data = []
         };
 
-        if (doctoTimetables is not null && string.IsNullOrEmpty(doctoTimetables.IdDoctor) || string.IsNullOrEmpty(doctoTimetables.Id) || string.IsNullOrEmpty(doctoTimetables.Date))
+        if (string.IsNullOrEmpty(deleteDoctorTimetablesDto.Id) && deleteDoctorTimetablesDto.TimeList is not null && deleteDoctorTimetablesDto.TimeList.Count == 0)
         {
-            result.Errors.Add("Não existe horário a ser atualizado, verfique e tente novamente");
+            result.Errors.Add("Id da Data ou lita de horários não encontrado");
             return result;
         }
 
-        if (doctoTimetables.Id != deleteDoctorTimetablesDto.Id)
-        {
-            result.Errors.Add("ID da Data Disponível não encontrado");
-        }
-
-        bool hasDuplicates = deleteDoctorTimetablesDto.TimeList.GroupBy(x => x.Id).Any(g => g.Count() > 1);
-        bool hasTimeDuplicates = deleteDoctorTimetablesDto.TimeList.GroupBy(x => x.Time).Any(g => g.Count() > 1);
-
-        if (hasDuplicates)
-            result.Errors.Add("Existe ID repetido, verifique e tente novamente");
-
-        if (hasTimeDuplicates)
-            result.Errors.Add("Existe horário repetido, verifique e tente novamente");
-
-
-        foreach (var item in deleteDoctorTimetablesDto.TimeList)
-        {
-            if (!doctoTimetables.TimeList.Exists(a => a.Id == item.Id && a.IdDoctorsTimetablesDate == deleteDoctorTimetablesDto.Id))
-                result.Errors.Add("ID do Horário não encontrado");
-                
-            if (doctoTimetables.TimeList.Any(a => a.Time == item.Time && a.IdDoctorsTimetablesDate == deleteDoctorTimetablesDto.Id))
-                result.Errors.Add("Horário já cadastrado");
-        }
-
-        if (result.Errors.Any())
+        if (deleteDoctorTimetablesDto.TimeList is null || deleteDoctorTimetablesDto.TimeList.Count == 0) 
             return result;
-
+        
         foreach (var item in deleteDoctorTimetablesDto.TimeList)
         {
             result.Data.Add(new DoctorTimetablesTimeEntity()
             {
                 Id = item.Id,
                 IdDoctorsTimetablesDate = deleteDoctorTimetablesDto.Id,
-                Time = item.Time,
             });
         }
         
@@ -70,7 +44,6 @@ public class DeleteUseCase(DeleteDoctorTimetablesDto deleteDoctorTimetablesDto,
                 Id = id,
             }
         };
-
         return result;
     }
 }

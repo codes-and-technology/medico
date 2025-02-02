@@ -14,9 +14,9 @@ namespace Delete.Api.Controllers;
 [Authorize]
 public class DoctorsTimeTablesController(IController controller) : ControllerBase
 {
-    [HttpPut]
+    [HttpDelete]
     [Authorize(Roles = "DOCTOR")]
-    public async Task<IActionResult> Put(DeleteDoctorTimetablesDto deleteDoctorTimetablesDto)
+    public async Task<IActionResult> Delete(DeleteDoctorTimetablesDto deleteDoctorTimetablesDto)
     {
         try
         {

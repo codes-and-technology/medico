@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DeleteInterface\DeleteInterface.csproj" />
-      <ProjectReference Include="..\External.Interfaces\External.Interfaces.csproj" />
     </ItemGroup>
 
     <ItemGroup>

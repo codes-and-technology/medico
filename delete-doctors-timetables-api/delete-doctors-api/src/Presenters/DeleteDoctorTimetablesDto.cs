@@ -9,5 +9,4 @@ public class DeleteDoctorTimetablesDto
 public class TimeList
 {
     public string Id { get; set; }
-    public string Time { get; set; }
 }

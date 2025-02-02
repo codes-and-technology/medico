@@ -5,8 +5,6 @@ using Prometheus;
 using Delete.Api.Helpers.Middlewares;
 using DeleteController;
 using System.Text;
-using External.Interfaces;
-using ExternalInterfaceGateway;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using QueueGateway;
@@ -58,7 +56,7 @@ public class Program
    
         builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Atualização de Horários", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "API para Deletar Horários", Version = "v1" });
 
             // Adiciona suporte para passar o token JWT no Swagger
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -115,11 +113,8 @@ public class Program
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
-        builder.Services.AddRefitServiceExtension(configuration);
         
         builder.Services.AddScoped<IController, DeleteDoctorController>();
-        builder.Services.AddScoped<IDoctorTimetablesConsultingGateway, DoctorTimetablesConsultingGateway>();
         builder.Services.AddScoped<IDoctorTimetablesProducer, DoctorTimetablesProducer>();
         builder.Services.AddScoped<IDoctorTimetablesQueueGateway, DoctorTimetablesQueueGateway>();
     }
