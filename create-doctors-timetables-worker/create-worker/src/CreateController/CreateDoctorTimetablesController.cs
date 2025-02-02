@@ -4,7 +4,6 @@ using CreateInterface.Gateway.Cache;
 using CreateInterface.Gateway.DB;
 using CreateInterface.UseCase;
 using Presenters;
-using Presenters.Enum;
 
 namespace CreateController
 {
@@ -13,9 +12,10 @@ namespace CreateController
         ICacheGateway<DoctorTimetablesDateEntity> cache,
         IDoctorTimetablesDateDBGateway doctorTimetablesDateDbGateway,
         IDoctorTimetablesTimeDBGateway doctorTimetablesTimeDbGateway
-        ) : ICreateDoctorTimetablesController
+    ) : ICreateDoctorTimetablesController
     {
-        public async Task<CreateResult<DoctorTimetablesDateEntity>> CreateAsync(DoctorTimetablesDateEntity doctorTimetables)
+        public async Task<CreateResult<DoctorTimetablesDateEntity>> CreateAsync(
+            DoctorTimetablesDateEntity doctorTimetables)
         {
             CreateResult<DoctorTimetablesDateEntity> result = new();
             
@@ -31,7 +31,8 @@ namespace CreateController
             await doctorTimetablesDateDbGateway.CommitAsync();
 
             await cache.ClearCacheAsync("DoctorsTimetables");
-            
+
+
             return result;
         }
     }

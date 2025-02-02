@@ -4,5 +4,5 @@ namespace CreateInterface;
 
 public interface IDoctorTimetablesConsultingGateway
 {
-    Task<IEnumerable<ConsultingDoctorTimetablesDateDto>> GetAllAsync(string token);
+    Task<List<ConsultingDoctorTimetablesDateDto>> GetAllAsync(string token);
 }

@@ -7,18 +7,18 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["/create-worker/src/Create.Worker/Create.Worker.csproj", "src/Create.Worker/"]
-COPY ["/create-worker/src/CreateController/CreateController.csproj", "src/CreateController/"]
-COPY ["/create-worker/src/CreateEntitys/CreateEntitys.csproj", "src/CreateEntitys/"]
-COPY ["/create-worker/src/CreateInterface/CreateInterface.csproj", "src/CreateInterface/"]
-COPY ["/create-worker/src/Presenters/Presenters.csproj", "src/Presenters/"]
-COPY ["/create-worker/src/CreateUseCases/CreateUseCases.csproj", "src/CreateUseCases/"]
-COPY ["/create-worker/src/DataBase/DataBase.csproj", "src/DataBase/"]
-COPY ["/create-worker/src/Rabbit.Consumer.Create/Rabbit.Consumer.Create.csproj", "src/Rabbit.Consumer.Create/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/Create.Worker/Create.Worker.csproj", "src/Create.Worker/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/CreateController/CreateController.csproj", "src/CreateController/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/CreateEntitys/CreateEntitys.csproj", "src/CreateEntitys/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/CreateInterface/CreateInterface.csproj", "src/CreateInterface/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/Presenters/Presenters.csproj", "src/Presenters/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/CreateUseCases/CreateUseCases.csproj", "src/CreateUseCases/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/DataBase/DataBase.csproj", "src/DataBase/"]
+COPY ["/create-doctors-timetables-worker/create-worker/src/Rabbit.Consumer.Create/Rabbit.Consumer.Create.csproj", "src/Rabbit.Consumer.Create/"]
 
-RUN dotnet restore "./src/Create.Worker/Create.Worker.csproj"
+RUN dotnet restore	 "./src/Create.Worker/Create.Worker.csproj"
 
-COPY ["/create-worker", "/src"]
+COPY ["/create-doctors-timetables-worker/create-worker", "/src"]
 
 WORKDIR "/src/src/Create.Worker"
 RUN dotnet build "./Create.Worker.csproj" -c $BUILD_CONFIGURATION -o /app/build

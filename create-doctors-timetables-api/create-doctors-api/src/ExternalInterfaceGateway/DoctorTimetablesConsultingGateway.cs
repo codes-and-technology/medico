@@ -8,7 +8,7 @@ namespace ExternalInterfaceGateway;
 public class DoctorTimetablesConsultingGateway(IDoctorTimetablesExternal doctorTimetablesApi)
     : IDoctorTimetablesConsultingGateway
 {
-    public async Task<IEnumerable<ConsultingDoctorTimetablesDateDto>> GetAllAsync(string token)
+    public async Task<List<ConsultingDoctorTimetablesDateDto>> GetAllAsync(string token)
     {
         var result = await doctorTimetablesApi.Get(token);
 

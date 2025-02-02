@@ -51,12 +51,14 @@ public class Program
 
     private static void InstallServices(WebApplicationBuilder builder, IConfigurationRoot configuration)
     {
+        builder.Services.AddRabbitMq(configuration);
+
         builder.Services.AddLogging(builder => builder.AddConsole());
         builder.Services.AddHealthChecks();
    
         builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cadastros de Horários", Version = "v1" });
 
             // Adiciona suporte para passar o token JWT no Swagger
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -114,7 +116,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddRabbitMq(configuration);
         builder.Services.AddRefitServiceExtension(configuration);
         
         builder.Services.AddScoped<IController, CreateDoctorController>();

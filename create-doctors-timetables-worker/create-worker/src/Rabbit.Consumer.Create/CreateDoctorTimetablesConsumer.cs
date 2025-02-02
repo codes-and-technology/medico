@@ -4,12 +4,12 @@ using MassTransit;
 
 namespace Rabbit.Consumer.Create;
 
-public class CreateUserConsumer(ICreateDoctorTimetablesGateway createUserGateway) : IConsumer<DoctorTimetablesDateEntity>
+public class CreateDoctorTimetablesConsumer(ICreateDoctorTimetablesGateway createDoctorTimetablesGateway) : IConsumer<DoctorTimetablesDateEntity>
 {
     public async Task Consume(ConsumeContext<DoctorTimetablesDateEntity> context)
     {
         var message = context.Message;
         Console.WriteLine($"Received message: {message}");
-        var result = await createUserGateway.CreateAsync(message);
+        var result = await createDoctorTimetablesGateway.CreateAsync(message);
     }
 }

@@ -5,7 +5,7 @@ using CreateInterface.Gateway.DB;
 
 namespace DBGateways;
 
-public class DoctorTimetablesDateDbGateway<T>(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IDoctorTimetablesDateDBGateway
+public class DoctorTimetablesDateDbGateway(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IDoctorTimetablesDateDBGateway
 {
     public async Task AddAsync(DoctorTimetablesDateEntity entity) => await Uow.DoctorTimetablesDates.AddAsync(entity);
 
