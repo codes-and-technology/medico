@@ -25,16 +25,14 @@ public class DeleteDoctorTimetablesUseCase : IDeleteDoctorTimetablesUseCase
     
     public DeleteResult<DoctorTimetablesDateEntity> Delete(DoctorTimetablesDateEntity doctorTimetables, List<DoctorTimetablesTimeEntity> dbList, List<DoctorTimetablesDateEntity> doctorTimetablesDateEntityList)
     {
-        var result = new DeleteResult<DoctorTimetablesDateEntity>();
-
-        result.Data = new DoctorTimetablesDateEntity
+        var result = new DeleteResult<DoctorTimetablesDateEntity>
         {
-
+            Data = new DoctorTimetablesDateEntity
+            {
+                DoctorTimetablesTimes = []
+            }
         };
         
-        result.Data.DoctorTimetablesTimes = new List<DoctorTimetablesTimeEntity>();
-
-
         foreach (var item in doctorTimetablesDateEntityList)
         {
             if (item is null)

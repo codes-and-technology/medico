@@ -56,6 +56,8 @@ namespace DeleteController
                     }
                     
                     result = deleteDoctorTimetablesUseCase.Delete(doctorTimetables, list, doctorTimetablesDateEntityList);
+                    if (!result.Success)
+                        throw new Exception("Horário não pertence ao médico");
                     
                     UpdateList(result.Data.DoctorTimetablesTimes);
 
