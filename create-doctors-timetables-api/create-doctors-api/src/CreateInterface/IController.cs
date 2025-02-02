@@ -5,5 +5,5 @@ namespace CreateInterface;
 
 public interface IController
 {
-    Task<ResultDto<List<DoctorTimetablesTimeEntity>>> CreateDoctorAsync(CreateDoctorTimetablesDto createDoctorTimetablesDto, string token, string doctorId);
+    Task<ResultDto<DoctorTimetablesDateEntity>> CreateDoctorAsync(CreateDoctorTimetablesDto createDoctorTimetablesDto, string token, string doctorId);
 }

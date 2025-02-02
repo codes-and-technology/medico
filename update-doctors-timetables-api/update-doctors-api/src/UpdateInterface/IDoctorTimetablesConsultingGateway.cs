@@ -1,6 +1,6 @@
 ﻿using Presenters;
 
-namespace CreateInterface;
+namespace UpdateInterface;
 
 public interface IDoctorTimetablesConsultingGateway
 {
