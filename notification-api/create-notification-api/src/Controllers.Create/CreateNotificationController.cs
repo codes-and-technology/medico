@@ -9,7 +9,10 @@ public class CreateNotificationController(INotificationGateway notificationGatew
 {
     public async Task<ResultDto<NotificationEntity>> CreateNotificationAsync(NotificationDto notificationDTO, string token, string userID)
     {
-        var result = new ResultDto<List<NotificationEntity>>();
+        var result = new ResultDto<NotificationEntity>();
+
+        var useCase = new CreateNotificationUseCase(notificationDTO);
+        
 
         //var useCase = new CreateNotificationUseCase(createDoctorTimetablesDto, doctoTimetables, doctorId);
 
@@ -25,6 +28,6 @@ public class CreateNotificationController(INotificationGateway notificationGatew
         //await doctorTimetablesQueueGateway.SendMessage(entity.Data);
         //return doctorTimetablesDate;
 
-        return null;
+        return result;
     }
 }

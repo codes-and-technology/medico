@@ -11,7 +11,7 @@ namespace Create.Api;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class NotificationAPI(IController controller) : ControllerBase
 {
     [HttpPost]

@@ -33,5 +33,12 @@ namespace Entitys
         {
             return $"IdAppointment: {IdAppointment}, SendDate: {SendDate}, Message: {Message}, Success: {Success}, ErrorMessage: {ErrorMessage}";
         }
+
+        /*
+        public static implicit operator NotificationEntity(NotificationEntity v)
+        {
+            throw new NotImplementedException();
+        }
+        */
     }
 }

@@ -3,12 +3,20 @@ using Presenters;
 
 namespace UseCases.Create;
 
-public class CreateNotificationUseCase()
+public class CreateNotificationUseCase(NotificationDto notificationDTO)
 {
     public ResultDto<NotificationEntity> CreateNotification()
     {
         var result = new ResultDto<NotificationEntity>();
-       
+        result.Data = new NotificationEntity()
+        {
+            Id = Guid.NewGuid(),
+            IdAppointment = notificationDTO.IdAppointment,
+            CreateDate = DateTime.Now
+
+        };
+       return result;
+
         /*
         if (doctoTimetablesList is not null 
             && doctoTimetablesList.Date == createDoctorTimetablesDto.AvailableDate.ToString("yyyy-MM-dd")
@@ -30,15 +38,16 @@ public class CreateNotificationUseCase()
             AvailableDate = createDoctorTimetablesDto.AvailableDate
         };
         */
-        return result;
+
     }
     
 
-    /*public ResultDto<DoctorTimetablesDateEntity> CreateEntity(DoctorTimetablesDateEntity doctorTimetablesDateEntity, List<DoctorTimetablesTimeEntity> doctorTimetablesTimeList)
+/*    
+    public ResultDto<NotificationEntity> CreateEntity(DoctorTimetablesDateEntity doctorTimetablesDateEntity, List<DoctorTimetablesTimeEntity> doctorTimetablesTimeList)
     {
-        var result = new ResultDto<DoctorTimetablesDateEntity>
+        var result = new ResultDto<NotificationEntity>
         {
-            Data = new DoctorTimetablesDateEntity
+            Data = new NotificationEntity
             {
                 DoctorTimetablesTimes = [.. doctorTimetablesTimeList],
                 IdDoctor = doctorTimetablesDateEntity.IdDoctor,
@@ -49,5 +58,5 @@ public class CreateNotificationUseCase()
 
         return result;
     }
-    */
+*/
 }
