@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: update-doctors-timetables-worker
+  name: delete-doctors-timetables-worker
   labels: 
-    app: update-doctors-timetables-worker
+    app: delete-doctors-timetables-worker
     ambiente: dev
     equipe: desenvolvimento
   annotations: 
     criador: "Daniel Haro, Eduardo Rodrigues e Kenny Evans"
-    descricao: "Worker para Alterar Horários"
+    descricao: "Worker para deletar Horários"
     revisao: "1.0"    
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: update-doctors-timetables-worker
+      app: delete-doctors-timetables-worker
   template:
     metadata:
       labels:
-        app: update-doctors-timetables-worker
+        app: delete-doctors-timetables-worker
     spec:
       containers:
-      - name: update-doctors-timetables-worker
-        image: danielharo/update-doctors-timetables-worker:latest
+      - name: delete-doctors-timetables-worker
+        image: danielharo/delete-doctors-timetables-worker:latest
  # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container

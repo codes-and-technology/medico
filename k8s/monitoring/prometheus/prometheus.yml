@@ -46,3 +46,11 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['update-doctors-timetables-worker:80']  
+      - job_name: 'delete-doctors-timetables-api'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['delete-doctors-timetables-api:80']   
+      - job_name: 'delete-doctors-timetables-worker'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['delete-doctors-timetables-worker:80']  
