@@ -73,6 +73,10 @@ Delete-IfExists "k8s/api/update-doctors-timetables-api/service.yml"
 Delete-IfExists "k8s/api/update-doctors-timetables-api/deployment.yml"
 Delete-IfExists "k8s/api/update-doctors-timetables-worker/service.yml"
 Delete-IfExists "k8s/api/update-doctors-timetables-worker/deployment.yml"
+Delete-IfExists "k8s/api/delete-doctors-timetables-api/service.yml"
+Delete-IfExists "k8s/api/delete-doctors-timetables-api/deployment.yml"
+Delete-IfExists "k8s/api/delete-doctors-timetables-worker/service.yml"
+Delete-IfExists "k8s/api/delete-doctors-timetables-worker/deployment.yml"
 
 
 Write-Host "Resource cleanup completed."
