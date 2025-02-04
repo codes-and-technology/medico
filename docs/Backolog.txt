@@ -1,0 +1,52 @@
+1 - Alterar login
+	> Médico logar com CRM
+	> Paciente logar com CPF ou E-mail
+	
+2 - Cadastro Médico: 
+	> Devemos cadastrar especialidade, valor, avaliação no cadastro de usuários do tipo médico.
+
+3 - Consulta de médicos deve ter os filtros especialidade e avaliação
+
+4 - No cadastro de horário deve ser informado a especialidade
+	
+5 - Agendamento
+	> Médico deve dar o aceite / recusar
+	> Na consulta do médico, tbm devemos informar a especialidade e o valor da consulta
+	> Criar recurso para consulta dos agendamento pelo paciente
+	> Criar recurso para cancelar o agendamento
+
+-----------------------------
+Fora do Escopo	
+	Não terá Geolocalização	
+	Não precisa mostrar o pipe executando
+	
+----------------------
+BACKLOG:
+
+01 - [D] [API Horários] Delete de Horário do Médico
+02 - [ ] [Worker Notificação] Testar e criar os testes unitários (...)
+03 - [K] [API AUTH] Alterar login
+04 - [ ] [API USER] - Cadastro Médico: Incluir os campos [especialidade], [valor], [avaliação]
+05 - [ ] [API CONSULTA HORÁRIOS MÉDICOS] - Incluir filtros [especialidade] e [avaliação] e no DTO de resposta informar [especialidade], [avaliação] e [Valor]
+06 - [E] [API AGENDAMENTO] Criar Agendamento:
+07 - [ ] [API AGENDAMENTO] Criar recurso do médico para dar o aceite / recusar
+08 - [ ] [API AGENDAMENTO] Na consulta do médico, tbm devemos informar no DTO de resposta [especialidade], [avaliação] e [Valor]
+09 - [ ] [API AGENDAMENTO] Criar recurso para consulta dos agendamento pelo paciente
+10 - [ ] [API AGENDAMENTO] Criar recurso para cancelar o agendamento
+
+Não Funcionais
+11 - [ ] [NÃO FUNCIONAIS] Criar o arquivo do GitAction e rodar a pipe.
+12 - [ ] [NÃO FUNCIONAIS] Revisar as documentações das APIs.
+13 - [ ] [NÃO FUNCIONAIS] Revisar documentação da apresentação.
+14 - [ ] [NÃO FUNCIONAIS] Gravarmos a apresentação.
+
+
+
+
+
+
+
+
+
+
+
