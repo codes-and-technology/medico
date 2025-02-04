@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: appointments-api
-        image: 318914/appointments-api:1.0.0.3 # Imagem do seu container
+        image: 318914/appointments-api:1.0.0.4 # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
         env:

@@ -14,8 +14,14 @@ namespace Consulting.Api.Controllers;
 [Authorize]
 public class AppointmentsController(IDoctorController doctorController, IDoctorTimetablesController doctorTimetablesController, IAppointmentController appointmentController) : ControllerBase
 {
+    /// <summary>
+    /// Consulta os médicos disponíveis.
+    /// </summary>
+    /// <returns>Lista de médicos.</returns>
     [HttpGet("/doctors")]
     [Authorize(Roles = "PATIENT")]
+    [ProducesResponseType(typeof(ResultDto<List<UserDto>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<List<UserDto>>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Doctor()
     {
         try
@@ -26,11 +32,18 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
-        }        
+        }
     }
 
+    /// <summary>
+    /// Consulta os horários disponíveis de um médico.
+    /// </summary>
+    /// <param name="idDoctor">ID do médico.</param>
+    /// <returns>Lista de horários disponíveis.</returns>
     [HttpGet("/timetables")]
     [Authorize(Roles = "PATIENT")]
+    [ProducesResponseType(typeof(ResultDto<List<DoctorsTimetablesDateDto>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<List<DoctorsTimetablesDateDto>>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Timetables(string idDoctor)
     {
         try
@@ -44,8 +57,15 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
         }
     }
 
+    /// <summary>
+    /// Cria um novo agendamento.
+    /// </summary>
+    /// <param name="dto">Dados do agendamento.</param>
+    /// <returns>Resultado da criação do agendamento.</returns>
     [HttpPost("/Appointments")]
     [Authorize(Roles = "PATIENT")]
+    [ProducesResponseType(typeof(ResultDto<CreatedAppointmentDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<CreatedAppointmentDto>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateAppointmentDto dto)
     {
         try
