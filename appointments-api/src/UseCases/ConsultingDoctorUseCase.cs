@@ -22,7 +22,10 @@ public class ConsultingDoctorUseCase()
             Id = f.Id.ToString(),
             Email = f.Email,
             Name = f.Name,
-            CRM = f.CRM
+            CRM = f.CRM,
+            Amount = f.Amount,
+            PhysicianAssessment = f.PhysicianAssessment,
+            Specialty = f.Specialty,
         }).ToList();
         
         var result = new ResultDto<List<UserDto>>
