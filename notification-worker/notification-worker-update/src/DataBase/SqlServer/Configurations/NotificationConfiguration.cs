@@ -11,12 +11,16 @@ public class NotificationConfiguration : IEntityTypeConfiguration<NotificationEn
         builder.ToTable("Notification");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).IsRequired();
-        builder.Property(p => p.CreatedDate).IsRequired();
+        builder.Property(p => p.IdAppointment).IsRequired();
+        builder.Property(p => p.CreateDate).IsRequired();
         builder.Property(p => p.SendDate);
         builder.Property(p => p.Message).IsRequired();
         builder.Property(p => p.Success);
         builder.Property(p => p.ErrorMessage);
 
-
+        builder.HasOne(o => o.Appointment)
+            .WithMany(m => m.Notifications)
+            .HasPrincipalKey(p => p.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

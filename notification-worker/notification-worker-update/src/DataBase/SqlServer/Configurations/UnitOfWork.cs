@@ -7,19 +7,37 @@ public class UnitOfWork : IUnitOfWork
     //public IContactRepository Contacts { get; }
     //public IPhoneRegionRepository PhoneRegions { get; }
     public INotificationRepository Notifications { get; }
+    public IAppointmentRepository Appointments { get; }
+    public IDoctorsTimetablesTimesRepository TimetablesTimes { get; }
+    public IDoctorsTimetablesDateRepository TimetablesDates { get; }
+    public IPatientRepository Patients { get; }
+    public IDoctorRepository Doctors { get; }
+
 
     public UnitOfWork(ApplicationDbContext dbContext,
                         //IContactRepository contactRepository,
                         //IPhoneRegionRepository phoneRegions,
-                        INotificationRepository notificationRepository)
+                        INotificationRepository notificationRepository,
+                        IAppointmentRepository appointmentRepository,
+                        IDoctorsTimetablesTimesRepository timetablesTimesRepository,
+                        IDoctorsTimetablesDateRepository timetablesDateRepository,
+                        IPatientRepository patientRepository,
+                        IDoctorRepository doctorRepository
+                        )
     {
         _dbContext = dbContext;
         //Contacts = contactRepository;
         //PhoneRegions = phoneRegions;
         Notifications = notificationRepository;
-    }
+        Appointments = appointmentRepository;
+        TimetablesTimes = timetablesTimesRepository;
+        TimetablesDates = timetablesDateRepository;
+        Patients = patientRepository;
+        Doctors = doctorRepository;
 
-    public async Task<int> CommitAsync()
+}
+
+public async Task<int> CommitAsync()
     {
         return await _dbContext.SaveChangesAsync();
     }

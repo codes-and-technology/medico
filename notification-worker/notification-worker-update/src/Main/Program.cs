@@ -34,6 +34,12 @@ internal class Program
         //builder.Services.AddScoped<IContactRepository, ContactRepository>();
         //builder.Services.AddScoped<IPhoneRegionRepository, PhoneRegionRepository>();
         builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+        builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        builder.Services.AddScoped<IDoctorsTimetablesTimesRepository, DoctorsTimetablesTimesRepository>();
+        builder.Services.AddScoped<IDoctorsTimetablesDateRepository, DoctorsTimetablesDateRepository>();
+        builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+        builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
 
         //builder.Services.AddScoped<IContactDBGateway, ContactDBGateway>();
         //builder.Services.AddScoped<IPhoneRegionDBGateway, PhoneRegionDBGateway>();

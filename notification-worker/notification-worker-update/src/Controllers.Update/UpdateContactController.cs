@@ -38,7 +38,7 @@ namespace Controllers.Update
 
             if (phoneRegion is null)
             {
-                phoneRegion = new PhoneRegionEntity { CreatedDate = DateTime.Now, Id = Guid.NewGuid(), RegionNumber = regionNumber };
+                phoneRegion = new PhoneRegionEntity { CreateDate = DateTime.Now, Id = Guid.NewGuid(), RegionNumber = regionNumber };
                 await _phoneRegionDBGateway.AddAsync(phoneRegion);
             }
 
