@@ -6,7 +6,7 @@ using Presenters;
 
 namespace CreateUseCases;
 
-public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm)
+public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm, decimal? amount, string specialty, int? physicianAssessment)
 {
     public ResultDto<UserEntity> CreateUser()
     {
@@ -53,7 +53,10 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm)
             Email = userDto.Email,
             CreateDate = DateTime.Now,
             CRM = crm,
-            CPF = userDto.DocumentNumber
+            CPF = userDto.DocumentNumber,
+            Amount = amount,
+            PhysicianAssessment = physicianAssessment,
+            Specialty = specialty,
         };
 
         result.Data = user;

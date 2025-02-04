@@ -168,6 +168,9 @@ CREATE TABLE [dbo].[Users](
 	[Email] [varchar](100) NOT NULL,
 	[CRM] [varchar](50) NULL,
 	[CreateDate] [datetime] NOT NULL,
+	[Amount] DECIMAL(18,2) NULL,
+    [Specialty] VARCHAR(100) NULL,
+    [PhysicianAssessment] INT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

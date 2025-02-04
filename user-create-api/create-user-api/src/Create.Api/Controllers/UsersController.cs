@@ -21,7 +21,7 @@ public class UsersController(IController controller) : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await controller.CreateUserAsync(doctorDto, doctorDto.CRM);
+            var result = await controller.CreateUserAsync(doctorDto, doctorDto.CRM, doctorDto.Amount, doctorDto.Specialty, doctorDto.PhysicianAssessment);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
@@ -38,7 +38,7 @@ public class UsersController(IController controller) : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await controller.CreateUserAsync(patientDto, string.Empty);
+            var result = await controller.CreateUserAsync(patientDto, string.Empty, null, string.Empty, null);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)

@@ -10,6 +10,11 @@ public class UserEntity : EntityBase
     public string Email { get; set; }
 
     public string CRM { get; set; }
-    
+
+    public decimal? Amount { get; set; } 
+    public string Specialty { get; set; } 
+    public int? PhysicianAssessment { get; set; }
+
+
     public AuthEntity Auth{get;set;}
 }
