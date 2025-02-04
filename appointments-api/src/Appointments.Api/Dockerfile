@@ -1,0 +1,38 @@
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+
+COPY ["/appointments-api/src/Consulting.Api/Consulting.Api.csproj", "src/Consulting.Api/"]
+COPY ["/appointments-api/src/ConsultingController/ConsultingController.csproj", "src/ConsultingController/"]
+COPY ["/appointments-api/src/ConsultingEntitys/ConsultingEntitys.csproj", "src/ConsultingEntitys/"]
+COPY ["/appointments-api/src/ConsultingInterface/ConsultingInterface.csproj", "src/ConsultingInterface/"]
+COPY ["/appointments-api/src/ConsultingUseCases/ConsultingUseCases.csproj", "src/ConsultingUseCases/"]
+COPY ["/appointments-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
+COPY ["/appointments-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
+COPY ["/appointments-api/src/Redis/Redis.csproj", "src/Redis/"]
+COPY ["/appointments-api/src/CacheGateway/CacheGateway.csproj", "src/CacheGateway/"]
+COPY ["/appointments-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
+
+RUN dotnet restore "./src/Consulting.Api/Consulting.Api.csproj"
+
+COPY ["/consulting-appointments-doctors-api/consulting-doctors-api", "/src"]
+
+WORKDIR "/src/src/Consulting.Api"
+RUN dotnet build "Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Consulting.Api.dll"]
