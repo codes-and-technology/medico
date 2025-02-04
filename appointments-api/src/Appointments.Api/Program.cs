@@ -1,4 +1,5 @@
 ﻿using CacheGateway;
+using Consulting.Api.Controllers;
 using Controllers;
 using Create.Api.Helpers.Middlewares;
 using DataBase;
@@ -127,6 +128,7 @@ public class Program
 
         builder.Services.AddScoped<IDoctorController, ConsultingDoctorController>();
         builder.Services.AddScoped<IDoctorTimetablesController, ConsultingDoctorTimetablesController>();
+        builder.Services.AddScoped<IAppointmentController, AppointmentController>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IDoctorsTimetablesDateDBGateway, DoctorsTimetablesDateDBGateway>();
         builder.Services.AddScoped<IDoctorsTimetablesTimesDBGateway, DoctorsTimetablesTimesDBGateway>();

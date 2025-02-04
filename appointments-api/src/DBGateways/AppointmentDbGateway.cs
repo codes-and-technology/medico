@@ -6,8 +6,7 @@ namespace DBGateways;
 
 public class AppointmentDbGateway(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IAppointmentDBGateway
 {
-    public Task<IEnumerable<AppointmentEntity>> FindAllAsync(Expression<Func<AppointmentEntity, bool>> predicate)
-    {
-        return Uow.Appointment.GetAllAsync(predicate);
-    }
+    public async Task AddAsync(AppointmentEntity entity) => await Uow.Appointment.AddAsync(entity);
+
+    public async Task<IEnumerable<AppointmentEntity>> FindAllAsync(Expression<Func<AppointmentEntity, bool>> predicate) => await Uow.Appointment.GetAllAsync(predicate);
 }

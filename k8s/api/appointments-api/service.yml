@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: consulting-appointments-doctors-api
+  name: appointments-api
 spec:
   type: NodePort
   selector:
-    app: consulting-appointments-doctors-api
+    app: appointments-api
   ports:
     - port: 80
       targetPort: 80

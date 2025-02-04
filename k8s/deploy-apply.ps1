@@ -56,8 +56,8 @@ kubectl apply -f k8s/api/user-create-api/deployment.yml
 kubectl apply -f k8s/api/user-create-api/service.yml
 kubectl apply -f k8s/api/auth-api/deployment.yml
 kubectl apply -f k8s/api/auth-api/service.yml
-kubectl apply -f k8s/api/consulting-appointments-doctors-api/deployment.yml
-kubectl apply -f k8s/api/consulting-appointments-doctors-api/service.yml
+kubectl apply -f k8s/api/appointments-api/deployment.yml
+kubectl apply -f k8s/api/appointments-api/service.yml
 kubectl apply -f k8s/api/consulting-doctorstimetables-api/deployment.yml
 kubectl apply -f k8s/api/consulting-doctorstimetables-api/service.yml
 kubectl apply -f k8s/api/create-doctors-timetables-api/deployment.yml

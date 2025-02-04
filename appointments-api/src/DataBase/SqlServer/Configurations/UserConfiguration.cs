@@ -11,10 +11,13 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.ToTable("Users");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).IsRequired();
-        builder.Property(p => p.CRM);
+        builder.Property(p => p.Name).IsRequired();
         builder.Property(p => p.CPF).IsRequired();
         builder.Property(p => p.Email).IsRequired();
         builder.Property(p => p.CreateDate).HasColumnType("DATETIME").HasDefaultValueSql("GETDATE()").IsRequired();
-        builder.Property(p => p.Name).IsRequired();
+        builder.Property(p => p.CRM);
+        builder.Property(p => p.Amount);
+        builder.Property(p => p.Specialty);
+        builder.Property(p => p.PhysicianAssessment);        
     }
 }

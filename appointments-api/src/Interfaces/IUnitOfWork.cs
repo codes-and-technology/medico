@@ -6,5 +6,7 @@ public interface IUnitOfWork : IDisposable
     IDoctorsTimetablesDateRepository DoctorsTimetablesDate { get; }
     IDoctorsTimetablesTimesRepository DoctorsTimetablesTimes { get; }
     IAppointmentRepository Appointment{ get; }
+    Task<int> CommitAsync();
+    Task ExecuteInTransactionAsync(Func<Task> action);
 }
 

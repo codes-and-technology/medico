@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace DataBase.SqlServer.Configurations;
 
@@ -24,6 +25,28 @@ public class UnitOfWork : IUnitOfWork
         Appointment = appointment;
     }
 
+    public async Task<int> CommitAsync()
+    {
+        return await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task ExecuteInTransactionAsync(Func<Task> action)
+    {
+        using (IDbContextTransaction transaction = await _dbContext.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                await action();
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+    }
+
     public void Dispose()
     {
         Dispose(true);
@@ -37,4 +60,6 @@ public class UnitOfWork : IUnitOfWork
             _dbContext.Dispose();
         }
     }
+
+    
 }
