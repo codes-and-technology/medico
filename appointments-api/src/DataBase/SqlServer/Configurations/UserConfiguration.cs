@@ -18,6 +18,6 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.Property(p => p.CRM);
         builder.Property(p => p.Amount);
         builder.Property(p => p.Specialty);
-        builder.Property(p => p.PhysicianAssessment);        
+        builder.Property(p => p.Score);        
     }
 }

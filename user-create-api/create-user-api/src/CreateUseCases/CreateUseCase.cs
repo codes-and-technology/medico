@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CreateUseCases;
 
-public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm, decimal? amount, string specialty, int? physicianAssessment)
+public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm, decimal? amount, string specialty, int? score)
 {
     public ResultDto<UserEntity> CreateUser()
     {
@@ -30,7 +30,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm, d
                 result.Errors.Add("Valor da consulta é obrigatório");            
             if (string.IsNullOrEmpty(specialty))
                 result.Errors.Add("Precisa informar a especialidade");
-            if (!physicianAssessment.HasValue)
+            if (!score.HasValue)
                 result.Errors.Add("Precisa informar a avaliação");
         }
 
@@ -68,7 +68,7 @@ public class CreateUseCase(UserDto userDto, UserEntity userEntity, string crm, d
             CRM = crm,
             CPF = userDto.DocumentNumber,
             Amount = amount,
-            PhysicianAssessment = physicianAssessment,
+            Score = score,
             Specialty = specialty,
         };
 

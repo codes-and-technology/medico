@@ -13,7 +13,7 @@ public class UserEntity : EntityBase
 
     public decimal? Amount { get; set; } 
     public string Specialty { get; set; } 
-    public int? PhysicianAssessment { get; set; }
+    public int? Score { get; set; }
 
 
     public AuthEntity Auth{get;set;}

@@ -29,5 +29,5 @@ public class DoctorDto : UserDto
     /// </summary>
     [Required(ErrorMessage = "A Avaliação é obrigatória.")]
     [Range(1, 5, ErrorMessage = "A Avaliação deve estar entre 1 e 5.")]
-    public int PhysicianAssessment { get; set; }
+    public int Score { get; set; }
 }

@@ -24,7 +24,7 @@ public class ConsultingDoctorUseCase()
             Name = f.Name,
             CRM = f.CRM,
             Amount = f.Amount,
-            PhysicianAssessment = f.PhysicianAssessment,
+            Score = f.Score,
             Specialty = f.Specialty,
         }).ToList();
         
