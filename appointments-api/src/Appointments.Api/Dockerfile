@@ -10,29 +10,29 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-COPY ["/appointments-api/src/Consulting.Api/Consulting.Api.csproj", "src/Consulting.Api/"]
-COPY ["/appointments-api/src/ConsultingController/ConsultingController.csproj", "src/ConsultingController/"]
-COPY ["/appointments-api/src/ConsultingEntitys/ConsultingEntitys.csproj", "src/ConsultingEntitys/"]
-COPY ["/appointments-api/src/ConsultingInterface/ConsultingInterface.csproj", "src/ConsultingInterface/"]
-COPY ["/appointments-api/src/ConsultingUseCases/ConsultingUseCases.csproj", "src/ConsultingUseCases/"]
+COPY ["/appointments-api/src/Appointments.Api/Appointments.Api.csproj", "src/Appointments.Api/"]
+COPY ["/appointments-api/src/Controllers/Controllers.csproj", "src/Controllers/"]
+COPY ["/appointments-api/src/Entitys/Entitys.csproj", "src/Entitys/"]
+COPY ["/appointments-api/src/Interfaces/Interfaces.csproj", "src/Interfaces/"]
+COPY ["/appointments-api/src/UseCases/UseCases.csproj", "src/UseCases/"]
 COPY ["/appointments-api/src/Presenters/Presenters.csproj", "src/Presenters/"]
 COPY ["/appointments-api/src/DataBase/DataBase.csproj", "src/DataBase/"]
 COPY ["/appointments-api/src/Redis/Redis.csproj", "src/Redis/"]
 COPY ["/appointments-api/src/CacheGateway/CacheGateway.csproj", "src/CacheGateway/"]
 COPY ["/appointments-api/src/DBGateways/DBGateways.csproj", "src/DBGateways/"]
 
-RUN dotnet restore "./src/Consulting.Api/Consulting.Api.csproj"
+RUN dotnet restore "./src/Appointments.Api/Appointments.Api.csproj"
 
-COPY ["/consulting-appointments-doctors-api/consulting-doctors-api", "/src"]
+COPY ["/appointments-api", "/src"]
 
-WORKDIR "/src/src/Consulting.Api"
-RUN dotnet build "Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/Appointments.Api"
+RUN dotnet build "Appointments.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Consulting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Appointments.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Consulting.Api.dll"]
+ENTRYPOINT ["dotnet", "Appointments.Api.dll"]

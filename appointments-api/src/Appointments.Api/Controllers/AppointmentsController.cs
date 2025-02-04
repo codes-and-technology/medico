@@ -44,7 +44,7 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
         }
     }
 
-    [HttpPost]
+    [HttpPost("/Appointments")]
     [Authorize(Roles = "PATIENT")]
     public async Task<IActionResult> Create(CreateAppointmentDto dto)
     {

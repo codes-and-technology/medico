@@ -5,7 +5,7 @@ namespace UseCases;
 
 public class AppointmentUseCase()
 {
-    public ResultDto<CreatedAppointmentDto> CreateAppointment(string idPatient, CreateAppointmentDto dto, IEnumerable<AppointmentEntity> appointmentDbList, IEnumerable<DoctorsTimetablesDateEntity> dateDb, IEnumerable<DoctorsTimetablesTimesEntity> timeDb)
+    public ResultDto<CreatedAppointmentDto> CreateAppointment(string idPatient, CreateAppointmentDto dto, IEnumerable<AppointmentEntity> appointmentDbList)
     {
         var result = new ResultDto<CreatedAppointmentDto>();
 

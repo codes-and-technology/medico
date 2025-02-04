@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appointments-api
+  name: consulting-appointments-doctors-api
   labels: 
-    app: appointments-api
+    app: consulting-appointments-doctors-api
     ambiente: dev
     equipe: desenvolvimento
   annotations: 
@@ -14,15 +14,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: appointments-api
+      app: consulting-appointments-doctors-api
   template:
     metadata:
       labels:
-        app: appointments-api
+        app: consulting-appointments-doctors-api
     spec:
       containers:
-      - name: appointments-api
-        image: 318914/appointments-api:1.0.0.3 # Imagem do seu container
+      - name: consulting-appointments-doctors-api
+        image: 318914/consulting-appointments-doctors-api:1.0.0.1 # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
         env:
