@@ -12,8 +12,6 @@ namespace Controllers
 
         public async Task<Result<NotificationEntity>> NotificationAsync(NotificationEntity entity)
         {
-            
-            //entity.PhoneRegion = await GetOrUpdatePhoneRegionAsync(entity.PhoneRegion.RegionNumber);
             var result = _updateNotificationUseCase.Notification(entity);
 
             if (result.Errors.Count > 0)
