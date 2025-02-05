@@ -27,7 +27,7 @@ public static class RabbitServiceExtension
                     h.Password(password);
                 });
               
-                cfg.ReceiveEndpoint("update-notification", receiver =>
+                cfg.ReceiveEndpoint("appointment-create", receiver =>
                 {
                     receiver.ConfigureConsumer<NotificationConsumer>(context);
                     receiver.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
