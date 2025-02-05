@@ -70,7 +70,7 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
     {
         try
         {
-            string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string idUser = User.FindFirstValue("Id");
 
             var result = await appointmentController.CreateAppointmentAsync(idUser, dto);
             return result.Success ? Ok(result) : BadRequest(result);

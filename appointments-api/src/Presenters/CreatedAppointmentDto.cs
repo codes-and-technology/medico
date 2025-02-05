@@ -9,8 +9,9 @@ public class CreatedAppointmentDto
     public string Status { get; set; }
     public string AppointmentDate { get; set; }
 
-    public CreatedAppointmentDto Clone(CreateAppointmentDto dto)
+    public CreatedAppointmentDto Clone(string newId, CreateAppointmentDto dto)
     {
+        Id = newId;
         IdDoctor = dto.IdDoctor;
         IdDoctorsTimetablesDate = dto.IdDoctorsTimetablesDate;
         IdDoctorsTimetablesTime = dto.IdDoctorsTimetablesTime;
