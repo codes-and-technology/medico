@@ -83,6 +83,7 @@ CREATE TABLE [dbo].[Appointments](
 	[IdDoctor] [varchar](50) NOT NULL,
 	[IdDoctorsTimetablesDate] [varchar](50) NOT NULL,
 	[IdDoctorsTimetablesTime] [varchar](50) NOT NULL,
+	[Status] [varchar](50) NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[DeleteDate] [datetime] NULL,
  CONSTRAINT [PK_Appointments] PRIMARY KEY CLUSTERED 

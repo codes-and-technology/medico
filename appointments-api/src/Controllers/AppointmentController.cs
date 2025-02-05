@@ -29,7 +29,8 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
                         IdDoctor = dto.IdDoctor,
                         IdDoctorsTimetablesDate = dto.IdDoctorsTimetablesDate,
                         IdDoctorsTimetablesTime = dto.IdDoctorsTimetablesTime,
-                        CreateDate = DateTime.Now
+                        CreateDate = DateTime.Now,
+                        Status = "PENDING"
                     };
 
                     await appointmentDBGateway.AddAsync(entity);
@@ -43,7 +44,7 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
             dtoResult.Clone(newId, dto);
 
             if(dateDb != null && timeDb != null)
-                dtoResult.AppointmentDate = $"{dateDb.AvailableDate:dd/MM/YYYY} {timeDb.Time}";
+                dtoResult.AppointmentDate = $"{dateDb.AvailableDate.ToShortDateString()} {timeDb.Time}";
 
             result.Data = dtoResult;
 

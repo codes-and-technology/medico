@@ -9,5 +9,6 @@ namespace Entitys
         public string IdDoctorsTimetablesDate { get; set; }
         public string IdDoctorsTimetablesTime { get; set; }
         public DateTime? DeleteDate { get; set; }
+        public string Status { get; set; }
     }
 }
