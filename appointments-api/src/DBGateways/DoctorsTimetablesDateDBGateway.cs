@@ -8,6 +8,6 @@ public class DoctorsTimetablesDateDBGateway(IUnitOfWork unitOfWork) : BaseDB(uni
 {
     public Task<IEnumerable<DoctorsTimetablesDateEntity>> FindAllAsync(Expression<Func<DoctorsTimetablesDateEntity, bool>> predicate)
     {
-        return Uow.DoctorsTimetablesDate.GetAllAsync(predicate);
+        return Uow.DoctorsTimetablesDate.FindAllAsync(predicate);
     }
 }

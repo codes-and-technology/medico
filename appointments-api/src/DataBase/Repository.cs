@@ -2,7 +2,6 @@
 using Entitys.Base;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace DataBase;
 
@@ -19,5 +18,5 @@ public class Repository<T> : IRepository<T> where T : EntityBase
 
     public virtual async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync();
+    public virtual async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync();
 }

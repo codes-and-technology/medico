@@ -3,6 +3,7 @@ using Entitys;
 using Interfaces;
 using Moq;
 using Presenters;
+using System.Linq.Expressions;
 
 namespace UnitTests;
 
@@ -54,7 +55,7 @@ public class ConsultingDoctorsControllerTests
             cacheGateway.Setup(s => s.GetCacheAsync(It.IsAny<string>())).ReturnsAsync(list);
         }
 
-        userDbGateway.Setup(s => s.GetAllAsync()).ReturnsAsync(userEntityList);
+        userDbGateway.Setup(s => s.FindAllAsync(It.IsAny<Expression<Func<UserEntity, bool>>>())).ReturnsAsync(userEntityList);
         
         var controller = new ConsultingDoctorController(userDbGateway.Object, cacheGateway.Object);
 

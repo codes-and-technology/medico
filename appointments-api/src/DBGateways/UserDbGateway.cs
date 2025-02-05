@@ -1,12 +1,13 @@
 ﻿using Entitys;
 using Interfaces;
+using System.Linq.Expressions;
 
 namespace DBGateways;
 
 public class UserDbGateway(IUnitOfWork unitOfWork) : BaseDB(unitOfWork), IUserDBGateway
 {
-    public Task<IEnumerable<UserEntity>> GetAllAsync()
+    public Task<IEnumerable<UserEntity>> FindAllAsync(Expression<Func<UserEntity, bool>> predicate)
     {
-        return Uow.Users.GetAllAsync(w => w.CRM != null && w.Amount != null && w.Specialty != null && w.Score.HasValue);
+        return Uow.Users.FindAllAsync(predicate);
     }
 }

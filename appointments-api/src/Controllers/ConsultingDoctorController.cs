@@ -14,7 +14,7 @@ public class ConsultingDoctorController(IUserDBGateway userDbGateway, ICache cac
         if (doctorCache is not null && doctorCache.Count > 0)
             return useCase.CreateConsultingFromCache(doctorCache);
 
-        var doctorList = await userDbGateway.GetAllAsync();
+        var doctorList = await userDbGateway.FindAllAsync(w => w.CRM != null && w.Amount != null && w.Specialty != null && w.Score.HasValue);
         var result = useCase.CreateConsultingFromDb(doctorList);
 
         await cacheGateway.SaveCacheAsync("Doctors", result.Data);

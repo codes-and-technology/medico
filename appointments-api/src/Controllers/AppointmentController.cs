@@ -7,7 +7,8 @@ namespace Controllers;
 public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimetablesDateDBGateway, 
                                    IDoctorsTimetablesTimesDBGateway doctorsTimetablesTimesDBGateway, 
                                    IAppointmentDBGateway appointmentDBGateway,
-                                   ICreateAppointmentQueueGateway createAppointmentQueueGateway) : IAppointmentController
+                                   ICreateAppointmentQueueGateway createAppointmentQueueGateway,
+                                   IUserDBGateway userDBGateway) : IAppointmentController
 {
     public async Task<ResultDto<CreatedAppointmentDto>> CreateAppointmentAsync(string idPatient, CreateAppointmentDto dto)
     {
@@ -43,8 +44,11 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
             var dateDb = (await doctorsTimetablesDateDBGateway.FindAllAsync(d => d.Id == dto.IdDoctorsTimetablesDate)).FirstOrDefault();
             var timeDb = (await doctorsTimetablesTimesDBGateway.FindAsync(t => t.Id == dto.IdDoctorsTimetablesTime)).FirstOrDefault();
 
+            var patient = (await userDBGateway.FindAllAsync(u => u.Id == idPatient)).FirstOrDefault();
+            var doctor = (await userDBGateway.FindAllAsync(u => u.Id == dto.IdDoctor)).FirstOrDefault();
+
             var dtoResult = new CreatedAppointmentDto();
-            dtoResult.Clone(newId, dto);
+            dtoResult.Clone(newId, dto, doctor.Name, idPatient, patient.Name);
 
             if(dateDb != null && timeDb != null)
                 dtoResult.AppointmentDate = $"{dateDb.AvailableDate.ToShortDateString()} {timeDb.Time}";
