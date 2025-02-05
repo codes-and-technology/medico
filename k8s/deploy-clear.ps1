@@ -55,12 +55,14 @@ Write-Host "Deleting Node Exporter configurations..."
 Delete-IfExists "k8s/monitoring/node/service.yml"
 Delete-IfExists "k8s/monitoring/node/deployment.yml"
 
+
 # Deletar Configurações da API
 Write-Host "Deleting API configurations..."
 Delete-IfExists "k8s/api/auth-api/service.yml"
 Delete-IfExists "k8s/api/auth-api/deployment.yml"
 Delete-IfExists "k8s/api/user-create-api/service.yml"
 Delete-IfExists "k8s/api/user-create-api/deployment.yml"
+Delete-IfExists "k8s/api/user-create-api/hpa.yml"
 Delete-IfExists "k8s/api/appointments-api/service.yml"
 Delete-IfExists "k8s/api/appointments-api/deployment.yml"
 Delete-IfExists "k8s/api/consulting-doctorstimetables-api/service.yml"
@@ -78,5 +80,8 @@ Delete-IfExists "k8s/api/delete-doctors-timetables-api/deployment.yml"
 Delete-IfExists "k8s/api/delete-doctors-timetables-worker/service.yml"
 Delete-IfExists "k8s/api/delete-doctors-timetables-worker/deployment.yml"
 
+
+# Deletar Metrics-Server
+Delete-IfExists "k8s/metrics/deployment.yml"
 
 Write-Host "Resource cleanup completed."
