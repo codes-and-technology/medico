@@ -43,7 +43,7 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
             dtoResult.Clone(newId, dto);
 
             if(dateDb != null && timeDb != null)
-                dtoResult.AppointmentDate = $"{dateDb.AvailableDate:dd:MM:YYYY} {timeDb.Time}";
+                dtoResult.AppointmentDate = $"{dateDb.AvailableDate:dd/MM/YYYY} {timeDb.Time}";
 
             result.Data = dtoResult;
 
