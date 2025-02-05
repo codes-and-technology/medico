@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rabbit.Producer.CreateAppointment\Rabbit.Producer.csproj" />
+    <ProjectReference Include="..\Rabbit.Producer\Rabbit.Producer.csproj" />
   </ItemGroup>
 
 </Project>
