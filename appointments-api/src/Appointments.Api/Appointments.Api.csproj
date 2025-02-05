@@ -26,7 +26,6 @@
     <ProjectReference Include="..\Presenters\Presenters.csproj" />
     <ProjectReference Include="..\Controllers\Controllers.csproj" />
     <ProjectReference Include="..\QueueGateway\QueueGateway.csproj" />
-    <ProjectReference Include="..\Rabbit.Producer.CreateAppointment\Rabbit.Producer.csproj" />
     <ProjectReference Include="..\Rabbit.Producer\Rabbit.Producer.csproj" />
     <ProjectReference Include="..\Redis\Redis.csproj" />
   </ItemGroup>
