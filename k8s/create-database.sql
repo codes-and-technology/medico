@@ -171,7 +171,7 @@ CREATE TABLE [dbo].[Users](
 	[CreateDate] [datetime] NOT NULL,
 	[Amount] DECIMAL(18,2) NULL,
     [Specialty] VARCHAR(100) NULL,
-    [PhysicianAssessment] INT NULL,
+    [Score] INT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

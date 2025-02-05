@@ -21,7 +21,7 @@ public class UsersController(IController controller) : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await controller.CreateUserAsync(doctorDto, doctorDto.CRM, doctorDto.Amount, doctorDto.Specialty, doctorDto.PhysicianAssessment);
+            var result = await controller.CreateUserAsync(doctorDto, doctorDto.CRM, doctorDto.Amount, doctorDto.Specialty, doctorDto.Score);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
