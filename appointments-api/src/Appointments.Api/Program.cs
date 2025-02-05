@@ -56,6 +56,7 @@ public class Program
 
     private static void InstallServices(WebApplicationBuilder builder, IConfigurationRoot configuration)
     {
+        builder.Services.AddRabbitMq(configuration);
         builder.Services.AddLogging(builder => builder.AddConsole());
         builder.Services.AddHealthChecks();
         builder
