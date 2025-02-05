@@ -13,17 +13,18 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
 
         try
         {
+            string newId = Guid.NewGuid().ToString();
+
             await appointmentDBGateway.ExecuteInTransactionAsync(async () =>
             {
                 var appointmentDbList = await appointmentDBGateway.FindAllAsync(a => a.IdDoctor == dto.IdDoctor);
-                
-
                 result = useCase.CreateAppointment(idPatient, dto, appointmentDbList);
 
                 if (result.Success)
                 {
                     var entity = new AppointmentEntity
                     {
+                        Id = newId,
                         IdPatient = idPatient,
                         IdDoctor = dto.IdDoctor,
                         IdDoctorsTimetablesDate = dto.IdDoctorsTimetablesDate,
@@ -39,10 +40,10 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
             var timeDb = (await doctorsTimetablesTimesDBGateway.FindAsync(t => t.Id == dto.IdDoctorsTimetablesTime)).FirstOrDefault();
 
             var dtoResult = new CreatedAppointmentDto();
-            dtoResult.Clone(dto);
+            dtoResult.Clone(newId, dto);
 
             if(dateDb != null && timeDb != null)
-                dtoResult.AppointmentDate = $"{dateDb.AvailableDate} {timeDb.Time}";
+                dtoResult.AppointmentDate = $"{dateDb.AvailableDate:dd:MM:YYYY} {timeDb.Time}";
 
             result.Data = dtoResult;
 
