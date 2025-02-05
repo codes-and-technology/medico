@@ -1,5 +1,5 @@
 ﻿using Entitys;
-using Interface;
+using Interfaces;
 
 namespace DataBase.SqlServer;
 

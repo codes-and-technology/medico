@@ -31,9 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "src\DataBase\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateways", "src\Gateways\Gateways.csproj", "{11CF865E-AD5C-4574-9681-201DAF1B3166}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google", "src\Google\Google.csproj", "{89FC1ACE-0D9C-438F-8774-8F7BC3372B1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailKit.Email", "src\MailKit.Email\MailKit.Email.csproj", "{89FC1ACE-0D9C-438F-8774-8F7BC3372B1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "src\Interface\Interface.csproj", "{538A9024-5E61-47FB-BC67-AFC37614C8D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "src\Interfaces\Interfaces.csproj", "{538A9024-5E61-47FB-BC67-AFC37614C8D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

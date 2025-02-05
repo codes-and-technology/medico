@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Presenters
+namespace Presenters.Helpers
 {
     public static class Validator
     {

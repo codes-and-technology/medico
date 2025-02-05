@@ -1,5 +1,5 @@
 ﻿using DataBase.SqlServer.Configurations;
-using Interface;
+using Interfaces;
 
 namespace Gateways.Database
 {

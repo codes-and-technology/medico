@@ -18,9 +18,7 @@ public class ApplicationDbContext : DbContext
         _connectionString = connectionString;
     }
 
-    public DbSet<ContactEntity> Contacts { get; set; }
-    public DbSet<PhoneRegionEntity> PhoneRegions { get; set; }
-
+    public DbSet<NotificationEntity> Notifications { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

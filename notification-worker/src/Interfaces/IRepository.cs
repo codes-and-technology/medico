@@ -1,9 +1,9 @@
 ﻿using Entitys;
 
-namespace Interface;
+namespace Interfaces;
 public interface IRepository<T> where T : EntityBase
 {
-    Task AddAsync(T entity);
     Task UpdateAsync(T entity);
-    Task<T> FindByIdAsync(Guid id);
+    Task AddAsync(T entity);
+    Task<T> FindByIdAsync(string id);
 }

@@ -4,8 +4,8 @@ using Presenters;
 using Entitys;
 
 namespace Controllers;
-public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimetablesDateDBGateway, 
-                                   IDoctorsTimetablesTimesDBGateway doctorsTimetablesTimesDBGateway, 
+public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimetablesDateDBGateway,
+                                   IDoctorsTimetablesTimesDBGateway doctorsTimetablesTimesDBGateway,
                                    IAppointmentDBGateway appointmentDBGateway,
                                    ICreateAppointmentQueueGateway createAppointmentQueueGateway,
                                    IUserDBGateway userDBGateway) : IAppointmentController
@@ -41,6 +41,9 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
                 }
             });
 
+            if (result.Errors.Count > 0)
+                return result;
+
             var dateDb = (await doctorsTimetablesDateDBGateway.FindAllAsync(d => d.Id == dto.IdDoctorsTimetablesDate)).FirstOrDefault();
             var timeDb = (await doctorsTimetablesTimesDBGateway.FindAsync(t => t.Id == dto.IdDoctorsTimetablesTime)).FirstOrDefault();
 
@@ -48,10 +51,15 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
             var doctor = (await userDBGateway.FindAllAsync(u => u.Id == dto.IdDoctor)).FirstOrDefault();
 
             var dtoResult = new CreatedAppointmentDto();
-            dtoResult.Clone(newId, dto, doctor.Name, idPatient, patient.Name);
+            dtoResult.Clone(newId: newId,
+                dto: dto,
+                doctorName: doctor.Name,
+                doctorEmail: doctor.Email,
+                idPatient: idPatient,
+                patientName: patient.Name);
 
-            if(dateDb != null && timeDb != null)
-                dtoResult.AppointmentDate = $"{dateDb.AvailableDate.ToShortDateString()} {timeDb.Time}";
+            if (dateDb != null && timeDb != null)
+                dtoResult.AppointmentDate = $"{dateDb.AvailableDate.ToShortDateString()} às {timeDb.Time}";
 
             result.Data = dtoResult;
             await createAppointmentQueueGateway.SendMessage(result.Data);

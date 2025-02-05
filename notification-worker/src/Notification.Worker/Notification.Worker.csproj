@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Controllers\Controllers.csproj" />
-    <ProjectReference Include="..\Controllers.Update\Controllers.Update.csproj" />
     <ProjectReference Include="..\DataBase\DataBase.csproj" />
+    <ProjectReference Include="..\MailKit.Email\MailKit.Email.csproj" />
     <ProjectReference Include="..\Rabbit.Consumer\Rabbit.Consumer.csproj" />
     <ProjectReference Include="..\UseCases\UseCases.csproj" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Entitys;
 
-namespace Interface;
+namespace Interfaces;
 
 public interface INotificationRepository : IRepository<NotificationEntity>
 {

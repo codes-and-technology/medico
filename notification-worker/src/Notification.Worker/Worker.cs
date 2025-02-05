@@ -1,4 +1,4 @@
-namespace Update.Worker
+namespace Main
 {
     public class Worker : BackgroundService
     {

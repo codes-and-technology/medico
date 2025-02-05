@@ -2,15 +2,16 @@ using Controllers;
 using DataBase.SqlServer;
 using DataBase.SqlServer.Configurations;
 using Gateways.Database;
+using Google;
+using Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Prometheus;
 using Rabbit.Consumer;
-using Redis;
-using Update.Worker;
-using Interface;
 using UseCases;
+
+namespace Main;
 
 internal class Program
 {
@@ -24,22 +25,19 @@ internal class Program
             .Build();
 
         builder.Services.AddRabbitMq(configuration);
-        builder.Services.AddRedis(configuration);
 
         builder.Services.UseHttpClientMetrics();
 
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
-        builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-        builder.Services.AddScoped<IDoctorsTimetablesTimesRepository, DoctorsTimetablesTimesRepository>();
-        builder.Services.AddScoped<IDoctorsTimetablesDateRepository, DoctorsTimetablesDateRepository>();
         
-        builder.Services.AddScoped<INotificationDBGateway, NotificationDBGateway>();
-        builder.Services.AddScoped<INotificationGateway,NotificationGateway>();
+        builder.Services.AddScoped<INotificationDbGateway, NotificationDbGateway>();
+        builder.Services.AddScoped<IEmailGateway,EmailGateway>();
         
         builder.Services.AddScoped<INotificationController, NotificationController>();
         builder.Services.AddScoped<INotificationUseCase, NotificationUseCase>();
-
+        builder.Services.AddScoped<IEmail, Email>();
+        
         builder.Services.AddHostedService<Worker>();
 
         builder.Services.AddDbContext<ApplicationDbContext>(

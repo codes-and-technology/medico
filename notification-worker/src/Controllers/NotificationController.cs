@@ -1,27 +1,26 @@
-﻿using Entitys;
-using Presenters;
-using Interface;
+﻿using Presenters;
+using Interfaces;
 
 namespace Controllers
 {
-    public class NotificationController(INotificationDBGateway notificationDBGateway,
-                                         INotificationUseCase notificationUseCase) : INotificationController
+    public class NotificationController(
+        INotificationDbGateway dbGateway,
+        INotificationUseCase useCase,
+        IEmailGateway emailGateway) : INotificationController
     {
-        private readonly INotificationDBGateway _notificationDBGateway = notificationDBGateway;
-        private readonly INotificationUseCase _updateNotificationUseCase = notificationUseCase;
-
-        public async Task<Result<NotificationEntity>> NotificationAsync(NotificationEntity entity)
+        public async Task NotificationAsync(CreatedAppointmentDto dto)
         {
-            var result = _updateNotificationUseCase.Notification(entity);
+            var result = useCase.Notification(dto);
 
             if (result.Errors.Count > 0)
-                return result;
-            
+                throw new Exception(result.Errors[0]);
 
-            await _notificationDBGateway.UpdateAsync(entity);
-            await _notificationDBGateway.CommitAsync();
+            var emailResult = await emailGateway.NotificationAsync(dto);
 
-            return result;
+            var createEntity = useCase.CreateEntity(emailResult, dto.Id);
+
+            await dbGateway.AddAsync(createEntity.Data);
+            await dbGateway.CommitAsync();
         }
     }
 }

@@ -23,7 +23,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Entitys\Entitys.csproj" />
-	  <ProjectReference Include="..\Interface\Interface.csproj" />
+	  <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
 	</ItemGroup>
 
 </Project>

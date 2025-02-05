@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Entitys;
-using Interface;
+using Interfaces;
 
 namespace DataBase.SqlServer;
 
@@ -15,7 +15,7 @@ public class Repository<T> : IRepository<T> where T : EntityBase
         _dbSet = _context.Set<T>();
     }
 
-    public virtual async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
     public virtual async Task UpdateAsync(T entity) => await Task.Run(() => _dbSet.Update(entity));
-    public virtual async Task<T> FindByIdAsync(Guid id) => await _dbSet.FindAsync(id);
+    public virtual async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+    public virtual async Task<T> FindByIdAsync(string id) => await _dbSet.FindAsync(id);
 }
