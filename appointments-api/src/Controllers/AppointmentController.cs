@@ -4,7 +4,10 @@ using Presenters;
 using Entitys;
 
 namespace Controllers;
-public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimetablesDateDBGateway, IDoctorsTimetablesTimesDBGateway doctorsTimetablesTimesDBGateway, IAppointmentDBGateway appointmentDBGateway) : IAppointmentController
+public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimetablesDateDBGateway, 
+                                   IDoctorsTimetablesTimesDBGateway doctorsTimetablesTimesDBGateway, 
+                                   IAppointmentDBGateway appointmentDBGateway,
+                                   ICreateAppointmentQueueGateway createAppointmentQueueGateway) : IAppointmentController
 {
     public async Task<ResultDto<CreatedAppointmentDto>> CreateAppointmentAsync(string idPatient, CreateAppointmentDto dto)
     {
@@ -47,9 +50,7 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
                 dtoResult.AppointmentDate = $"{dateDb.AvailableDate.ToShortDateString()} {timeDb.Time}";
 
             result.Data = dtoResult;
-
-            //TODO: Enviar para fila de notificação de agendamento solicitado, pendente aprovação
-
+            await createAppointmentQueueGateway.SendMessage(result.Data);
         }
         catch (Exception ex)
         {

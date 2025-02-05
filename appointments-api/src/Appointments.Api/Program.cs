@@ -1,5 +1,4 @@
 ﻿using CacheGateway;
-using Consulting.Api.Controllers;
 using Controllers;
 using Create.Api.Helpers.Middlewares;
 using DataBase;
@@ -11,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Prometheus;
+using QueueGateway;
+using Rabbit.Producer;
 using Redis;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -55,6 +56,7 @@ public class Program
 
     private static void InstallServices(WebApplicationBuilder builder, IConfigurationRoot configuration)
     {
+        builder.Services.AddRabbitMq(configuration);
         builder.Services.AddLogging(builder => builder.AddConsole());
         builder.Services.AddHealthChecks();
         builder
@@ -139,5 +141,7 @@ public class Program
         builder.Services.AddScoped<IDoctorsTimetablesDateRepository, DoctorsTimetablesDateRepository>();
         builder.Services.AddScoped<IDoctorsTimetablesTimesRepository, DoctorsTimetablesTimesRepository>();
         builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        builder.Services.AddScoped<ICreateAppointmentProducer, CreateAppointmentProducer>();
+        builder.Services.AddScoped<ICreateAppointmentQueueGateway, CreateAppointmentQueueGateway>();
     }
 }
