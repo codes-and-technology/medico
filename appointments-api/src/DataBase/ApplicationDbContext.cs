@@ -22,7 +22,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<DoctorsTimetablesDateEntity> DoctorsTimetablesDates { get; set; }
     public DbSet<DoctorsTimetablesTimesEntity> DoctorsTimetablesTimes { get; set; }
-
+    public DbSet<AppointmentReportEntity> AppoitmentReport { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -33,7 +33,6 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.Entity<AppointmentReportEntity>().HasNoKey();
     }
-
-
 }
