@@ -155,7 +155,7 @@ CREATE TABLE [dbo].[Notification](
 	[SendDate] [datetime] NOT NULL,
 	[Message] [varchar](200) NOT NULL,
 	[Success] [bit] NOT NULL,
-	[ErrorMessage] [varchar](200) NULL
+	[ErrorMessage] [varchar](8000) NULL
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Users]    Script Date: 28/01/2025 11:55:51 ******/

@@ -41,6 +41,8 @@ public class Email(IConfiguration configuration) : IEmail
             message.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
+            client.ServerCertificateValidationCallback = (s, c, h, e) => true; 
+
             await client.ConnectAsync(domain, 587, SecureSocketOptions.StartTls);
             await client.AuthenticateAsync(email, secret);
 
