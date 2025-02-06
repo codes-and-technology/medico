@@ -9,13 +9,15 @@ WORKDIR /src
 
 # Copy project files
 COPY ["/notification-worker/src/Notification.Worker/Notification.Worker.csproj", "src/Notification.Worker/"]
-COPY ["/notification-worker/src/Controller/Controller.csproj", "src/Controller/"]
+COPY ["/notification-worker/src/Controllers/Controllers.csproj", "src/Controllers/"]
 COPY ["/notification-worker/src/Entitys/Entitys.csproj", "src/Entitys/"]
-COPY ["/notification-worker/src/Interface/Interface.csproj", "src/Interface/"]
+COPY ["/notification-worker/src/Interfaces/Interfaces.csproj", "src/Interfaces/"]
 COPY ["/notification-worker/src/Presenters/Presenters.csproj", "src/Presenters/"]
 COPY ["/notification-worker/src/UseCases/UseCases.csproj", "src/UseCases/"]
 COPY ["/notification-worker/src/DataBase/DataBase.csproj", "src/DataBase/"]
-COPY ["/notification-worker/src/Rabbit.Consumer/Rabbit.Consumercsproj", "src/Rabbit.Consumer/"]
+COPY ["/notification-worker/src/Gateways/Gateways.csproj", "src/Gateways/"]
+COPY ["/notification-worker/src/MailKit.Email/MailKit.Email.csproj", "src/MailKit.Email/"]
+COPY ["/notification-worker/src/Rabbit.Consumer/Rabbit.Consumer.csproj", "src/Rabbit.Consumer/"]
 
 # Restore dependencies
 RUN dotnet restore "./src/Notification.Worker/Notification.Worker.csproj"
