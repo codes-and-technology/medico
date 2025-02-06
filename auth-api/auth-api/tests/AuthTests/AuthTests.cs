@@ -38,7 +38,7 @@ namespace AuthTests
 
             var createContactController = new AuthController(userDbGateway.Object, authDbGateway.Object, _configuration);
 
-            var result = await createContactController.AuthAsync(new LoginDto { Email = "teste@teste.com", Password = "string" });
+            var result = await createContactController.AuthAsync(new LoginPatientDto { Email = "teste@teste.com", Password = "string" });
 
             Assert.True(result.Success);
         }
@@ -58,7 +58,7 @@ namespace AuthTests
 
             var createContactController = new AuthController(userDbGateway.Object, authDbGateway.Object, _configuration);
 
-            var result = await createContactController.AuthAsync(new LoginDto { Email = "teste@teste.com", Password = "123456" });
+            var result = await createContactController.AuthAsync(new LoginPatientDto { Email = "teste@teste.com", Password = "123456" });
 
             Assert.False(result.Success);
         }

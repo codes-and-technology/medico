@@ -16,8 +16,8 @@ public class AuthController(IController controller) : ControllerBase
     /// </summary>
     /// <param name="login">Dados do login</param>
     /// <returns></returns>
-    [HttpPost("/auth")]
-    public async Task<IActionResult> Auth([FromBody] LoginDto login)
+    [HttpPost("/auth/doctor")]
+    public async Task<IActionResult> AuthDoctor([FromBody] LoginDoctorDto login)
     {
         try
         {
@@ -32,4 +32,27 @@ public class AuthController(IController controller) : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    /// <summary>
+    /// Método para autenticação de usuários
+    /// </summary>
+    /// <param name="login">Dados do login</param>
+    /// <returns></returns>
+    [HttpPost("/auth/patient")]
+    public async Task<IActionResult> AuthPatient([FromBody] LoginPatientDto login)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await controller.AuthAsync(login);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
 }

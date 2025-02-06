@@ -7,23 +7,44 @@ using System.Security.Claims;
 
 namespace AuthUseCases;
 
-public class AuthUseCase(UserEntity user, LoginDto login, byte[] secretJwt)
+public class AuthUseCase(byte[] secretJwt)
 {
-    public ResultDto<UserEntity> Auth()
+    public ResultDto<UserEntity> Auth(UserEntity user, LoginDoctorDto login)
     {
         var result = new ResultDto<UserEntity>();
-        
-        result.Valid(user);
-        result.Valid(login);
+
+        if (user == null)
+            result.Errors.Add("Usuário ou senha inválidos");
+        else
+        {
+            result.Valid(user);
+            result.Valid(login);
+        }
 
         return result;
     }
 
-    public ResultDto<string> Authenticate(LoginDto loginRequested, AuthEntity authEntity, UserEntity user)
+    public ResultDto<UserEntity> Auth(UserEntity user, LoginPatientDto login)
+    {
+        var result = new ResultDto<UserEntity>();
+
+        if (user == null)
+            result.Errors.Add("Usuário ou senha inválidos");
+        else
+        {
+            result.Valid(user);
+            result.Valid(login);
+        }
+
+        return result;
+    }
+
+
+    public ResultDto<string> Authenticate(string pwd, AuthEntity authEntity, UserEntity user)
     {
         ResultDto<string> result = new();
 
-        if (!SecurityUtils.VerifyPassword(loginRequested.Password, authEntity.Password))
+        if (!SecurityUtils.VerifyPassword(pwd, authEntity.Password))
             result.Errors.Add("Usuário ou senha inválido");
         else
             result.Data = GenerateToken(authEntity, user);
