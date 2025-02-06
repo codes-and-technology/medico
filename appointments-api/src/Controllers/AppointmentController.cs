@@ -151,4 +151,21 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
             Data = dtoList
         };
     }
+
+    public async Task<ResultDto<AppointmentEntity>> DeleteAppointment(string idAppointment, string patientId)
+    {
+        var appointmentList = await appointmentDBGateway.FindAllAsync(a => a.Id == idAppointment);
+        var useCase = new AppointmentUseCase();
+
+        var result = useCase.CreateDeleteAppointment(appointmentList.FirstOrDefault(), patientId);
+
+        if (!result.Success)
+            return result;
+        
+        await appointmentDBGateway.UpdateAsync(result.Data);
+        
+        await appointmentDBGateway.CommitAsync();
+
+        return result;
+    }
 }

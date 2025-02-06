@@ -30,4 +30,20 @@ public class AppointmentUseCase()
 
         return result;
     }
+
+    public ResultDto<AppointmentEntity> CreateDeleteAppointment(AppointmentEntity appointmentDb, string patientId)
+    {
+        var result = new ResultDto<AppointmentEntity>();
+
+        if (appointmentDb is null || appointmentDb.IdPatient != patientId)
+        {
+            result.Errors.Add("Agendamento não encontrado");
+            return result;
+        }
+        appointmentDb.DeleteDate = DateTime.Now;
+        appointmentDb.Status = "CANCELED";
+        result.Data = appointmentDb;
+
+        return result;
+    }
 }

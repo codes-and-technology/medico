@@ -127,4 +127,29 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
             return BadRequest(ex.Message);
         }
     }
+
+    /// <summary>
+    /// Paciente Cancelar Agendamento
+    /// </summary>
+    /// <param name="idAppointment">ID do agendamento.</param>
+    /// <returns>Resultado do cancelamento</returns>
+    [HttpDelete("/Appointment/{idAppointment}")]
+    [Authorize(Roles = "PATIENT")]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> DeleteAppointment(string idAppointment)
+    {
+        try
+        {
+            string idUser = User.FindFirstValue("Id");
+
+            var result = await appointmentController.DeleteAppointment(idAppointment, idUser);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    
 }
