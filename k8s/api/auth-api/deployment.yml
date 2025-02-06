@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: auth-api
-        image: 318914/auth-app:latest # Imagem do seu container
+        image: danielharo/auth-api:latest # Imagem do seu container
         ports:
         - containerPort: 80  # Porta onde a aplicação está ouvindo dentro do container
         env:
