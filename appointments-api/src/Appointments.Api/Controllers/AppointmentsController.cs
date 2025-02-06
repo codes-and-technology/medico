@@ -22,11 +22,11 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
     [Authorize(Roles = "PATIENT")]
     [ProducesResponseType(typeof(ResultDto<List<UserDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<List<UserDto>>), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Doctor()
+    public async Task<IActionResult> Doctor([FromQuery] string specialty, [FromQuery] int? score)
     {
         try
         {
-            var result = await doctorController.ConsultingDoctorAsync();
+            var result = await doctorController.ConsultingDoctorAsync(specialty, score);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         catch (Exception ex)
