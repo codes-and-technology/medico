@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Consulting.Api.Controllers;
 
 /// <summary>
-/// Controlador para manipulação de contatos.
+/// Controlador para manipulação de médico.
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
