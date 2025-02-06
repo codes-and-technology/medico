@@ -41,7 +41,7 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
                 }
             });
 
-            if (result.Errors.Count > 0)
+            if (!result.Success)
                 return result;
 
             var dateDb = (await doctorsTimetablesDateDBGateway.FindAllAsync(d => d.Id == dto.IdDoctorsTimetablesDate)).FirstOrDefault();
@@ -67,6 +67,23 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
         catch (Exception ex)
         {
             result.Errors.Add(ex.Message);
+        }
+
+        return result;
+    }
+
+    public async Task<ResultDto<string>> ConfirmAsync(string idAppointment, bool isConfirmed)
+    {
+        var result = new ResultDto<string>();
+        var useCase = new AppointmentUseCase();
+
+        var appointmentDb = (await appointmentDBGateway.FindAllAsync(a => a.Id == idAppointment)).FirstOrDefault();
+        result = useCase.CreateConfirm(appointmentDb, isConfirmed);
+
+        if (result.Success)
+        {
+            await appointmentDBGateway.UpdateAsync(appointmentDb);
+            await appointmentDBGateway.CommitAsync();
         }
 
         return result;
