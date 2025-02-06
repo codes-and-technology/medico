@@ -2,14 +2,18 @@
 
 namespace Presenters;
 
-public class LoginDto
+public class LoginPatientDto
 {
     /// <summary>
     /// Endereço de e-mail do usuário.
     /// </summary>
-    [Required(ErrorMessage = "E-mail é obrigatório")]
+    //[Required(ErrorMessage = "E-mail é obrigatório")]
     [EmailAddress(ErrorMessage = "O endereço de e-mail é inválido.")]
     public string Email { get; set; }
+
+    //[Required(ErrorMessage = "CPF é obrigatório")]
+    public string CPF { get; set; }
+
 
     /// <summary>
     /// Senha do usuário.

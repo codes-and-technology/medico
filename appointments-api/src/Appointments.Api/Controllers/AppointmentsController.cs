@@ -104,4 +104,27 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
             return BadRequest(ex.Message);
         }
     }
+
+    /// <summary>
+    /// Consulta os detalhes de um agendamento para o paciente logado.
+    /// </summary>
+    /// <returns>Detalhes do agendamento.</returns>
+    [HttpGet("/Appointment")]
+    [Authorize(Roles = "PATIENT")]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Appointment()
+    {
+        try
+        {
+            string idUser = User.FindFirstValue("Id");
+
+            var result = await appointmentController.ConsultAppointment(idUser);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

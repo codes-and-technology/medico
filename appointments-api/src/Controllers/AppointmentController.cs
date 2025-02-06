@@ -88,4 +88,67 @@ public class AppointmentController(IDoctorsTimetablesDateDBGateway doctorsTimeta
 
         return result;
     }
+
+    public async Task<ResultDto<List<AppointmentReportDto>>> ConsultAppointment(string idPatient)
+    {
+        var entityList = await appointmentDBGateway.FindReportAsync(idPatient);
+
+        List<AppointmentReportDto> dtoList = new();
+
+        foreach (var entity in entityList)
+        {
+            dtoList.Add(new AppointmentReportDto
+            {
+                Id = entity.AG_ID,
+                Status = entity.AG_Status,
+                CreateDate = entity.AG_CreateDate,
+                DeleteDate = entity.AG_DeleteDate,
+                Doctor = new DoctorReportDto
+                {
+                    Id = entity.DO_Id,
+                    Name = entity.DO_Name,
+                    CPF = entity.DO_CPF,
+                    Email = entity.DO_Email,
+                    CRM = entity.DO_CRM,
+                    CreateDate = entity.DO_CreateDate,
+                    Amount = entity.DO_Amount,
+                    Specialty = entity.DO_Specialty,
+                    Score = entity.DO_Score
+                },
+                Patient = new PatientReportDto
+                {
+                    Id = entity.PA_Id,
+                    Name = entity.PA_Name,
+                    CPF = entity.PA_CPF,
+                    Email = entity.PA_Email,
+                    CRM = entity.PA_CRM,
+                    CreateDate = entity.PA_CreateDate,
+                    Amount = entity.PA_Amount,
+                    Specialty = entity.PA_Specialty,
+                    Score = entity.PA_Score
+                },
+                Date = new DateReportDto
+                {
+                    Id = entity.DT_Id,
+                    IdDoctor = entity.DT_IdDoctor,
+                    AvailableDate = entity.DT_AvailableDate,
+                    CreateDate = entity.DT_CreateDate,
+                    DeleteDate = entity.DT_DeleteDate
+                },
+                Time = new TimeReportDto
+                {
+                    Id = entity.TM_Id,
+                    IdDoctorsTimetablesDate = entity.TM_IdDoctorsTimetablesDate,
+                    Time = entity.TM_Time,
+                    CreateDate = entity.TM_CreateDate,
+                    DeleteDate = entity.TM_DeleteDate
+                }
+            });
+        }
+
+        return new ResultDto<List<AppointmentReportDto>>
+        {
+            Data = dtoList
+        };
+    }
 }
