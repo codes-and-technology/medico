@@ -17,4 +17,17 @@ public class AppointmentUseCase()
 
         return result;
     }
+    
+    public ResultDto<string> CreateConfirm(AppointmentEntity appointmentDb, bool isConfirmed)
+    {
+        var result = new ResultDto<string>();
+
+        if(appointmentDb is null)
+            result.Errors.Add("Agendamento não localizado");
+
+        result.Data = appointmentDb.Id;
+        appointmentDb.Status = isConfirmed ? "CONFIRMED" : "CANCELED";
+
+        return result;
+    }
 }

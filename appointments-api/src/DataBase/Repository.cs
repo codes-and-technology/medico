@@ -17,6 +17,6 @@ public class Repository<T> : IRepository<T> where T : EntityBase
     }
 
     public virtual async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
-
+    public virtual async Task UpdateAsync(T entity) => _dbSet.Update(entity);
     public virtual async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync();
 }
