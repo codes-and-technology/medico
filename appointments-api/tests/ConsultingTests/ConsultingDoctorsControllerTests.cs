@@ -59,7 +59,7 @@ public class ConsultingDoctorsControllerTests
         
         var controller = new ConsultingDoctorController(userDbGateway.Object, cacheGateway.Object);
 
-        var result = await controller.ConsultingDoctorAsync();
+        var result = await controller.ConsultingDoctorAsync("", null);
 
         Assert.True(result.Data.Count > 0);
     }

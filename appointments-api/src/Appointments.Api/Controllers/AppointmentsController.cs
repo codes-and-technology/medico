@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presenters;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Consulting.Api.Controllers;
@@ -22,11 +23,11 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
     [Authorize(Roles = "PATIENT")]
     [ProducesResponseType(typeof(ResultDto<List<UserDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<List<UserDto>>), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Doctor()
+    public async Task<IActionResult> Doctor([FromQuery] string specialty, [FromQuery] int? score)
     {
         try
         {
-            var result = await doctorController.ConsultingDoctorAsync();
+            var result = await doctorController.ConsultingDoctorAsync(specialty, score);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         catch (Exception ex)
@@ -73,6 +74,52 @@ public class AppointmentsController(IDoctorController doctorController, IDoctorT
             string idUser = User.FindFirstValue("Id");
 
             var result = await appointmentController.CreateAppointmentAsync(idUser, dto);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Confirma ou rejeita um agendamento.
+    /// </summary>
+    /// <param name="idAppointment">ID do agendamento.</param>
+    /// <param name="isConfirmed">Indica se o agendamento está confirmado (true) ou rejeitado (false).</param>
+    /// <returns>Resultado da confirmação do agendamento.</returns>
+    [HttpPost("/Confirm")]
+    [Authorize(Roles = "DOCTOR")]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Confirm([Required] string idAppointment, [Required] bool isConfirmed)
+    {
+        try
+        {
+            var result = await appointmentController.ConfirmAsync(idAppointment, isConfirmed);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Consulta os detalhes de um agendamento para o paciente logado.
+    /// </summary>
+    /// <returns>Detalhes do agendamento.</returns>
+    [HttpGet("/Appointment")]
+    [Authorize(Roles = "PATIENT")]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultDto<string>), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Appointment()
+    {
+        try
+        {
+            string idUser = User.FindFirstValue("Id");
+
+            var result = await appointmentController.ConsultAppointment(idUser);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         catch (Exception ex)
