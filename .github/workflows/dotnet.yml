@@ -18,12 +18,16 @@ jobs:
           fetch-depth: 0
 
       - name: Listar arquivos do diretório (debug)
-        run: ls -R ./k8s
-        shell: bash
+        run: Get-ChildItem -Recurse ./k8s
+        shell: powershell
 
       - name: Garantir permissões adequadas
-        run: chmod 755 ./k8s/deploy-clear.ps1 ./k8s/deploy-apply.ps1
-        shell: bash
+        run: Set-ExecutionPolicy RemoteSigned -Scope Process -Force
+        shell: powershell
+
+      - name: Garantir permissões de execução ao script
+        run: Set-ItemProperty -Path ./k8s/deploy-clear.ps1 -Name IsReadOnly -Value $false
+        shell: powershell
 
       - name: Executar deploy-clear.ps1
         run: powershell -File ./k8s/deploy-clear.ps1
