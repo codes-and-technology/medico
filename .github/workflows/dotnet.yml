@@ -85,7 +85,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/delete-doctors-timetables-worker:latest
 
       - name: notification-worker
-        run: docker build -t notification-worker:latest -f ./-f notification-worker/src/Notification.Worker/Dockerfile  .
+        run: docker build -t notification-worker:latest -f ./notification-worker/src/Notification.Worker/Dockerfile  .
 
       - name: Tag Docker image - notification-worker
         run: docker tag notification-worker:latest ${{ secrets.DOCKER_USERNAME }}/notification-worker:latest
@@ -94,7 +94,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/notification-worker:latest
 
       - name: update-doctors-timetables-api
-        run: docker build -t update-doctors-timetables-api:latest -f ./-f update-doctors-timetables-api/update-doctors-api/src/Update.Api/Dockerfile  .
+        run: docker build -t update-doctors-timetables-api:latest -f ./update-doctors-timetables-api/update-doctors-api/src/Update.Api/Dockerfile  .
 
       - name: Tag Docker image - update-doctors-timetables-api
         run: docker tag update-doctors-timetables-api:latest ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-api:latest
@@ -103,7 +103,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-api:latest
 
       - name: update-doctors-timetables-worker
-        run: docker build -t update-doctors-timetables-worker:latest -f ./-f update-doctors-timetables-worker/update-worker/src/Update.Worker/Dockerfile  .
+        run: docker build -t update-doctors-timetables-worker:latest -f ./update-doctors-timetables-worker/update-worker/src/Update.Worker/Dockerfile  .
 
       - name: Tag Docker image - update-doctors-timetables-worker
         run: docker tag update-doctors-timetables-worker:latest ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-worker:latest
@@ -112,7 +112,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-worker:latest
         
       - name: user-create-api
-        run: docker build -t user-create-api:latest -f ./-f user-create-api/create-user-api/src/Create.Api/Dockerfile .
+        run: docker build -t user-create-api:latest -f ./user-create-api/create-user-api/src/Create.Api/Dockerfile .
 
       - name: Tag Docker image - user-create-api
         run: docker tag user-create-api:latest ${{ secrets.DOCKER_USERNAME }}/user-create-api:latest
