@@ -5,13 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace Consulting.Api.Controllers;
 
 /// <summary>
-/// Controlador para manipulação de médico.
+/// Controlador responsável pelo gerenciamento da agenda médica.
+/// Permite a consulta de horários disponíveis de médicos.
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
 public class DoctorsTimetablesController(IController controller) : ControllerBase
 {
+    /// <summary>
+    /// Obtém os horários cadastrados pelo médico autenticado.
+    /// </summary>
+    /// <returns>200 OK com a lista de horários, 400 Bad Request em caso de erro ou 401 Unauthorized se o usuário não for identificado.</returns>
+    /// <remarks>
+    /// Somente usuários com a função "DOCTOR" podem acessar este endpoint.
+    /// </remarks>
     [HttpGet("/doctors-timetables")]
     [Authorize(Roles = "DOCTOR")]
     public async Task<IActionResult> Doctor()
@@ -29,7 +37,7 @@ public class DoctorsTimetablesController(IController controller) : ControllerBas
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new { message = ex.Message });
         }
     }
 }

@@ -27,4 +27,9 @@
     <ProjectReference Include="..\Rabbit.Producer.Delete\Rabbit.Producer.Delete.csproj" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
 </Project>

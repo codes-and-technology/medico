@@ -22,10 +22,10 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['auth-api:80']
-      - job_name: 'consulting-appointments-doctors-api'
+      - job_name: 'appointments-api'
         metrics_path: /metrics
         static_configs:
-          - targets: ['consulting-appointments-doctors-api:80']
+          - targets: ['appointments-api:80']
       - job_name: 'consulting-doctorstimetables-api'
         metrics_path: /metrics
         static_configs:
@@ -54,3 +54,7 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['delete-doctors-timetables-worker:80']  
+      - job_name: 'notification-worker'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['notification-worker:80'] 

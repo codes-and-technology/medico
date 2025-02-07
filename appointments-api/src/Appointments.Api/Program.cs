@@ -13,6 +13,7 @@ using Prometheus;
 using QueueGateway;
 using Rabbit.Producer;
 using Redis;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using UseCases;
@@ -70,7 +71,9 @@ public class Program
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Agendamentos", Version = "v1" });
-
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
             // Adiciona suporte para passar o token JWT no Swagger
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {

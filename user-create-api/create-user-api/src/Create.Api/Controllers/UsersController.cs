@@ -1,8 +1,6 @@
 ﻿using Presenters;
 using CreateInterface;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Presenters.Enum;
 
 namespace Create.Api.Controllers;
 
@@ -13,37 +11,51 @@ namespace Create.Api.Controllers;
 [ApiController]
 public class UsersController(IController controller) : ControllerBase
 {
-    [HttpPost("/doctor")]
-    public async Task<IActionResult> Doctor([FromBody] DoctorDto doctorDto)
+    /// <summary>
+    /// Cria um novo usuário do tipo médico.
+    /// </summary>
+    /// <param name="doctorDto">Dados do médico a ser cadastrado.</param>
+    /// <returns>204 No Content se bem-sucedido, ou 400 Bad Request em caso de erro.</returns>
+    [HttpPost("doctor")]
+    public async Task<IActionResult> CreateDoctor([FromBody] DoctorDto doctorDto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         try
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var result = await controller.CreateUserAsync(
+                doctorDto, doctorDto.CRM, doctorDto.Amount, doctorDto.Specialty, doctorDto.Score
+            );
 
-            var result = await controller.CreateUserAsync(doctorDto, doctorDto.CRM, doctorDto.Amount, doctorDto.Specialty, doctorDto.Score);
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
-        }        
+            return BadRequest(new { message = ex.Message });
+        }
     }
 
-    [HttpPost("/patient")]
-    public async Task<IActionResult> Patient([FromBody] PatientDto patientDto)
+    /// <summary>
+    /// Cria um novo usuário do tipo paciente.
+    /// </summary>
+    /// <param name="patientDto">Dados do paciente a ser cadastrado.</param>
+    /// <returns>204 No Content se bem-sucedido, ou 400 Bad Request em caso de erro.</returns>
+    [HttpPost("patient")]
+    public async Task<IActionResult> CreatePatient([FromBody] PatientDto patientDto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         try
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var result = await controller.CreateUserAsync(patientDto, string.Empty, null, string.Empty, null);
+
             return result.Success ? NoContent() : BadRequest(result);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new { message = ex.Message });
         }
     }
 }

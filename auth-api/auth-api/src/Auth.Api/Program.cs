@@ -7,6 +7,7 @@ using DBGateways;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Prometheus;
+using System.Reflection;
 
 public class Program
 {
@@ -31,6 +32,10 @@ public class Program
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth", Version = "v1" });
+
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
         });
 
         builder.Services.UseHttpClientMetrics();

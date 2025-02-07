@@ -28,4 +28,9 @@
 		<ProjectReference Include="..\Presenters\Presenters.csproj" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
 </Project>

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using QueueGateway;
 using Rabbit.Producer.Create;
+using System.Reflection;
 
 public class Program
 {
@@ -59,7 +60,9 @@ public class Program
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cadastros de Horários", Version = "v1" });
-
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
             // Adiciona suporte para passar o token JWT no Swagger
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {

@@ -27,4 +27,10 @@
     <ProjectReference Include="..\Rabbit.Producer.Update\Rabbit.Producer.Update.csproj" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+
 </Project>

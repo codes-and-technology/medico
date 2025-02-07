@@ -9,6 +9,7 @@ using DataBase.SqlServer.Configurations;
 using DBGateways;
 using Microsoft.EntityFrameworkCore;
 using Redis;
+using System.Reflection;
 
 public class Program
 {
@@ -33,6 +34,9 @@ public class Program
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Usuários", Version = "v1" });
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
         });
 
         builder.Services.UseHttpClientMetrics();
