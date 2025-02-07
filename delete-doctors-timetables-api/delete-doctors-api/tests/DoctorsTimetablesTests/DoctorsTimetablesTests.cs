@@ -21,8 +21,7 @@ public class DeleteDoctorsTests
             {
               new TimeList
               {
-                  Id = "1",
-                  Time = "12:00"
+                  Id = "1"
               }
             }
         };
