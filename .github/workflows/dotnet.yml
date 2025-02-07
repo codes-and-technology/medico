@@ -153,7 +153,7 @@ jobs:
         run: dotnet build ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/tests/ConsultingTests/ConsultingTests.csproj --configuration Release --no-restore
 
       - name: Run tests - consulting-doctors-timetables-api tests
-        run: dotnet test ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/tests/ConsultingTests/ConsultingTests.csproj/ConsultingTests.csproj
+        run: dotnet test ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/tests/ConsultingTests/ConsultingTests.csproj
 
       - name: Restore dependencies - create-doctors-timetables-api unit tests
         run: dotnet restore ./create-doctors-timetables-api/create-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
@@ -230,6 +230,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
+    needs: test-unitario
     steps:
       - name: Clear Cuurents PODs
         run: ./k8s/deploy-clear.ps1
