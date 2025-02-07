@@ -223,3 +223,18 @@ USE [master]
 GO
 ALTER DATABASE [Fiap_Hackathon] SET  READ_WRITE 
 GO
+
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('20d0023e-4aa6-465f-9bed-031dc265a8c9', 'Silvana da Rocha Cruz', '35952622046', '11225', 'medico6@example.com', 110.00, 'PEDIATRA', 5, GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('239fc576-9144-41b0-963a-192d020d6709', 'Valdemir da Silva', '08840191011', '61644', 'medico4@example.com', 110.00, 'CLINICO GERAL', 3 ,GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('32beed5a-aa0a-498e-878c-a00561af2284', 'stringstri', '40993229808', '29876', 'medico99@example.com', 0.01, 'CLINICO GERAL', 5 ,GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('4c824865-069f-4776-99d2-e75f9b5abf1d', 'Ademir Lima', '98602088086', '44901', 'medico7@example.com', 190.00, 'PEDIATRA', 5 ,GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('5f1017a3-dcf8-420b-a7f1-4535040e79d9', 'Marcelo Guimaraes', '08840191011', '00183', 'medico3@example.com', 90.00, 'CLINICO GERAL', 3 ,GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('8b723b21-a27b-427f-bb6a-e542fa280d89', 'Rogerio Mendonça', '08324429093', '33702', 'medico1@example.com', 50.00, 'CLINICO GERAL', 4  ,GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Users] (Id, Name, CPF, Email, CRM, Amount, Specialty, Score, CreateDate) VALUES ('d7338f0b-ef2f-45d9-97e3-70bbce864d8e', 'Marcelo Guimaraes', '98066066040', '11317', 'medico2@example.com', 70.00, 'CLINICO GERAL', 3 ,GETUTCDATE());
+
+INSERT INTO [Fiap_Hackathon].[dbo].[Auth] (Id, IdUser, CreateDate, Password, LastLoginDate) VALUES ('11a5fe85-c712-477c-b8e4-f96089fcaff7', '8b723b21-a27b-427f-bb6a-e542fa280d89', GETUTCDATE(), '$2a$10$pCnsOwIQ1k10yrb1iGus1O8a.bod/Ag/cWv3cjOI8rxtMypBwj1dG', GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Auth] (Id, IdUser, CreateDate, Password, LastLoginDate) VALUES ('2ab4ad2a-779b-4864-8460-2fbf1772dfbf', '5f1017a3-dcf8-420b-a7f1-4535040e79d9', GETUTCDATE(), '$2a$10$Xq.0vRPjglv9t6jU474D6eMzvGeTMma8g/17tiA0flq.xmtnR5uQ2', GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Auth] (Id, IdUser, CreateDate, Password, LastLoginDate) VALUES ('46df7511-7d02-4b1c-88bb-0a5855b7fc54', '4c824865-069f-4776-99d2-e75f9b5abf1d', GETUTCDATE(), '$2a$10$2eZ54U/BxHILTFZZfxoEGOS5VGzBqBhcLbMdnRLCuOWgv6LdlMf2S', GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Auth] (Id, IdUser, CreateDate, Password, LastLoginDate) VALUES ('72609c09-8b20-4715-b792-f0cb04c3b504', '239fc576-9144-41b0-963a-192d020d6709', GETUTCDATE(), '$2a$10$CPITCKVqYPbKq47/mEp3vOED5N7YuZLoL7NEzFWdXnmo4Iu0Lz.cG', GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Auth] (Id, IdUser, CreateDate, Password, LastLoginDate) VALUES ('ccde82c9-cfaa-4817-bb84-79a47aeb6f50', 'd7338f0b-ef2f-45d9-97e3-70bbce864d8e', GETUTCDATE(), '$2a$10$sCJcRu3Wa9FTxkOE09yEf.LFKAXV2FTN4/RTwu.uQbRurafVypXnO', GETUTCDATE());
+INSERT INTO [Fiap_Hackathon].[dbo].[Auth] (Id, IdUser, CreateDate, Password, LastLoginDate) VALUES ('dc14f0ae-6e44-4f21-b02a-d20e516ddad0', '20d0023e-4aa6-465f-9bed-031dc265a8c9', GETUTCDATE(), '$2a$10$PLEbt7SRtRliHOHEij1bs.MDMwvpI1IyBqrTnkjtxeVIeCd8/agOm', GETUTCDATE());

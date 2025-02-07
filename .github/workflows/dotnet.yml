@@ -1,0 +1,238 @@
+name: CI/CD Build and Run Docker Container
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image - appointments-api
+        run: docker build -t appointments-api:latest -f ./appointments-api/src/Appointments.Api/Dockerfile  .
+
+      - name: Tag Docker image - appointments-api
+        run: docker tag appointments-api:latest ${{ secrets.DOCKER_USERNAME }}/appointments-api:latest
+
+      - name: Push Docker image - appointments-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/appointments-api:latest
+
+      - name: Build Docker image - auth-api
+        run: docker build -t auth-api:latest -f ./auth-api/auth-api/src/Auth.Api/Dockerfile .
+
+      - name: Tag Docker image - auth-api
+        run: docker tag auth-api:latest ${{ secrets.DOCKER_USERNAME }}/auth-api:latest
+
+      - name: Push Docker image - auth-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/auth-api:latest
+      
+      - name: Build Docker image - consulting-doctorstimetables-api
+        run: docker build -t consulting-doctorstimetables-api:latest -f ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/src/Consulting.Api/Dockerfile  .
+
+      - name: Tag Docker image - consulting-doctorstimetables-api
+        run: docker tag consulting-doctorstimetables-api:latest ${{ secrets.DOCKER_USERNAME }}/consulting-doctorstimetables-api:latest
+
+      - name: Push Docker image - consulting-doctorstimetables-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/consulting-doctorstimetables-api:latest
+ 
+      - name: Build Docker image - create-doctors-timetables-api
+        run: docker build -t create-doctors-timetables-api:latest -f ./create-doctors-timetables-api/create-doctors-api/src/Create.Api/Dockerfile  .
+
+      - name: Tag Docker image - create-doctors-timetables-api
+        run: docker tag create-doctors-timetables-api:latest ${{ secrets.DOCKER_USERNAME }}/create-doctors-timetables-api:latest
+
+      - name: Push Docker image - create-doctors-timetables-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/create-doctors-timetables-api:latest
+
+      - name: Build Docker image - create-doctors-timetables-worker
+        run: docker build -t create-doctors-timetables-worker:latest -f ./create-doctors-timetables-worker/create-worker/src/Create.Worker/Dockerfile  .
+
+      - name: Tag Docker image - create-doctors-timetables-worker
+        run: docker tag create-doctors-timetables-worker:latest ${{ secrets.DOCKER_USERNAME }}/create-doctors-timetables-worker:latest
+
+      - name: Push Docker image - create-doctors-timetables-worker
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/create-doctors-timetables-worker:latest
+
+      - name: delete-doctors-timetables-api
+        run: docker build -t delete-doctors-timetables-api:latest -f ./delete-doctors-timetables-api/delete-doctors-api/src/Delete.Api/Dockerfile  .
+
+      - name: Tag Docker image - delete-doctors-timetables-api
+        run: docker tag delete-doctors-timetables-api:latest ${{ secrets.DOCKER_USERNAME }}/delete-doctors-timetables-api:latest
+
+      - name: Push Docker image - delete-doctors-timetables-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/delete-doctors-timetables-api:latest
+
+      - name: delete-doctors-timetables-worker
+        run: docker build -t delete-doctors-timetables-worker:latest -f ./delete-doctors-timetables-worker/delete-worker/src/Delete.Worker/Dockerfile  .
+
+      - name: Tag Docker image - delete-doctors-timetables-worker
+        run: docker tag delete-doctors-timetables-worker:latest ${{ secrets.DOCKER_USERNAME }}/delete-doctors-timetables-worker:latest
+
+      - name: Push Docker image - delete-doctors-timetables-worker
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/delete-doctors-timetables-worker:latest
+
+      - name: notification-worker
+        run: docker build -t notification-worker:latest -f ./-f notification-worker/src/Notification.Worker/Dockerfile  .
+
+      - name: Tag Docker image - notification-worker
+        run: docker tag notification-worker:latest ${{ secrets.DOCKER_USERNAME }}/notification-worker:latest
+
+      - name: Push Docker image - notification-worker
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/notification-worker:latest
+
+      - name: update-doctors-timetables-api
+        run: docker build -t update-doctors-timetables-api:latest -f ./-f update-doctors-timetables-api/update-doctors-api/src/Update.Api/Dockerfile  .
+
+      - name: Tag Docker image - update-doctors-timetables-api
+        run: docker tag update-doctors-timetables-api:latest ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-api:latest
+
+      - name: Push Docker image - update-doctors-timetables-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-api:latest
+
+      - name: update-doctors-timetables-worker
+        run: docker build -t update-doctors-timetables-worker:latest -f ./-f update-doctors-timetables-worker/update-worker/src/Update.Worker/Dockerfile  .
+
+      - name: Tag Docker image - update-doctors-timetables-worker
+        run: docker tag update-doctors-timetables-worker:latest ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-worker:latest
+
+      - name: Push Docker image - update-doctors-timetables-worker
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/update-doctors-timetables-worker:latest
+        
+      - name: user-create-api
+        run: docker build -t user-create-api:latest -f ./-f user-create-api/create-user-api/src/Create.Api/Dockerfile .
+
+      - name: Tag Docker image - user-create-api
+        run: docker tag user-create-api:latest ${{ secrets.DOCKER_USERNAME }}/user-create-api:latest
+
+      - name: Push Docker image - user-create-api
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/user-create-api:latest
+
+
+  test-unitario:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Restore dependencies - appointments-api unit tests
+        run: dotnet restore ./appointments-api/tests/ConsultingTests/UnitTests.csproj
+
+      - name: Build solution -  appointments-api unit tests
+        run: dotnet build ./appointments-api/tests/ConsultingTests/UnitTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - appointments-api unit tests
+        run: dotnet test ./appointments-api/tests/ConsultingTests/UnitTests.csproj
+       
+      - name: Restore dependencies - auth-api unit tests
+        run: dotnet restore ./auth-api/auth-api/tests/AuthTests/AuthTests.csproj
+
+      - name: Build solution -  auth-api unit tests
+        run: dotnet build ./auth-api/auth-api/tests/AuthTests/AuthTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - auth-api unit tests
+        run: dotnet test ./auth-api/auth-api/tests/AuthTests/AuthTests.csproj
+
+      - name: Restore dependencies - consulting-doctors-timetables-api unit tests
+        run: dotnet restore ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/tests/ConsultingTests/ConsultingTests.csproj
+
+      - name: Build solution -  consulting-doctors-timetables-api tests
+        run: dotnet build ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/tests/ConsultingTests/ConsultingTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - consulting-doctors-timetables-api tests
+        run: dotnet test ./consulting-doctorstimetables-api/consulting-doctors-timetables-api/tests/ConsultingTests/ConsultingTests.csproj/ConsultingTests.csproj
+
+      - name: Restore dependencies - create-doctors-timetables-api unit tests
+        run: dotnet restore ./create-doctors-timetables-api/create-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
+
+      - name: Build solution -  create-doctors-timetables-api unit tests
+        run: dotnet build ./create-doctors-timetables-api/create-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - create-doctors-timetables-api unit tests
+        run: dotnet test ./create-doctors-timetables-api/create-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
+     
+      - name: Restore dependencies - create-doctors-timetables-worker unit tests
+        run: dotnet restore ./create-doctors-timetables-worker/create-worker/tests/CreateWorker.Unit.Tests/CreateWorker.Unit.Tests.csproj
+
+      - name: Build solution - create-doctors-timetables-worker unit tests
+        run: dotnet build ./create-doctors-timetables-worker/create-worker/tests/CreateWorker.Unit.Tests/CreateWorker.Unit.Tests.csproj --configuration Release --no-restore
+
+      - name: Run tests - create-doctors-timetables-worker unit tests
+        run: dotnet test ./create-doctors-timetables-worker/create-worker/tests/CreateWorker.Unit.Tests/CreateWorker.Unit.Tests.csproj
+
+      - name: Restore dependencies - delete-doctors-timetables-api unit tests
+        run: dotnet restore ./delete-doctors-timetables-api/delete-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
+
+      - name: Build solution - delete-doctors-timetables-api unit tests
+        run: dotnet build ./delete-doctors-timetables-api/delete-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - delete-doctors-timetables-api unit tests
+        run: dotnet test ./delete-doctors-timetables-api/delete-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
+
+      - name: Restore dependencies - delete-doctors-timetables-worker unit tests
+        run: dotnet restore ./delete-doctors-timetables-worker/delete-worker/tests/DeleteWorker.Unit.Tests/DeleteWorker.Unit.Tests.csproj
+
+      - name: Build solution - delete-doctors-timetables-worker unit tests
+        run: dotnet build ./delete-doctors-timetables-worker/delete-worker/tests/DeleteWorker.Unit.Tests/DeleteWorker.Unit.Tests.csproj --configuration Release --no-restore
+
+      - name: Run tests - delete-doctors-timetables-worker unit tests
+        run: dotnet test ./delete-doctors-timetables-worker/delete-worker/tests/DeleteWorker.Unit.Tests/DeleteWorker.Unit.Tests.csproj
+
+      - name: Restore dependencies - notification-worker unit tests
+        run: dotnet restore ./notification-worker/tests/NotificationWorker.Unit.Tests/NotificationWorker.Unit.Tests.csproj
+
+      - name: Build solution - notification-worker unit tests
+        run: dotnet build ./notification-worker/tests/NotificationWorker.Unit.Tests/NotificationWorker.Unit.Tests.csproj --configuration Release --no-restore
+
+      - name: Run tests - notification-worker unit tests
+        run: dotnet test ./notification-worker/tests/NotificationWorker.Unit.Tests/NotificationWorker.Unit.Tests.csproj
+
+      - name: Restore dependencies - update-doctors-timetables-api Unit Tests
+        run: dotnet restore ./update-doctors-timetables-api/update-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
+
+      - name: Build solution - update-doctors-timetables-api Unit Tests
+        run: dotnet build ./update-doctors-timetables-api/update-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - update-doctors-timetables-api Unit Tests
+        run: dotnet test ./update-doctors-timetables-api/update-doctors-api/tests/DoctorsTimetablesTests/DoctorsTimetablesTests.csproj
+
+      - name: Restore dependencies - update-doctors-timetables-worker Unit Tests
+        run: dotnet restore ./update-doctors-timetables-worker/update-worker/tests/UpdateWorker.Unit.Tests/UpdateWorker.Unit.Tests.csproj
+
+      - name: Build solution - update-doctors-timetables-worker Unit Tests
+        run: dotnet build ./update-doctors-timetables-worker/update-worker/tests/UpdateWorker.Unit.Tests/UpdateWorker.Unit.Tests.csproj --configuration Release --no-restore
+
+      - name: Run tests - update-doctors-timetables-worker Unit Tests
+        run: dotnet test ./update-doctors-timetables-worker/update-worker/tests/UpdateWorker.Unit.Tests/UpdateWorker.Unit.Tests.csproj
+
+      - name: Restore dependencies - user-create-api Unit Tests
+        run: dotnet restore ./user-create-api/create-user-api/tests/CreateUserTests/CreateUserTests.csproj
+
+      - name: Build solution - user-create-api Unit Tests
+        run: dotnet build ./user-create-api/create-user-api/tests/CreateUserTests/CreateUserTests.csproj --configuration Release --no-restore
+
+      - name: Run tests - user-create-api Unit Tests
+        run: dotnet test ./user-create-api/create-user-api/tests/CreateUserTests/CreateUserTests.csproj
+
+
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Clear Cuurents PODs
+        run: ./k8s/deploy-clear.ps1
+        continue-on-error: true
+      - name: Create new PODs
+        run: ./k8s/deploy-apply.ps1
