@@ -16,3 +16,5 @@ Para viabilizar o desenvolvimento de um sistema que esteja em conformidade
 com as melhores práticas de qualidade e arquitetura de software, a Health&Med
 contratou os alunos do curso 4NETT para fazer a análise do projeto, arquitetura
 do software e desenvolvimento do MVP.
+
+
